@@ -85,8 +85,7 @@ function mota_settings_field_email_output()
      echo '<input name="mota_settings_field_email" type="text" value="' . $value . '" />';
 }
 
-function mota_register_custom_post_types()
-{
+function mota_register_custom_post_types() {
      $labels_catalogue = array(
           'menu_name'             => __('Catalogue', 'mota'),
           'name_admin_bar'        => __('Catalogue', 'mota'),

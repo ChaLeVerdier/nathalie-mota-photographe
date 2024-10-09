@@ -1,5 +1,5 @@
 <?php get_header(); ?>
 
-<h1>Nathalie Mota Photographe</h1>
+<!-- Home page du site avec champs "catégorie" "format" "trier par" + "galerie 8 photos par défaut" + icônes visibles au survole des photos + bouton charger plus -->
 
 <?php get_footer(); ?>

@@ -1,0 +1,44 @@
+
+/* Fonts */
+
+@font-face {
+    font-family: 'SpaceMono';
+    src: url('assets/fonts/SpaceMono-Regular.woff2') format('woff2'),
+         url('assets/fonts/SpaceMono-Regular.ttf') format('truetype'); 
+    font-weight: 400; 
+    font-style: normal; 
+}
+
+@font-face {
+    font-family: 'SpaceMono';
+    src: url('assets/fonts/SpaceMono-Bolditalic.woff2') format('woff2'),
+         url('assets/fonts/SpaceMono-Bolditalic.ttf') format('truetype'); 
+    font-weight: 700; 
+    font-style: italic; 
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('assets/fonts/Poppins.woff2') format('woff2'),
+         url('assets/fonts/Poppins.ttf') format('truetype'); 
+    font-weight: 400; 
+    font-style: normal; 
+}
+
+/* Variables */
+:root {
+    --font-primary: 'SpaceMono', sans-serif; 
+    --font-secondary: 'Poppins', sans-serif; 
+
+    --color-main: #E00000; /* Rouge */
+    --color-secondary: #FE5858; /* Couleur secondaire */
+    --color-tertiary: #FFD6D6; /* Couleur tertiaire */
+    --color-black: #000000; /* Noir  */
+    --color-darkgrey: #C4C4C4; /* Gris foncé */
+    --color-tertiary: #D8D8D8; /* Gris medium */
+    --color-tertiary: #E5E5E5; /* Gris light */
+    --color-tertiary: #313144; /* Bleu foncé */
+
+}
+
+ 

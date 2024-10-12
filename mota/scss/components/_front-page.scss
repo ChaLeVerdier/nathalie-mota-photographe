@@ -1,0 +1,41 @@
+/* Fonts */
+
+@font-face {
+     font-family: 'SpaceMono';
+     src: url('assets/fonts/SpaceMono-Regular.woff2') format('woff2'),
+          url('assets/fonts/SpaceMono-Regular.woff') format('woff'); 
+     font-weight: 400; 
+     font-style: normal; 
+ }
+ 
+ @font-face {
+     font-family: 'SpaceMono';
+     src: url('assets/fonts/SpaceMono-Bolditalic.woff2') format('woff2'),
+          url('assets/fonts/SpaceMono-Bolditalic.woff') format('woff'); 
+     font-weight: 700; 
+     font-style: italic; 
+ }
+ 
+ @font-face {
+     font-family: 'Poppins';
+     src: url('assets/fonts/Poppins.woff2') format('woff2'),
+          url('assets/fonts/Poppins.woff') format('woff'); 
+     font-weight: 400; 
+     font-style: normal; 
+ }
+ 
+/* Variables */
+:root {
+    --font-primary: 'SpaceMono', sans-serif; 
+    --font-secondary: 'Poppins', sans-serif; 
+
+    --color-main: #E00000; /* Rouge */
+    --color-secondary: #FE5858; /* Couleur secondaire */
+    --color-tertiary-light: #FFD6D6; /* Couleur tertiaire claire */
+    --color-tertiary-medium: #D8D8D8; /* Couleur tertiaire moyenne */
+    --color-tertiary-dark: #E5E5E5; /* Couleur tertiaire foncée */
+    --color-black: #000000; /* Noir */
+    --color-darkgrey: #C4C4C4; /* Gris foncé */
+}
+ 
+  

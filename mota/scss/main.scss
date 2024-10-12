@@ -1,3 +1,4 @@
-body{
-     background-color: aqua;
-}
+@import 'components/footer';
+@import 'components/front-page';
+@import 'components/header';
+@import 'components/modal-contact';

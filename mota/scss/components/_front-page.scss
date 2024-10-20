@@ -38,4 +38,14 @@
     --color-darkgrey: #C4C4C4; /* Gris foncé */
 }
  
-  
+.site-main{
+    background-color: #FE5858;
+}
+
+.hero {
+        min-height: 806px;
+        background-size: cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }

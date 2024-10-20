@@ -1,3 +1,15 @@
+<?php
+/**
+ * En-tête de notre thème
+ *
+ * Ce modèle affiche toute la section <head> et tout jusqu'à <div id="content">
+ *
+ * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
+ *
+ * @package Mota
+ */
+?>
+
 <?php //ob_start(); 
 ?>
 
@@ -7,29 +19,36 @@
 <head>
      <meta charset="<?php bloginfo('charset'); ?>">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="profile" href="https://gmpg.org/xfn/11">
      <?php wp_head(); ?>
 </head>
 
 <body <?php body_class(); ?>>
+<?php wp_body_open(); ?>
 
-<header>
+<div id="page" class="site">
+	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e('Passer au contenu', 'mota'); ?></a>
+
+<header id="masthead">
     <div class="header-container">
         <div class="logo">
             <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.png" alt="Logo du site">
         </div>
-        <nav class="main-nav">
-            <ul>
-                <li><a href="#">Accueil</a></li>
-                <li><a href="#">À propos</a></li>
-                <li><a href="#" id="open-contact-modal">Contact</a></li>
-                <?php get_template_part('template-parts/modal', 'contact'); ?>
-            </ul>
-        </nav>
+
+        <!-- header.php -->
+<nav class="main-navigation">
+  <?php
+  wp_nav_menu( array(
+    'theme_location' => 'main-menu', // Emplacement du menu enregistré
+    'container_class'      => 'main-menu-container',          
+    'menu_class'     => 'main-menu', // Classe CSS pour styliser le menu
+  ) );
+  ?>
+</nav>
+
     </div>
-    <div class="hero">
-        <img src="<?php echo get_theme_mod('hero_image'); ?>" alt="Image Hero" class="hero-image hero-background">
-        <div class="hero-title">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/hero_titre.png" alt="Titre du site">
-        </div>
-    </div>
+
+    <?php get_template_part('template-parts/modal', 'contact'); ?>
 </header>
+
+

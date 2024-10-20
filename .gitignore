@@ -1,0 +1,6 @@
+# Ignorer tous les thèmes Twenty Twenty
+twentytwenty*
+
+# Ignorer des fichier 
+/old.txt
+

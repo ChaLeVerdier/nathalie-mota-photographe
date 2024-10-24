@@ -1,26 +1,138 @@
 @charset "UTF-8";
+/* Variables */
+/* Rouge */
+/* Couleur secondaire */
+/* Couleur tertiaire claire */
+/* Couleur tertiaire moyenne */
+/* Couleur tertiaire foncée */
+/* Noir */
+/* Gris foncé */
+/* _fonts.scss */
+@font-face {
+  font-family: "SpaceMono";
+  src: url("../fonts/SpaceMono-Regular.woff2") format("woff2"), url("../fonts/SpaceMono-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "SpaceMono";
+  src: url("../fonts/SpaceMono-Bolditalic.woff2") format("woff2"), url("../fonts/SpaceMono-Bolditalic.woff") format("woff");
+  font-weight: 700;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../fonts/Poppins.woff2") format("woff2"), url("../fonts/Poppins.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.modal.show {
+  display: block;
+}
+.modal .modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fefefe;
+  font-family: "Poppins", sans-serif !important;
+  font-size: 12px;
+  font-weight: 500;
+  color: #313144;
+  margin: 15% auto;
+  padding: 0;
+  border: 4px solid #000000;
+  max-width: 400px;
+  max-height: 600px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Effet d'ombre pour le style */
+  overflow: hidden; /* Cache tout débordement */
+}
+.modal .modal-content img {
+  width: 100%; /* L'image prend toute la largeur */
+  height: auto; /* Maintient le ratio de l'image */
+  margin-top: 5px;
+  margin-bottom: 30px;
+}
+.modal .form-group {
+  width: 50%; /* Chaque groupe de champs prend la largeur totale */
+  margin-bottom: 25px; /* Espace entre les champs */
+}
+.modal label {
+  display: block; /* Force les labels à occuper toute la ligne */
+  margin-bottom: 10px; /* Espace entre le label et le champ */
+  text-align: left; /* Justifie le texte à gauche */
+}
+.modal input[type=text],
+.modal input[type=email],
+.modal textarea {
+  width: 100%; /* Champs prennent toute la largeur */
+  border: 1px solid #ccc; /* Bordure par défaut */
+  border-radius: 6px; /* Bords arrondis des champs */
+  margin: 5px 0;
+  padding: 10px; /* Espacement intérieur */
+  box-sizing: border-box; /* Inclut padding et bordure dans la largeur totale */
+}
+.modal button,
+.modal input[type=submit] {
+  font-family: "SpaceMono", sans-serif !important;
+  font-size: 12px;
+  width: 100%; /* Le bouton prend toute la largeur comme les autres champs */
+  background-color: #D3D3D3; /* Couleur de fond gris */
+  border: none; /* Enlève la bordure */
+  border-radius: 2px; /* Bords arrondis */
+  padding: 10px; /* Espacement intérieur */
+  cursor: pointer; /* Change le curseur pour indiquer que c'est cliquable */
+  transition: background-color 0.3s; /* Effet de transition pour la couleur de fond */
+}
+.modal button:hover,
+.modal input[type=submit]:hover {
+  background-color: #C0C0C0; /* Couleur de fond au survol */
+}
+.modal button:hover {
+  background-color: #C0C0C0; /* Couleur de fond au survol */
+}
+.modal .close {
+  display: none;
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.modal .close:hover, .modal .close:focus {
+  color: black;
+  text-decoration: none;
+}
+
 .site-footer {
-  border: 2px solid rgb(37, 53, 228);
+  border-top: 1px solid #000; /* Bordure en haut */
+  font-family: "SpaceMono", sans-serif;
 }
 
 .footer-menu {
-  border: 2px solid rgb(221, 237, 69);
   list-style: none;
-  margin: 0;
-  padding: 0;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 50px;
 }
-.footer-menu li {
-  margin-left: 20px;
-  border: 2px solid rgb(206, 120, 15);
-}
-.footer-menu a {
+.footer-menu li a {
   text-decoration: none;
   color: #000000;
   text-transform: uppercase;
-  font-weight: bold;
 }
-.footer-menu a:hover {
+.footer-menu li a:hover {
   color: #007bff;
 }
 @media (max-width: 768px) {
@@ -33,63 +145,106 @@
   }
 }
 
-/* Fonts */
-@font-face {
-  font-family: "SpaceMono";
-  src: url("assets/fonts/SpaceMono-Regular.woff2") format("woff2"), url("assets/fonts/SpaceMono-Regular.woff") format("woff");
-  font-weight: 400;
-  font-style: normal;
-}
-@font-face {
-  font-family: "SpaceMono";
-  src: url("assets/fonts/SpaceMono-Bolditalic.woff2") format("woff2"), url("assets/fonts/SpaceMono-Bolditalic.woff") format("woff");
-  font-weight: 700;
-  font-style: italic;
-}
-@font-face {
-  font-family: "Poppins";
-  src: url("assets/fonts/Poppins.woff2") format("woff2"), url("assets/fonts/Poppins.woff") format("woff");
-  font-weight: 400;
-  font-style: normal;
-}
-/* Variables */
-:root {
-  --font-primary: "SpaceMono", sans-serif;
-  --font-secondary: "Poppins", sans-serif;
-  --color-main: #E00000; /* Rouge */
-  --color-secondary: #FE5858; /* Couleur secondaire */
-  --color-tertiary-light: #FFD6D6; /* Couleur tertiaire claire */
-  --color-tertiary-medium: #D8D8D8; /* Couleur tertiaire moyenne */
-  --color-tertiary-dark: #E5E5E5; /* Couleur tertiaire foncée */
-  --color-black: #000000; /* Noir */
-  --color-darkgrey: #C4C4C4; /* Gris foncé */
-}
-
-.site-main {
-  background-color: #FE5858;
-}
-
+/* *********** HERO ***************** */
 .hero {
-  min-height: 806px;
-  background-size: cover;
+  overflow: hidden; /* Pour éviter tout débordement */
+}
+
+.hero-image {
+  width: 100%; /* L'image prend 100% de la largeur du conteneur */
+  height: auto; /* Laisse la hauteur s'ajuster proportionnellement */
+  display: block; /* Évite les espaces en dessous de l'image */
+  margin-bottom: 30px;
+}
+
+/* *********** SECTION FILTRE ET GALLERIE ***************** */
+.photo-section {
+  width: 100%; /* Occupe toute la largeur disponible */
+  padding: 0; /* Pas de padding */
+  box-sizing: border-box; /* Empêche les éléments de déborder */
+  display: flex;
+  flex-direction: column;
+}
+
+/* *********** FILTRES ***************** */
+.photo-filters {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 60px;
+}
+
+.filters-left {
+  display: flex;
+  gap: 30px; /* Espace entre les deux filtres */
+}
+
+.filters-right {
+  text-align: right;
+}
+
+select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: white;
+  width: 260px; /* Largeur fixe */
+  height: 42px; /* Hauteur fixe */
+}
+
+/* *********** GALERIE ***************** */
+/* Style pour la galerie photo */
+.photo-gallery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0;
+}
+
+/* Style pour le conteneur des photos */
+#photo-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; /* Espace entre les colonnes */
+  max-width: 1200px; /* Largeur maximale du conteneur */
+  margin: 0 auto; /* Centrer le conteneur */
+}
+
+/* Style pour chaque élément photo */
+.photo-item {
+  flex-basis: calc(50% - 10px); /* Deux colonnes */
+  height: 495px; /* Hauteur fixe des cubes */
+  margin-bottom: 20px; /* Espacement entre les rangées */
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #f0f0f0; /* Couleur de fond au cas où l'image ne charge pas */
 }
 
+/* Style pour les images */
+.photo-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* L'image couvre toute la zone du cube tout en conservant les proportions */
+}
+
+/* Ajustement responsive pour les petits écrans */
+@media (max-width: 768px) {
+  .photo-item {
+    flex-basis: 100%; /* Chaque photo prend toute la largeur sur mobile */
+  }
+}
 .header-container {
-  border: 2px solid rgb(37, 53, 228);
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
   position: relative;
-}
-.header-container .logo {
-  border: 2px solid rgb(59, 228, 37);
+  font-family: "SpaceMono", sans-serif;
 }
 .header-container .logo img {
-  max-width: 150px;
+  max-width: 250px;
+  border: none;
 }
 .header-container .menu-toggle {
   display: none;
@@ -100,21 +255,20 @@
   right: 20px;
 }
 .header-container .main-navigation .main-menu {
-  border: 2px solid rgb(221, 237, 69);
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
+  font-family: "SpaceMono", sans-serif !important;
 }
 .header-container .main-navigation .main-menu li {
   margin-left: 20px;
-  border: 2px solid rgb(206, 120, 15);
 }
 .header-container .main-navigation .main-menu li a {
   text-decoration: none;
   color: #000000;
   text-transform: uppercase;
-  font-weight: bold;
+  font-family: "SpaceMono", sans-serif;
 }
 .header-container .main-navigation .main-menu li a:hover {
   color: #007bff;
@@ -139,38 +293,9 @@
   }
 }
 
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4);
-}
-.modal.show {
-  display: block;
-}
-.modal .modal-content {
-  background-color: #fefefe;
-  margin: 15% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-  max-width: 600px;
-}
-.modal .close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  cursor: pointer;
-}
-.modal .close:hover, .modal .close:focus {
-  color: black;
-  text-decoration: none;
+body {
+  margin: 0; /* Enlève la marge par défaut */
+  padding: 0; /* Enlève le padding par défaut */
 }
 
 /*# sourceMappingURL=main.css.map */

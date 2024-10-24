@@ -1,0 +1,73 @@
+.header-container {
+  display: flex;
+  justify-content: space-between; // Logo à gauche, menu à droite
+  align-items: center;
+  padding: 10px 20px;
+  position: relative; // Pour le toggle du menu en mode mobile
+  font-family: $font-primary; // Applique la police principale à tout le header
+
+  // Logo
+  .logo {
+      img {
+          max-width: 250px;
+          border: none;
+      }
+  }
+
+  // Toggle button (pour mobile)
+  .menu-toggle {
+      display: none; // Caché par défaut
+      font-size: 30px;
+      cursor: pointer;
+      position: absolute;
+      top: 15px;
+      right: 20px;
+  }
+
+  // Menu principal
+  .main-navigation .main-menu {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      font-family: $font-primary !important; // Applique la police principale au menu
+
+      li {
+          margin-left: 20px;
+
+          a {
+              text-decoration: none;
+              color: #000000;
+              text-transform: uppercase; // Tout en majuscule
+              font-family: $font-primary; // Applique la police principale aux liens
+
+              &:hover {
+                  color: #007bff; // Couleur au survol
+              }
+          }
+      }
+
+      // Cacher le menu en mode mobile
+      @media (max-width: 768px) {
+          display: none; // Cacher le menu par défaut
+          flex-direction: column;
+          align-items: flex-start;
+
+          li {
+              margin-left: 0; // Réinitialiser la marge gauche
+              margin-bottom: 10px; // Espace entre les items en mobile
+          }
+      }
+  }
+
+  // Responsive : afficher le bouton toggle
+  @media (max-width: 768px) {
+      .menu-toggle {
+          display: block;
+      }
+
+      .main-menu.active { // Afficher le menu lorsqu'il est activé
+          display: flex;
+      }
+  }
+}

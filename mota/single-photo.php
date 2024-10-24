@@ -8,22 +8,27 @@
  * @subpackage Mota
  * @since Mota 1.0
  */
-
-get_header();
 ?>
 
-
-<main id="primary" class="site-main"><?php echo 'tout est ok'; ?>
-<?php
-while ( have_posts( ) ) : 
-     the_post(); 
-     // Prépare l'article courant pour l'affichage
-     get_template_part( 'template-parts/content/content', 'single' ); 
- endwhile;
-
- ?>
-
+<?php get_header(); ?>
+<main class="single-photo">
+    <div class="photo-content">
+        <h1><?php the_title(); ?></h1>
+        <div class="photo-image">
+            <?php the_post_thumbnail('full'); ?>
+        </div>
+        <div class="photo-description">
+            <?php the_content(); ?>
+        </div>
+        <!-- Navigation entre les photos -->
+        <div class="photo-navigation">
+            <div class="previous-photo"><?php previous_post_link('%link', '← Photo précédente'); ?></div>
+            <div class="next-photo"><?php next_post_link('%link', 'Photo suivante →'); ?></div>
+        </div>
+    </div>
+    <!-- Affichage des photos apparentées -->
+    <div class="related-photos">
+        <?php get_template_part('templates_parts/photo_block'); ?>
+    </div>
 </main>
-
-<?php
-get_footer();
+<?php get_footer(); ?>

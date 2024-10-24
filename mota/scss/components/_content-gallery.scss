@@ -1,0 +1,18 @@
+/* Styles pour la galerie d'images */
+
+.gallery-container {
+     width: 100%;
+     max-width: 1200px;
+     margin: 0 auto;
+ }
+ 
+ .photo-item {
+     position: relative;
+     width: 560px;
+     height: 495px;
+     margin: 10px;
+     float: left;
+     box-sizing: border-box;
+ }
+
+ 

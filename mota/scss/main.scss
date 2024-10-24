@@ -1,4 +1,7 @@
-@import 'components/footer';
-@import 'components/front-page';
-@import 'components/header';
+@import 'abstracts/variables';
+@import 'abstracts/fonts'; 
 @import 'components/modal-contact';
+@import 'layouts/footer';
+@import 'layouts/front-page';
+@import 'layouts/header';
+@import 'layouts/main';

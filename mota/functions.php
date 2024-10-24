@@ -39,6 +39,7 @@ function mota_enqueue_styles() {
 // Chargement des scripts
 function mota_enqueue_scripts() {
     wp_enqueue_script('mota-scripts', get_template_directory_uri() . '/js/scripts.js', array('jquery'), '1.0.0', true);
+    wp_enqueue_script('load-more-photos', get_stylesheet_directory_uri() . '/js/load-more.js', array('jquery'), null, true);
 }
 
 // Enregistrement des menus
@@ -63,6 +64,16 @@ function enable_classic_menu_interface() {
 // Ajouter la prise en charge des images de taille personnalisée
 add_image_size('featured-thumbnail', 350, 233, true);
 
+function add_contact_link_class($items) {
+    foreach ($items as $item) {
+        if ($item->title == 'Contact') { // Titre de l'élément du menu
+            $item->classes[] = 'contact-link'; // Ajoute la classe 'contact-link'
+        }
+    }
+    return $items;
+}
+
+
 
 // Hooks d'action
 add_action('wp_enqueue_scripts', 'mota_enqueue_styles');
@@ -72,3 +83,4 @@ add_action('after_setup_theme', 'mota_register_menus');
 add_action('after_setup_theme', 'enable_classic_menu_interface');
 // add_action('wp_ajax_request_photos', 'mota_request_photos');
 // add_action('wp_ajax_nopriv_request_photos', 'mota_request_photos');
+add_filter('wp_nav_menu_objects', 'add_contact_link_class');

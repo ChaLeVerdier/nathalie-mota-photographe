@@ -32,7 +32,8 @@
 <header id="masthead">
     <div class="header-container">
         <div class="logo">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.png" alt="Logo du site">
+        <a href="<?php echo home_url(); ?>"> <!-- Lien vers la page d'accueil -->    
+        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.png" alt="Logo du site">
         </div>
 
         <!-- header.php -->

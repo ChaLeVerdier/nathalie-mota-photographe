@@ -1,0 +1,25 @@
+/* _fonts.scss */
+
+@font-face {
+     font-family: 'SpaceMono';
+     src: url('../fonts/SpaceMono-Regular.woff2') format('woff2'),
+          url('../fonts/SpaceMono-Regular.woff') format('woff'); 
+     font-weight: 400; 
+     font-style: normal; 
+ }
+ 
+ @font-face {
+     font-family: 'SpaceMono';
+     src: url('../fonts/SpaceMono-Bolditalic.woff2') format('woff2'),
+          url('../fonts/SpaceMono-Bolditalic.woff') format('woff'); 
+     font-weight: 700; 
+     font-style: italic; 
+ }
+ 
+ @font-face {
+     font-family: 'Poppins';
+     src: url('../fonts/Poppins.woff2') format('woff2'),
+          url('../fonts/Poppins.woff') format('woff'); 
+     font-weight: 400; 
+     font-style: normal; 
+ }

@@ -1,0 +1,33 @@
+.site-footer {
+  border-top: 1px solid #000; /* Bordure en haut */
+  font-family: $font-primary; // Applique la police principale à tout le header
+}
+
+.footer-menu {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 50px;
+
+  li a {
+    text-decoration: none;
+    color: #000000;
+    text-transform: uppercase; // Pour avoir tout en majuscule
+      &:hover {
+      color: #007bff; // Couleur au survol
+    }
+  }
+
+  // Responsive : Menu mobile (breakpoint pour mobile)
+  @media (max-width: 768px) {
+    .header-container {
+      flex-direction: column; // Affiche le menu en colonne
+      align-items: flex-start;
+      li {
+        margin-bottom: 10px; // Espace entre les items en mobile
+      }
+    }
+  }
+}

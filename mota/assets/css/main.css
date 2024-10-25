@@ -34,8 +34,8 @@
   top: 0;
   width: 100%;
   height: 100%;
-  overflow: auto;
   background-color: rgba(0, 0, 0, 0.4);
+  overflow: auto;
 }
 .modal.show {
   display: block;
@@ -45,17 +45,18 @@
   flex-direction: column;
   align-items: center;
   background-color: #fefefe;
-  font-family: "Poppins", sans-serif !important;
+  font-family: "Poppins", sans-serif;
   font-size: 12px;
   font-weight: 500;
   color: #313144;
   margin: 15% auto;
-  padding: 0;
+  padding: 0px;
   border: 4px solid #000000;
   max-width: 400px;
-  max-height: 600px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Effet d'ombre pour le style */
-  overflow: hidden; /* Cache tout débordement */
+  width: 90%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  overflow: auto;
+  max-height: 80vh;
 }
 .modal .modal-content img {
   width: 100%; /* L'image prend toute la largeur */
@@ -93,6 +94,7 @@
   padding: 10px; /* Espacement intérieur */
   cursor: pointer; /* Change le curseur pour indiquer que c'est cliquable */
   transition: background-color 0.3s; /* Effet de transition pour la couleur de fond */
+  overflow: hidden; /* Cache tout débordement */
 }
 .modal button:hover,
 .modal input[type=submit]:hover {
@@ -158,8 +160,8 @@
 }
 
 /* *********** SECTION FILTRE ET GALLERIE ***************** */
-.photo-section {
-  width: 100%; /* Occupe toute la largeur disponible */
+.photo-catalogue {
+  width: 100%; /* Occupe 80% la largeur disponible */
   padding: 0; /* Pas de padding */
   box-sizing: border-box; /* Empêche les éléments de déborder */
   display: flex;
@@ -171,7 +173,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 20px 60px;
+  margin: 20px auto;
+  width: 1200px; /* Largeur maximale du conteneur */
 }
 
 .filters-left {
@@ -188,7 +191,7 @@ select {
   border: 1px solid #ccc;
   border-radius: 8px;
   background-color: white;
-  width: 260px; /* Largeur fixe */
+  width: 280px; /* Largeur fixe */
   height: 42px; /* Hauteur fixe */
 }
 
@@ -228,6 +231,19 @@ select {
   object-fit: cover; /* L'image couvre toute la zone du cube tout en conservant les proportions */
 }
 
+#charger-plus {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2px;
+  background-color: #D8D8D8;
+  font-family: "SpaceMono", sans-serif;
+  width: 280px;
+  height: 50px;
+  text-align: center;
+  color: #000000;
+}
+
 /* Ajustement responsive pour les petits écrans */
 @media (max-width: 768px) {
   .photo-item {
@@ -255,11 +271,10 @@ select {
   right: 20px;
 }
 .header-container .main-navigation .main-menu {
+  display: flex;
   list-style: none;
   margin: 0;
   padding: 0;
-  display: flex;
-  font-family: "SpaceMono", sans-serif !important;
 }
 .header-container .main-navigation .main-menu li {
   margin-left: 20px;
@@ -268,7 +283,6 @@ select {
   text-decoration: none;
   color: #000000;
   text-transform: uppercase;
-  font-family: "SpaceMono", sans-serif;
 }
 .header-container .main-navigation .main-menu li a:hover {
   color: #007bff;
@@ -296,6 +310,57 @@ select {
 body {
   margin: 0; /* Enlève la marge par défaut */
   padding: 0; /* Enlève le padding par défaut */
+  font-family: "SpaceMono", sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+  max-width: 1400px; /* Définit une largeur max pour les écrans très larges */
+  margin: 0 auto; /* Centre le contenu horizontalement */
+}
+
+.hero {
+  display: flex; /* Utiliser Flexbox */
+  justify-content: center; /* Centrer horizontalement */
+  align-items: center; /* Centrer verticalement */
+  height: 100vh; /* Hauteur pleine de la fenêtre */
+  overflow: hidden; /* Masquer les débordements */
+}
+
+.hero-background-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative; /* Position relative pour la superposition */
+}
+
+.hero-background-image img:first-child {
+  max-width: 100%; /* Taille de l'image de fond */
+  height: auto;
+}
+
+.hero-title {
+  position: absolute; /* Position absolue pour la superposition */
+  max-width: 80%; /* Ajustez la taille si nécessaire */
+  height: auto;
+}
+
+.hero-slider {
+  position: relative;
+  overflow: hidden;
+  height: 100vh; /* ou une hauteur souhaitée */
+}
+
+.hero-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.hero-slide.active {
+  opacity: 1;
 }
 
 /*# sourceMappingURL=main.css.map */

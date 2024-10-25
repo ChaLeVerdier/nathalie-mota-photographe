@@ -15,12 +15,11 @@ get_header(); ?>
             the_post();
     ?>
 
-            <section class="hero">
-                <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/hero.png'); ?>" alt="Image Hero" class="hero-image hero-background">
-            </section>
+<?php get_template_part('template-parts/swiper-hero'); ?>
+
 
             <!-- Ajout de la section pour les champs personnalisés -->
-            <section class="photo-section">
+            <section class="photo-catalogue">
                 <div class="photo-filters">
                     <div class="filters-left">
                         <!-- Filtre par catégorie -->
@@ -67,11 +66,10 @@ get_header(); ?>
                 <!-- Inclusion de la galerie -->
                 <?php get_template_part('template-parts/content', 'gallery'); ?>
 
-            </section>
-
-            <section class="photo-gallery">
-                <div id="photo-container"></div>
-                <button id="charger-plus"><?php esc_html_e('Charger plus', 'mota'); ?></button>
+                <section class="photo-gallery">
+                    <div id="photo-container"></div>
+                    <button id="charger-plus"><?php esc_html_e('Charger plus', 'mota'); ?></button>
+                </section>
             </section>
 
             <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>

@@ -1,0 +1,49 @@
+.hero {
+    display: flex;                    /* Utiliser Flexbox */
+    justify-content: center;          /* Centrer horizontalement */
+    align-items: center;              /* Centrer verticalement */
+    height: 100vh;                    /* Hauteur pleine de la fenêtre */
+    overflow: hidden;                 /* Masquer les débordements */
+}
+
+.hero-background-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;               /* Position relative pour la superposition */
+}
+
+.hero-background-image img:first-child {
+    max-width: 100%;                  /* Taille de l'image de fond */
+    height: auto;
+}
+
+.hero-title {
+    position: absolute;               /* Position absolue pour la superposition */
+    max-width: 80%;                   /* Ajustez la taille si nécessaire */
+    height: auto;
+}
+
+
+
+
+
+.hero-slider {
+     position: relative;
+     overflow: hidden;
+     height: 100vh; /* ou une hauteur souhaitée */
+ }
+ 
+ .hero-slide {
+     position: absolute;
+     top: 0;
+     left: 0;
+     right: 0;
+     bottom: 0;
+     opacity: 0;
+     transition: opacity 1s ease-in-out;
+ }
+ 
+ .hero-slide.active {
+     opacity: 1;
+ }

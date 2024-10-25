@@ -1,4 +1,4 @@
-let photosChargées = 0; // Nombre de photos déjà affichées
+let photosChargees = 0; // Nombre de photos déjà affichées
 const photosParChargement = 8; // Nombre de photos à charger à chaque clic
 
 // Au clic du bouton 'charger plus', appeler la fonction fetchPhotos
@@ -8,7 +8,7 @@ document.getElementById('charger-plus').addEventListener('click', () => {
 
 // Fonction pour récupérer et afficher les photos
 function fetchPhotos() {
-    const apiUrl = `http://nathalie-mota-photographe.local/wp-json/wp/v2/media?per_page=${photosParChargement}&offset=${photosChargées}`;
+    const apiUrl = `http://nathalie-mota-photographe.local/wp-json/wp/v2/media?per_page=${photosParChargement}&offset=${photosChargees}`;
 
     fetch(apiUrl)
         .then(response => response.json())
@@ -24,7 +24,7 @@ function fetchPhotos() {
             });
 
             // Mettre à jour le nombre de photos chargées
-            photosChargées += data.length;
+            photosChargees += data.length;
 
             // Vérifie si toutes les photos sont chargées ou si moins que prévu sont renvoyées
             if (data.length < photosParChargement) {

@@ -38,9 +38,19 @@ function mota_enqueue_styles() {
 
 // Chargement des scripts
 function mota_enqueue_scripts() {
-    wp_enqueue_script('mota-scripts', get_template_directory_uri() . '/js/scripts.js', array('jquery'), '1.0.0', true);
+    // Enqueue Swiper CSS
+    wp_enqueue_style('swiper-css', 'https://unpkg.com/swiper/swiper-bundle.min.css');
+
+    // Enqueue Swiper JS
+    wp_enqueue_script('hero-swiper-js', 'https://unpkg.com/swiper/swiper-bundle.min.js', array('jquery'), null, true);
+
+    // Enqueue votre script principal, dépendant de Swiper
+    wp_enqueue_script('mota-scripts', get_template_directory_uri() . '/js/scripts.js', array('jquery', 'hero-swiper-js'), '1.0.0', true);
+
+    // Enqueue le script pour charger plus de photos
     wp_enqueue_script('load-more-photos', get_stylesheet_directory_uri() . '/js/load-more.js', array('jquery'), null, true);
 }
+
 
 // Enregistrement des menus
 function mota_register_menus() {
@@ -64,6 +74,8 @@ function enable_classic_menu_interface() {
 // Ajouter la prise en charge des images de taille personnalisée
 add_image_size('featured-thumbnail', 350, 233, true);
 
+
+// Modale via contact
 function add_contact_link_class($items) {
     foreach ($items as $item) {
         if ($item->title == 'Contact') { // Titre de l'élément du menu

@@ -4,3 +4,7 @@
             <!-- <div class="hero-title">
                 <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/images/hero_titre.png" alt="Titre du site">
             </div> -->
+
+             <section class="hero">
+                <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/hero.png'); ?>" alt="Image Hero" class="hero-image hero-background">
+            </section>

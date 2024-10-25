@@ -12,8 +12,8 @@
 
 /* *********** SECTION FILTRE ET GALLERIE ***************** */
 
-.photo-section {
-    width: 100%; /* Occupe toute la largeur disponible */
+.photo-catalogue {
+    width: 100%; /* Occupe 80% la largeur disponible */
     padding: 0; /* Pas de padding */
     box-sizing: border-box; /* Empêche les éléments de déborder */
     display: flex;
@@ -26,7 +26,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 20px 60px;
+    margin: 20px auto;
+    width: 1200px; /* Largeur maximale du conteneur */
 }
 
 .filters-left {
@@ -43,7 +44,7 @@ select {
     border: 1px solid #ccc;
     border-radius: 8px;
     background-color: white;
-    width: 260px;  /* Largeur fixe */
+    width: 280px;  /* Largeur fixe */
     height: 42px;  /* Hauteur fixe */
 }
 
@@ -83,6 +84,20 @@ select {
     height: 100%;
     object-fit: cover; /* L'image couvre toute la zone du cube tout en conservant les proportions */
 }
+
+#charger-plus{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2px;    
+    background-color: $color-tertiary-medium;
+    font-family: $font-primary;
+    width: 280px;
+    height: 50px;
+    text-align: center;
+    color: $color-black;
+    }
+
 
 /* Ajustement responsive pour les petits écrans */
 @media (max-width: 768px) {

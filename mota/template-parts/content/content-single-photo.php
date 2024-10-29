@@ -1,4 +1,3 @@
-
 <?php
 /**
  * Template part for displaying single photo content
@@ -6,6 +5,8 @@
  * @package Mota
  */
 
+
+ 
 // Récupération des valeurs ACF
 $reference = get_field('reference');
 $type = get_field('type');
@@ -16,8 +17,8 @@ $annee = get_the_date('Y');
 // Récupération des termes de taxonomie
 $categories = get_the_terms(get_the_ID(), 'categorie');
 $formats = get_the_terms(get_the_ID(), 'format');
-
 ?>
+
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
     <header class="entry-header">
@@ -40,6 +41,7 @@ $formats = get_the_terms(get_the_ID(), 'format');
 
         echo '<div class="photo-annee"><strong>Année : </strong>' . esc_html($annee) . '</div>';
 
+
         // Affichage des termes de taxonomie
         if ($categories && !is_wp_error($categories)) :
             echo '<div class="photo-categorie"><strong>Catégorie : </strong>';
@@ -57,3 +59,4 @@ $formats = get_the_terms(get_the_ID(), 'format');
         ?>
     </div>
 </article>
+

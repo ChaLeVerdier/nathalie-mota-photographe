@@ -19,7 +19,6 @@
         );
         ?>
     </nav>
-    <button class="open-modal">Contactez-nous</button>
 </footer>
 
 <?php get_template_part('template-parts/modal', 'contact'); ?>

@@ -116,6 +116,46 @@
   text-decoration: none;
 }
 
+.gallery {
+  display: flex; /* Active le mode Flexbox */
+  flex-wrap: wrap; /* Permet aux éléments de passer à la ligne */
+  justify-content: space-between; /* Espace entre les éléments */
+}
+
+.gallery-item {
+  flex: 0 0 calc(50% - 10px); /* Chaque élément prend 50% de largeur moins l'espacement */
+  margin-bottom: 20px; /* Marge en bas de chaque image */
+  position: relative; /* Nécessaire pour centrer l'image */
+  overflow: hidden; /* Masquer le débordement */
+}
+
+.gallery img {
+  width: 100%; /* Remplir le conteneur */
+  height: auto; /* Garder le ratio d'aspect */
+  aspect-ratio: 1; /* Assurer que l'image est carrée */
+  object-fit: cover; /* Couvrir le conteneur sans déformer l'image */
+  display: block; /* Éliminer les espaces indésirables */
+}
+
+/* Centrer le bouton "Load More" */
+.load-more {
+  display: block;
+  margin: 30px auto; /* Centrage du bouton */
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #0073e6; /* Couleur de fond */
+  color: white; /* Couleur du texte */
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover sur le bouton "Load More" */
+.load-more:hover {
+  background-color: #005bb5;
+}
+
 .site-footer {
   border-top: 1px solid #000; /* Bordure en haut */
   font-family: "SpaceMono", sans-serif;
@@ -149,18 +189,47 @@
 
 /* *********** HERO ***************** */
 .hero {
-  overflow: hidden; /* Pour éviter tout débordement */
+  width: 100vw; /* Prend toute la largeur de la fenêtre */
+  height: 100vh; /* Prend toute la hauteur de la fenêtre */
+  max-width: 100%; /* Respecte la largeur maximale du body */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  border: 3px solid rgb(98, 0, 255);
 }
 
-.hero-image {
-  width: 100%; /* L'image prend 100% de la largeur du conteneur */
-  height: auto; /* Laisse la hauteur s'ajuster proportionnellement */
-  display: block; /* Évite les espaces en dessous de l'image */
-  margin-bottom: 30px;
+.hero-background-image {
+  width: 100%; /* Prend toute la largeur du conteneur parent */
+  height: 100%; /* Prend toute la hauteur du conteneur parent */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 3px solid rgb(6, 93, 38);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border: 3px solid rgb(6, 93, 38);
 }
 
-/* *********** SECTION FILTRE ET GALLERIE ***************** */
-.photo-catalogue {
+.hero-background-image img:first-child {
+  width: 100vw; /* Prend toute la largeur de la fenêtre */
+  height: 100vh; /* Prend toute la hauteur de la fenêtre */
+  object-fit: cover; /* Remplit l’espace sans déformation, en recadrant si nécessaire */
+  object-position: center;
+}
+
+.hero-title {
+  position: absolute; /* Position absolue pour la superposition */
+  max-width: 80%;
+  height: auto;
+  border: 3px solid red;
+}
+
+/* *********** SECTION FILTRE ET gallery ***************** */
+.catalogue {
   width: 100%; /* Occupe 80% la largeur disponible */
   padding: 0; /* Pas de padding */
   box-sizing: border-box; /* Empêche les éléments de déborder */
@@ -169,7 +238,7 @@
 }
 
 /* *********** FILTRES ***************** */
-.photo-filters {
+.catalogue-filters {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -244,6 +313,19 @@ select {
   color: #000000;
 }
 
+#load-more-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2px;
+  background-color: #D8D8D8;
+  font-family: "SpaceMono", sans-serif;
+  width: 280px;
+  height: 50px;
+  text-align: center;
+  color: #000000;
+}
+
 /* Ajustement responsive pour les petits écrans */
 @media (max-width: 768px) {
   .photo-item {
@@ -257,6 +339,10 @@ select {
   padding: 10px 20px;
   position: relative;
   font-family: "SpaceMono", sans-serif;
+  max-width: 100%; /* Limite la largeur du header au conteneur principal */
+  width: 100%;
+  box-sizing: border-box; /* Assure que padding et bordures soient inclus dans la largeur */
+  border: 2px solid greenyellow;
 }
 .header-container .logo img {
   max-width: 250px;
@@ -315,52 +401,7 @@ body {
   color: #333;
   max-width: 1400px; /* Définit une largeur max pour les écrans très larges */
   margin: 0 auto; /* Centre le contenu horizontalement */
-}
-
-.hero {
-  display: flex; /* Utiliser Flexbox */
-  justify-content: center; /* Centrer horizontalement */
-  align-items: center; /* Centrer verticalement */
-  height: 100vh; /* Hauteur pleine de la fenêtre */
-  overflow: hidden; /* Masquer les débordements */
-}
-
-.hero-background-image {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative; /* Position relative pour la superposition */
-}
-
-.hero-background-image img:first-child {
-  max-width: 100%; /* Taille de l'image de fond */
-  height: auto;
-}
-
-.hero-title {
-  position: absolute; /* Position absolue pour la superposition */
-  max-width: 80%; /* Ajustez la taille si nécessaire */
-  height: auto;
-}
-
-.hero-slider {
-  position: relative;
-  overflow: hidden;
-  height: 100vh; /* ou une hauteur souhaitée */
-}
-
-.hero-slide {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
-}
-
-.hero-slide.active {
-  opacity: 1;
+  border: 2px solid rgb(205, 16, 186);
 }
 
 /*# sourceMappingURL=main.css.map */

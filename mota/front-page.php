@@ -14,24 +14,31 @@ get_header(); ?>
         while (have_posts()) :
             the_post();
     ?>
+<section class='hero'>
+<div class="hero">
+    <div class="hero-background-image">
+        <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/hero2.png'); ?>" alt="Image Hero">
+        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/hero-titre.png" alt="Titre du Hero" class="hero-title">
+    </div>
+</div>
+</section>
 
-<?php get_template_part('template-parts/swiper-hero'); ?>
-
-
-            <!-- Ajout de la section pour les champs personnalisés -->
-            <section class="photo-catalogue">
-                <div class="photo-filters">
+<!-- // Section catalogue 1e partie : filtres -->
+            <section class="catalogue">
+                
+                <!-- Ajout de la section pour les champs personnalisés -->
+                <div class="catalogue-filters">
                     <div class="filters-left">
                         <!-- Filtre par catégorie -->
-                        <select name="photo_category" id="photo_category">
+                        <select name="photo-categorie" id="photo-categorie">
                             <option value=""><?php esc_html_e('CATÉGORIE', 'mota'); ?></option>
                             <?php
                             // Affichage des catégories spécifiques
-                            $categories = array('Mariage', 'Concert', 'Réception', 'Télévision');
-                            foreach ($categories as $category_slug) {
-                                $category = get_term_by('slug', $category_slug, 'category');
-                                if ($category) {
-                                    echo '<option value="' . esc_attr($category->slug) . '">' . esc_html($category->name) . '</option>';
+                            $categories = array('mariage', 'concert', 'Reception', 'Television');
+                            foreach ($categories as $categorie_slug) {
+                                $categorie = get_term_by('slug', $categorie_slug, 'category');
+                                if ($categorie) {
+                                    echo '<option value="' . esc_attr($categorie->slug) . '">' . esc_html($categorie->name) . '</option>';
                                 }
                             }
                             ?>
@@ -65,29 +72,24 @@ get_header(); ?>
 
                 <!-- Inclusion de la galerie -->
                 <?php get_template_part('template-parts/content', 'gallery'); ?>
+                
 
-                <section class="photo-gallery">
-                    <div id="photo-container"></div>
-                    <button id="charger-plus"><?php esc_html_e('Charger plus', 'mota'); ?></button>
-                </section>
-            </section>
+                <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+                    <header class="entry-header">
+                        <?php the_title('<h1 class="entry-title">', '</h1>'); ?>
+                    </header>
 
-            <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-                <header class="entry-header">
-                    <?php the_title('<h1 class="entry-title">', '</h1>'); ?>
-                </header>
-
-                <div class="entry-content">
-                    <?php
-                    the_content();
-                    wp_link_pages(array(
-                        'before' => '<div class="page-links">' . esc_html__('Pages:', 'mota'),
-                        'after'  => '</div>',
-                    ));
-                    ?>
-                </div>
-            </article>
-        <?php
+                    <div class="entry-content">
+                        <?php
+                        the_content();
+                        wp_link_pages(array(
+                            'before' => '<div class="page-links">' . esc_html__('Pages:', 'mota'),
+                            'after'  => '</div>',
+                        ));
+                        ?>
+                    </div>
+                </article>
+            <?php
         endwhile;
 
         // Articles récents
@@ -97,24 +99,24 @@ get_header(); ?>
         ));
 
         if ($recent_posts->have_posts()) :
-        ?>
-            <section class="recent-posts">
-                <h2><?php esc_html_e('Articles Récents', 'mota'); ?></h2>
-                <?php
-                while ($recent_posts->have_posts()) :
-                    $recent_posts->the_post();
-                    get_template_part('template-parts/content/content', 'excerpt');
-                endwhile;
-                wp_reset_postdata();
-                ?>
-            </section>
-    <?php
+            ?>
+                <section class="recent-posts">
+                    <h2><?php esc_html_e('Articles Récents', 'mota'); ?></h2>
+                    <?php
+                    while ($recent_posts->have_posts()) :
+                        $recent_posts->the_post();
+                        get_template_part('template-parts/content/content', 'excerpt');
+                    endwhile;
+                    wp_reset_postdata();
+                    ?>
+                </section>
+        <?php
         endif;
 
     else :
         get_template_part('template-parts/content/content', 'none');
     endif;
-    ?>
+        ?>
 </main>
 
 <?php

@@ -1,18 +1,46 @@
-/* Styles pour la galerie d'images */
+// /* Styles pour la galerie d'images */
 
-.gallery-container {
-     width: 100%;
-     max-width: 1200px;
-     margin: 0 auto;
- }
- 
- .photo-item {
-     position: relative;
-     width: 560px;
-     height: 495px;
-     margin: 10px;
-     float: left;
-     box-sizing: border-box;
- }
+.gallery {
+    display: flex;                      /* Active le mode Flexbox */
+    flex-wrap: wrap;                   /* Permet aux éléments de passer à la ligne */
+    justify-content: space-between;    /* Espace entre les éléments */
+    }
 
- 
+.gallery-item {
+    flex: 0 0 calc(50% - 10px);        /* Chaque élément prend 50% de largeur moins l'espacement */
+    margin-bottom: 20px;               /* Marge en bas de chaque image */
+    position: relative;                /* Nécessaire pour centrer l'image */
+    overflow: hidden;                  /* Masquer le débordement */
+}
+
+.gallery img {
+    width: 100%;                       /* Remplir le conteneur */
+    height: auto;                      /* Garder le ratio d'aspect */
+    aspect-ratio: 1;                  /* Assurer que l'image est carrée */
+    object-fit: cover;                /* Couvrir le conteneur sans déformer l'image */
+    display: block;                    /* Éliminer les espaces indésirables */
+}
+
+
+
+// ***** BOUTON LOAD-MORE ********* // 
+
+/* Centrer le bouton "Load More" */
+.load-more {
+    display: block;
+    margin: 30px auto; /* Centrage du bouton */
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #0073e6; /* Couleur de fond */
+    color: white; /* Couleur du texte */
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover sur le bouton "Load More" */
+.load-more:hover {
+    background-color: #005bb5;
+}
+

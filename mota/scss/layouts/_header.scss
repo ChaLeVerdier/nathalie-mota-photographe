@@ -5,6 +5,10 @@
   padding: 10px 20px;
   position: relative; // Pour le toggle du menu en mode mobile
   font-family: $font-primary; // Applique la police principale à tout le header
+  max-width: 100%; /* Limite la largeur du header au conteneur principal */
+    width: 100%;
+    box-sizing: border-box; /* Assure que padding et bordures soient inclus dans la largeur */
+    border: 2px solid greenyellow;
 
   // Logo
   .logo {

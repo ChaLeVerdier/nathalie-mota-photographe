@@ -35,51 +35,62 @@ get_header(); ?>
                     <div class="filters-left">
                         <!-- Filtre par catégorie -->
                         <select name="photo-categorie" id="photo-categorie">
+
                             <option value=""><?php esc_html_e('CATÉGORIE', 'mota'); ?></option>
+
                             <?php
                             // Affichage des catégories spécifiques
-                            $categories = array('mariage', 'concert', 'Reception', 'Television');
-                            foreach ($categories as $categorie_slug) {
-                                $categorie = get_term_by('slug', $categorie_slug, 'category');
-                                if ($categorie) {
-                                    echo '<option value="' . esc_attr($categorie->slug) . '">' . esc_html($categorie->name) . '</option>';
-                                }
+                            $categories = get_terms(array(
+                                'taxonomy' => 'photo-categorie',
+                                'hide_empty' => true,
+                            ));
+                            foreach ($categories as $category) {
+                                echo '<option value="' . esc_attr($category->slug) . '">' . esc_html($category->name) . '</option>';
                             }
                             ?>
+
                         </select>
 
                         <!-- Filtre par format -->
-                        <select name="photo_format" id="photo_format">
+                        <select name="photo-format" id="photo-format">
+
                             <option value=""><?php esc_html_e('FORMAT', 'mota'); ?></option>
+
                             <?php
                             // Affichage des formats spécifiques
-                            $formats = array('portrait', 'paysage');
-                            foreach ($formats as $format_slug) {
-                                $format = get_term_by('slug', $format_slug, 'format');
-                                if ($format) {
-                                    echo '<option value="' . esc_attr($format->slug) . '">' . esc_html($format->name) . '</option>';
-                                }
+                            $formats = get_terms(array(
+                                'taxonomy' => 'photo-format',
+                                'hide_empty' => true,
+                            ));
+                            foreach ($formats as $format) {
+                                echo '<option value="' . esc_attr($format->slug) . '">' . esc_html($format->name) . '</option>';
                             }
                             ?>
+
                         </select>
                     </div>
 
                     <div class="filters-right">
                         <!-- Trier par date -->
                         <select name="sort_by_date" id="sort_by_date">
+
                             <option value=""><?php esc_html_e('TRIER PAR', 'mota'); ?></option>
-                            <option value="asc"><?php esc_html_e('Du plus ancien au plus récent', 'mota'); ?></option>
-                            <option value="desc"><?php esc_html_e('Du plus récent au plus ancien', 'mota'); ?></option>
+
+                            <option value="DESC"><?php esc_html_e('à partir des plus récentes ', 'mota'); ?></option>
+
+                            <option value="ASC"><?php esc_html_e('à partir des
+                            plus anciennes', 'mota'); ?></option>
+
                         </select>
                     </div>
                 </div>
-                </section>
-                <!-- Inclusion de la galerie -->
-                <?php get_template_part('template-parts/content', 'gallery'); ?>
+            </section>
+            <!-- Inclusion de la galerie -->
+            <?php get_template_part('template-parts/content', 'gallery'); ?>
 
 
-                
-            <?php
+
+        <?php
         endwhile;
 
         // Articles récents
@@ -89,17 +100,17 @@ get_header(); ?>
         ));
 
         if ($recent_posts->have_posts()) :
-            ?>
-                <section class="recent-posts">
+        ?>
+            <section class="recent-posts">
 
-                </section>
-        <?php
+            </section>
+    <?php
         endif;
 
     else :
         get_template_part('template-parts/content/content', 'none');
     endif;
-        ?>
+    ?>
 </main>
 
 <?php

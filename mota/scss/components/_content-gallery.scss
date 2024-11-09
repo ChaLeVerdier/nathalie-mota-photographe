@@ -1,9 +1,14 @@
 // /* Styles pour la galerie d'images */
 
+
 .gallery {
-     display: flex;                      /* Active le mode Flexbox */
-     flex-wrap: wrap;                   /* Permet aux éléments de passer à la ligne */
-     justify-content: space-between;    /* Espace entre les éléments */
+     display: flex; /* Active le mode Flexbox */
+     flex-wrap: wrap; /* Permet aux éléments de passer à la ligne */
+     justify-content: space-between; /* Espace entre les éléments */
+     align-items: center;
+     margin: 20px auto;
+     width: 1200px; /* Largeur maximale du conteneur */
+    border: 3px solid red;
      }
  
  .gallery-item {
@@ -11,6 +16,7 @@
      margin-bottom: 20px;               /* Marge en bas de chaque image */
      position: relative;                /* Nécessaire pour centrer l'image */
      overflow: hidden;                  /* Masquer le débordement */
+     border: 3px solid rgb(0, 174, 255);
  }
  
  .gallery img {

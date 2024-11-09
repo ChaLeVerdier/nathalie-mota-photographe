@@ -1,6 +1,6 @@
 <!-- // Section catalogue 2e partie : gallerie -->
 
-<section id="photo-container">
+<section id="photo-gallery">
     <div class="gallery">
         <?php
         // Arguments pour récupérer les images
@@ -10,23 +10,31 @@
             'page'=> 1,
         );
 
-        $gallery_query = new WP_Query($args);
+        $photos = new WP_Query($args);
 
-        if ($gallery_query->have_posts()) :
-            while ($gallery_query->have_posts()) : $gallery_query->the_post(); ?>
-                <div class="gallery-item">
-                    <a href="<?php the_permalink(); ?>">
-                        <?php the_post_thumbnail(''); // Affiche l'image mise en avant 
-                        ?>
-                    </a>
+        if ($photos->have_posts()) :
+            while ($photos->have_posts()) : $photos->the_post();
+        ?>
+                
+            <div class="gallery-item">
+                <?php if (has_post_thumbnail()) : ?>
+                        <a href="<?php the_permalink(); ?>">
+                            <?php the_post_thumbnail('gallery-thumbnail'); ?>
+                        </a>
+                <?php endif; ?>
+            </div>
 
-                </div>
-            <?php endwhile;
-            wp_reset_postdata(); // Réinitialise la requête
-        else : ?>
-            <p><?php esc_html_e('Aucune image trouvée.', 'mota'); ?></p>
-        <?php endif; ?>
+            <?php
+                endwhile;
+                wp_reset_postdata();
+            endif;
+            ?>
     </div>
 </section>
 
-<button id="load-more-btn" class="load-more"><?php esc_html_e('Charger plus', 'mota'); ?></button>
+
+
+<!-- Bouton Charger Plus -->
+<div class="load-more-container">
+            <button id="load-more-btn" class="load-more-btn" data-page="2"><?php esc_html_e('Charger plus', 'mota'); ?></button>
+        </div>

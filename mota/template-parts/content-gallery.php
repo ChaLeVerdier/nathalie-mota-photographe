@@ -7,6 +7,7 @@
         $args = array(
             'post_type' => 'photo', 
             'posts_per_page' => 8, 
+            'page'=> 1,
         );
 
         $gallery_query = new WP_Query($args);

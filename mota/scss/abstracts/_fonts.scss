@@ -1,4 +1,4 @@
-/* _fonts.scss */
+/* Space Mono */
 
 @font-face {
      font-family: 'SpaceMono';
@@ -6,6 +6,8 @@
           url('../fonts/SpaceMono-Regular.woff') format('woff'); 
      font-weight: 400; 
      font-style: normal; 
+     font-display: swap; 
+     /* swap :Bonne pratique : Charge une police de remplacement avt : Améliore la vitesse de rendu */
  }
  
  @font-face {
@@ -14,12 +16,36 @@
           url('../fonts/SpaceMono-Bolditalic.woff') format('woff'); 
      font-weight: 700; 
      font-style: italic; 
+     font-display: swap; 
  }
  
+
+ /* Poppins */
  @font-face {
+     font-family: "Poppins";
+     src: url("../../assets/fonts/poppins/Poppins-Light.woff2") format("woff2"),
+          url("../../assets/fonts/poppins/Poppins-Light.woff") format("woff");
+     font-weight: 300;
+     font-style: normal;
+     font-display: swap;
+   }
+   
+@font-face {
      font-family: 'Poppins';
-     src: url('../fonts/Poppins.woff2') format('woff2'),
-          url('../fonts/Poppins.woff') format('woff'); 
-     font-weight: 400; 
-     font-style: normal; 
- }
+     src: url('../fonts/poppins/Poppins-Regular.woff2') format('woff2'),
+          url('../fonts/poppins/Poppins-Regular.woff') format('woff');
+     font-weight: 400;
+     font-style: normal;
+     font-display: swap; 
+   }
+   
+   /* Poppins Bold */
+   @font-face {
+     font-family: 'Poppins';
+     src: url('../fonts/poppins/Poppins-Bold.woff2') format('woff2'),
+          url('../fonts/poppins/Poppins-Bold.woff') format('woff');
+     font-weight: 700;
+     font-style: normal;
+     font-display: swap;
+   }
+   

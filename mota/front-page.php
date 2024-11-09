@@ -14,18 +14,22 @@ get_header(); ?>
         while (have_posts()) :
             the_post();
     ?>
-<section class='hero'>
-<div class="hero">
-    <div class="hero-background-image">
-        <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/hero2.png'); ?>" alt="Image Hero">
-        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/hero-titre.png" alt="Titre du Hero" class="hero-title">
-    </div>
-</div>
-</section>
+            <section class='hero'>
+                <?php
+                //ajoute template-parts hero.php
+                $template_part = locate_template('template-parts/hero-header.php');
+                if ($template_part) {
+                    get_template_part('template-parts/hero-header');
+                } else {
+                    // Code alternatif si le template part n'existe pas
+                    echo '<p>Le template hero est indisponible.</p>';
+                }
+                ?>
+            </section>
 
-<!-- // Section catalogue 1e partie : filtres -->
+            <!-- // Section catalogue 1e partie : filtres -->
             <section class="catalogue">
-                
+
                 <!-- Ajout de la section pour les champs personnalisés -->
                 <div class="catalogue-filters">
                     <div class="filters-left">
@@ -69,26 +73,12 @@ get_header(); ?>
                         </select>
                     </div>
                 </div>
-
+                </section>
                 <!-- Inclusion de la galerie -->
                 <?php get_template_part('template-parts/content', 'gallery'); ?>
+
+
                 
-
-                <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-                    <header class="entry-header">
-                        <?php the_title('<h1 class="entry-title">', '</h1>'); ?>
-                    </header>
-
-                    <div class="entry-content">
-                        <?php
-                        the_content();
-                        wp_link_pages(array(
-                            'before' => '<div class="page-links">' . esc_html__('Pages:', 'mota'),
-                            'after'  => '</div>',
-                        ));
-                        ?>
-                    </div>
-                </article>
             <?php
         endwhile;
 
@@ -101,14 +91,7 @@ get_header(); ?>
         if ($recent_posts->have_posts()) :
             ?>
                 <section class="recent-posts">
-                    <h2><?php esc_html_e('Articles Récents', 'mota'); ?></h2>
-                    <?php
-                    while ($recent_posts->have_posts()) :
-                        $recent_posts->the_post();
-                        get_template_part('template-parts/content/content', 'excerpt');
-                    endwhile;
-                    wp_reset_postdata();
-                    ?>
+
                 </section>
         <?php
         endif;

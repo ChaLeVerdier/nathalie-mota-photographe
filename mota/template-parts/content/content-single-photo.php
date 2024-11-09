@@ -2,61 +2,152 @@
 /**
  * Template part for displaying single photo content
  *
- * @package Mota
+ * @package MotaPhoto
  */
 
-
- 
 // Récupération des valeurs ACF
-$reference = get_field('reference');
-$type = get_field('type');
+$reference = get_field('Reference', get_the_ID()) ?: ''; // Initialiser avec une chaîne vide
+$type = get_field('Type', get_the_ID()) ?: ''; // Initialiser avec une chaîne vide
 
-// Récupération de l'année à partir de la date de publication
-$annee = get_the_date('Y');
+// Récupération de l'année de publication
+$annee = get_the_date('Y') ?: ''; // Initialiser avec une chaîne vide
 
 // Récupération des termes de taxonomie
-$categories = get_the_terms(get_the_ID(), 'categorie');
-$formats = get_the_terms(get_the_ID(), 'format');
+$categories = get_the_terms(get_the_ID(), 'photo-categorie') ?: [];
+$formats = get_the_terms(get_the_ID(), 'photo-format') ?: [];
+
+// URL de la page de contact
+$contact_page_url = get_permalink(get_page_by_path('contact')) ?: '#'; // Lien de fallback si la page n'existe pas
+
+// Debug : Affichage des valeurs pour vérification
+/*
+var_dump($reference); // Affiche la référence ou NULL si non défini
+var_dump($type);      // Affiche le type ou NULL si non défini
+var_dump($annee);     // Affiche l'année de publication
+var_dump($categories); // Affiche les catégories ou WP_Error si non trouvées
+var_dump($formats);    // Affiche les formats ou WP_Error si non trouvés
+*/
 ?>
 
+<article id="post-<?php the_ID(); ?>" <?php post_class('content-single-photo'); ?>>
+    <header class="photo-header">
+        <div class="photo-info">
+            <?php the_title('<h1 class="photo-title">', '</h1>'); ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-    <header class="entry-header">
-        <?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
+            <?php if ($reference || $type || $annee) : ?>
+                <div class="photo-details">
+                    <?php if ($reference) : ?>
+                        <p class="photo-reference"><strong>Référence : </strong><?php echo esc_html($reference); ?></p>
+                    <?php endif; ?>
+                    <?php if (!empty($categories)) : ?>
+                        <p class="photo-categorie"><strong>Catégorie : </strong>
+                            <?php echo esc_html(implode(', ', wp_list_pluck($categories, 'name'))); ?>
+                        </p>
+                    <?php endif; ?>
+                    <?php if (!empty($formats)) : ?>
+                        <p class="photo-format"><strong>Format : </strong>
+                            <?php echo esc_html(implode(', ', wp_list_pluck($formats, 'name'))); ?>
+                        </p>
+                    <?php endif; ?>
+                    <?php if ($type) : ?>
+                        <p class="photo-type"><strong>Type : </strong><?php echo esc_html($type); ?></p>
+                    <?php endif; ?>
+                    <?php if ($annee) : ?>
+                        <p class="photo-annee"><strong>Année : </strong><?php echo esc_html($annee); ?></p>
+                    <?php endif; ?>
+                </div>
+            <?php endif; ?>
+        </div>
+
+        <!-- Image principale alignée à droite -->
+        <?php if (has_post_thumbnail()) : ?>
+            <div class="photo-image">
+                <?php the_post_thumbnail('large'); ?>
+            </div>
+        <?php endif; ?>
     </header>
 
-    <div class="entry-content">
-        <?php
-        // Affichage du contenu
-        the_content();
 
-        // Affichage des champs ACF et de l'année
-        if ($reference) :
-            echo '<div class="photo-reference"><strong>Référence : </strong>' . esc_html($reference) . '</div>';
-        endif;
-
-        if ($type) :
-            echo '<div class="photo-type"><strong>Type : </strong>' . esc_html($type) . '</div>';
-        endif;
-
-        echo '<div class="photo-annee"><strong>Année : </strong>' . esc_html($annee) . '</div>';
+    <!-- Section de contact -->
+<div class="photo-contact-section">
+    <p class="contact-question">Cette photo vous intéresse ?</p>
+    <?php if ($reference) : ?>
+        <a href="#" class="button contact-button open-modal" data-reference="<?php echo esc_attr($reference); ?>">Contact</a>
+    <?php endif; ?>
+</div>
 
 
-        // Affichage des termes de taxonomie
-        if ($categories && !is_wp_error($categories)) :
-            echo '<div class="photo-categorie"><strong>Catégorie : </strong>';
-            $category_names = wp_list_pluck($categories, 'name');
-            echo esc_html(implode(', ', $category_names));
-            echo '</div>';
-        endif;
+    <!-- Navigation Précédente et Suivante -->
+    <footer class="photo-navigation">
+        <div class="nav-links">
+            <?php
+            $prev_post = get_previous_post();
+            $next_post = get_next_post();
+            ?>
 
-        if ($formats && !is_wp_error($formats)) :
-            echo '<div class="photo-format"><strong>Format : </strong>';
-            $format_names = wp_list_pluck($formats, 'name');
-            echo esc_html(implode(', ', $format_names));
-            echo '</div>';
-        endif;
-        ?>
-    </div>
+            <?php if ($prev_post) : ?>
+                <div class="nav-item previous-photo">
+                    <a href="<?php echo get_permalink($prev_post->ID); ?>" class="nav-link prev-link">
+                        ← <?php echo esc_html(get_the_title($prev_post->ID)); ?>
+                    </a>
+                    <?php $prev_thumbnail = get_the_post_thumbnail_url($prev_post->ID, 'thumbnail'); ?>
+                    <?php if ($prev_thumbnail) : ?>
+                        <div class="thumbnail-preview">
+                            <img src="<?php echo esc_url($prev_thumbnail); ?>" alt="<?php echo esc_attr(get_the_title($prev_post->ID)); ?>" />
+                        </div>
+                    <?php endif; ?>
+                </div>
+            <?php endif; ?>
+
+            <?php if ($next_post) : ?>
+                <div class="nav-item next-photo">
+                    <a href="<?php echo get_permalink($next_post->ID); ?>" class="nav-link next-link">
+                        <?php echo esc_html(get_the_title($next_post->ID)); ?> →
+                    </a>
+                    <?php $next_thumbnail = get_the_post_thumbnail_url($next_post->ID, 'thumbnail'); ?>
+                    <?php if ($next_thumbnail) : ?>
+                        <div class="thumbnail-preview">
+                            <img src="<?php echo esc_url($next_thumbnail); ?>" alt="<?php echo esc_attr(get_the_title($next_post->ID)); ?>" />
+                        </div>
+                    <?php endif; ?>
+                </div>
+            <?php endif; ?>
+        </div>
+    </footer>
+
+    <!-- Section "Vous aimerez aussi" -->
+    <section class="related-photos">
+        <h2 class="related-title">Vous aimerez aussi</h2>
+        <div class="related-photos-grid">
+            <?php
+            // Récupérer les photos similaires dans la même catégorie
+            $related_args = array(
+                'post_type' => 'photo',
+                'posts_per_page' => 2,
+                'post__not_in' => array(get_the_ID()),
+                'tax_query' => array(
+                    array(
+                        'taxonomy' => 'photo-categorie',
+                        'field'    => 'slug',
+                        'terms'    => !empty($categories) ? wp_list_pluck($categories, 'slug') : '',
+                    ),
+                ),
+            );
+            $related_photos = new WP_Query($related_args);
+
+            if ($related_photos->have_posts()) :
+                while ($related_photos->have_posts()) : $related_photos->the_post();
+                    ?>
+                    <div class="related-photo-thumbnail">
+                        <a href="<?php the_permalink(); ?>">
+                            <?php the_post_thumbnail('medium'); ?>
+                        </a>
+                    </div>
+                    <?php
+                endwhile;
+                wp_reset_postdata();
+            endif;
+            ?>
+        </div>
+    </section>
 </article>
-

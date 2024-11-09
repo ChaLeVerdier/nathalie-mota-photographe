@@ -15,8 +15,10 @@
     text-decoration: none;
     color: #000000;
     text-transform: uppercase; // Pour avoir tout en majuscule
+    transition: font-weight 0.3s ease;
+    
       &:hover {
-      color: #007bff; // Couleur au survol
+        font-weight: 700; /* Poids de la police en gras au survol */
     }
   }
 

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * En-tête de notre thème
  *
@@ -17,39 +18,37 @@
 <html lang="<?php language_attributes(); ?>">
 
 <head>
-     <meta charset="<?php bloginfo('charset'); ?>">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="profile" href="https://gmpg.org/xfn/11">
-     <?php wp_head(); ?>
+  <meta charset="<?php bloginfo('charset'); ?>">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="profile" href="https://gmpg.org/xfn/11">
+  <?php wp_head(); ?>
 </head>
 
 <body <?php body_class(); ?>>
-<?php wp_body_open(); ?>
+  <?php wp_body_open(); ?>
 
-<div id="page" class="site">
-	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e('Passer au contenu', 'mota'); ?></a>
+  <div id="page" class="site">
+    <a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e('Passer au contenu', 'mota'); ?></a> <!-- Lien pour l'accessibilité -->
 
-<header id="masthead">
-    <div class="header-container">
+    <header id="masthead">
+      <div class="header-container">
         <div class="logo">
-        <a href="<?php echo home_url(); ?>"> <!-- Lien vers la page d'accueil -->    
-        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.png" alt="Logo du site">
+          <a href="<?php echo home_url(); ?>"> <!-- Lien vers la page d'accueil -->
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.png" alt="Logo du site">
         </div>
 
         <!-- header.php -->
-<nav class="main-navigation">
-  <?php
-  wp_nav_menu( array(
-    'theme_location' => 'main-menu', // Emplacement du menu enregistré
-    'container_class'      => 'main-menu-container',          
-    'menu_class'     => 'main-menu', // Classe CSS pour styliser le menu
-  ) );
-  ?>
-</nav>
+        <nav class="main-navigation">
+          <?php
+          wp_nav_menu(array(
+            'theme_location' => 'main-menu', // Emplacement du menu enregistré
+            'container_class'      => 'main-menu-container',
+            'menu_class'     => 'main-menu', // Classe CSS pour styliser le menu
+          ));
+          ?>
+        </nav>
 
-    </div>
+      </div> <!-- header-container -->
 
-    <?php get_template_part('template-parts/modal', 'contact'); ?>
-</header>
-
-
+      <?php get_template_part('template-parts/modal', 'contact'); ?>
+    </header>

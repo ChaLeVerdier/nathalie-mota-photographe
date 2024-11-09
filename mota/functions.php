@@ -43,24 +43,46 @@ function mota_enqueue_styles() {
 
 // Chargement des scripts
 function mota_enqueue_scripts() {
-    // Création d'un Swiper pour le hero
-    // Enqueue Swiper CSS 
-    wp_enqueue_style('swiper-css', 'https://unpkg.com/swiper/swiper-bundle.min.css');
-
-    // Enqueue Swiper JS
-    wp_enqueue_script('hero-swiper-js', 'https://unpkg.com/swiper/swiper-bundle.min.js', array('jquery'), null, true);
-
-    // Enqueue votre script principal, dépendant de Swiper
-    wp_enqueue_script('mota-scripts', get_template_directory_uri() . '/js/scripts.js', array('jquery', 'hero-swiper-js'), '1.0.0', true);
+    wp_enqueue_script('mota-scripts', get_template_directory_uri() . '/js/scripts.js', array('jquery'), '1.0.0', true);
 
     // Enqueue le script pour charger plus de photos
-    // wp_enqueue_script('load-more-photos', get_stylesheet_directory_uri() . '/js/load-more.js', array('jquery'), null, true);
+    wp_enqueue_script('load-more-photos', get_stylesheet_directory_uri() . '/js/content-gallery.js', array('jquery'), null, true);
 }
 
+add_action('wp_enqueue_scripts', 'mota_enqueue_styles');
+add_action('wp_enqueue_scripts', 'mota_enqueue_scripts');
 
-// *********************************************** //
-// *********** Load-more avec Ajax *************** //
-// *********************************************** //
+// ****************************************************************** //
+// ******* Hero : Personnalisation du titre H1 via Backoffice ******* //
+// ****************************************************************** //
+
+function mota_customize_register($wp_customize) {
+    // Section pour le Hero
+    $wp_customize->add_section('hero_section', array(
+        'title'    => __('Section Hero', 'mota'),
+        'priority' => 30,
+    ));
+
+    // Paramètre pour le texte du H1
+    $wp_customize->add_setting('hero_title_text', array(
+        'default'           => __('Photographe Event', 'mota'),
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+ // Contrôle pour le texte du H1
+ $wp_customize->add_control('hero_title_text_control', array(
+    'label'    => __('Texte du Titre H1', 'mota'),
+    'section'  => 'hero_section',
+    'settings' => 'hero_title_text',
+    'type'     => 'text',
+));
+}
+
+add_action('customize_register', 'mota_customize_register');
+
+
+// ***************************************************** //
+// *********** Load-more content-gallery *************** //
+// ***************************************************** //
 
 function load_more_gallery_scripts() {
     wp_enqueue_script( 'load-more-gallery', get_template_directory_uri() . '/js/content-gallery.js', array('jquery'), null, true );
@@ -70,6 +92,8 @@ function load_more_gallery_scripts() {
         'current_page' => 1, // Page courante
     ));
 }
+
+add_action('wp_enqueue_scripts', 'load_more_gallery_scripts');
 
 
 // Gérer la requête AJAX
@@ -102,6 +126,9 @@ function load_more_gallery_images() {
     die(); // Fin de la requête Ajax
 }
 
+add_action('wp_ajax_load_more_gallery-images', 'load_more_gallery-images');  // Pour les utilisateurs connectés
+add_action('wp_ajax_nopriv_load_more_gallery-images', 'load_more_gallery-images');  // Pour les visiteurs non connectés
+
 
 // ******************************************* //
 // *********** Gestion des menus ************* //
@@ -117,6 +144,12 @@ function mota_register_menus() { // Enregistrement des menus
     );
 }
 
+add_action('init', 'mota_register_menus');
+
+
+// *********************************************************** //
+// ********* Ajoute modale + ref à l'élément contact ********* //
+// *********************************************************** //
 
 function add_contact_link_class($items) {
     foreach ($items as $item) {
@@ -133,6 +166,8 @@ function add_contact_link_class($items) {
     return $items;
 }
 
+add_filter('wp_nav_menu_objects', 'add_contact_link_class');
+
 
 // ******************************************* //
 // *********** Gestion des images ************* //
@@ -140,6 +175,7 @@ function add_contact_link_class($items) {
 
 // Ajouter la prise en charge des images mises en avant
 add_theme_support('post_thumbnails');
+
 
 // Ajouter la prise en charge de l'interface de menu classique
 function enable_classic_menu_interface() {
@@ -149,23 +185,33 @@ function enable_classic_menu_interface() {
 // Ajouter la prise en charge des images de taille personnalisée
 add_image_size('featured-thumbnail', 350, 233, true);
 
+
 // Fonction pour ajouter l'attribut loading="lazy" aux images
 function ajouter_lazy_loading($content) {
     return str_replace('<img', '<img loading="lazy"', $content);
 }
+
+add_filter('the_content', 'ajouter_lazy_loading');
+
+
+// Ajouter la prise en charge des formats de publication AVIF dans WordPress
+function add_avif_support($mime_types) {
+    $mime_types['avif'] = 'image/avif';
+    return $mime_types;
+}
+
+add_filter('mime_types', 'add_avif_support');
 
 
 // ******************************************* //
 // ************* Hooks d'action ************** //
 // ******************************************* //
 
-add_action('wp_enqueue_scripts', 'mota_enqueue_styles');
-add_action('wp_enqueue_scripts', 'mota_enqueue_scripts');
-add_action('init', 'mota_register_menus');
-add_action('after_setup_theme', 'mota_register_menus');
-add_action('after_setup_theme', 'enable_classic_menu_interface');
-add_action('wp_enqueue_scripts', 'load_more_gallery_scripts');
-add_action('wp_ajax_load_more_gallery-images', 'load_more_gallery-images');  // Pour les utilisateurs connectés
-add_action('wp_ajax_nopriv_load_more_gallery-images', 'load_more_gallery-images');  // Pour les visiteurs non connectés
-add_filter('wp_nav_menu_objects', 'add_contact_link_class');
-add_filter('the_content', 'ajouter_lazy_loading');
+
+
+// add_action('after_setup_theme', 'mota_register_menus');
+// add_action('after_setup_theme', 'enable_classic_menu_interface');
+
+
+
+

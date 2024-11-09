@@ -1,0 +1,103 @@
+/* Styles de base pour la page single photo */
+.content-single-photo {
+     max-width: 1148px;
+     margin: 0 auto;
+     padding: 20px;
+     font-family: 'Space Mono', monospace;
+ }
+ 
+ /* Mise en page de l'en-tête */
+ .photo-header {
+     display: flex;
+     flex-wrap: wrap;
+     align-items: flex-start;
+     gap: 20px;
+     border-bottom: 1px solid #ccc;
+     padding-bottom: 20px;
+     margin-bottom: 20px;
+ }
+ 
+ .photo-info {
+     flex: 1 1 300px;
+ }
+ 
+ .photo-title {
+     font-size: 36px;
+     font-weight: 700;
+     margin: 0 0 10px;
+ }
+ 
+ .photo-details p {
+     margin: 5px 0;
+     font-size: 14px;
+     text-transform: uppercase;
+ }
+ 
+ .photo-image {
+     flex: 1 1 300px;
+ }
+ 
+ .photo-image img {
+     width: 100%;
+     height: auto;
+     object-fit: cover;
+ }
+ 
+ /* Section de contact */
+ .photo-contact-section {
+     text-align: center;
+     padding: 20px;
+     border-top: 1px solid #ccc;
+     border-bottom: 1px solid #ccc;
+     margin: 20px 0;
+ }
+ 
+ .contact-question {
+     font-size: 16px;
+     margin: 0 0 10px;
+ }
+ 
+ .contact-button {
+     background-color: #ccc;
+     padding: 10px 20px;
+     color: #000;
+     text-decoration: none;
+     text-transform: uppercase;
+ }
+ 
+ /* Navigation Précédente et Suivante */
+ .photo-navigation {
+     display: flex;
+     justify-content: space-between;
+     padding: 20px 0;
+     border-top: 1px solid #ccc;
+     border-bottom: 1px solid #ccc;
+ }
+ 
+ .nav-item {
+     text-align: center;
+     width: 48%;
+ }
+ 
+ .thumbnail-preview img {
+     width: 100%;
+     height: auto;
+     margin-top: 10px;
+     object-fit: cover;
+ }
+ 
+ /* Section "Vous aimerez aussi" */
+ .related-photos {
+     text-align: center;
+     margin-top: 40px;
+ }
+ 
+ .related-title {
+     font-size: 18px;
+     margin-bottom: 20px;
+ }
+ 
+ .related-photos-grid {
+     display: grid;
+     grid-template-columns: repeat(2, 1fr);
+ }

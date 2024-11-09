@@ -1,0 +1,53 @@
+/* Hero Section */
+.hero {
+    width: 100%; /* Prend toute la largeur de l'écran */
+    height: 962px; /* Hauteur spécifique du hero */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 0;
+}
+
+.hero .container {
+    max-width: 1148px; /* Largeur maximale du contenu interne */
+    width: 100%; /* Prend toute la largeur du parent jusqu'à 1148px */
+    padding: 0 20px; /* Padding pour les marges internes */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 96px;
+    font-weight: 700;
+    font-style: italic;
+    text-transform: uppercase;
+    line-height: 142.18px;
+    color: transparent; /* Couleur de fond transparente */
+    -webkit-text-stroke: 3px #FFF; /* Contour du texte en blanc */
+    text-align: center;
+    margin: 0;
+    letter-spacing: 0.1em; /* Espacement pour correspondre au design */
+}
+
+
+/* Version mobile */
+@media (max-width: 768px) {
+    .hero {
+        height: auto; /* Adapte la hauteur automatiquement au contenu */
+        padding: 40px 0; /* Ajoute de l'espace au-dessus et en dessous */
+    }
+
+    .hero-title {
+        font-size: 27.59px; /* Taille de police en version mobile */
+        line-height: 40.86px; /* Hauteur de ligne spécifique pour le mobile */
+        letter-spacing: 0.05em; /* Ajuste l'espacement pour la taille mobile */
+        padding: 0 10px; /* Espacement latéral pour éviter le débordement */
+        -webkit-text-stroke: 1px #FFF; /* Contour réduit en version mobile */
+    }
+}

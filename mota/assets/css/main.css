@@ -147,12 +147,14 @@
   justify-content: center;
   text-align: center;
   margin: 0;
+  box-sizing: border-box;
 }
 
 .hero .container {
-  max-width: 1148px; /* Largeur maximale du contenu interne */
-  width: 100%; /* Prend toute la largeur du parent jusqu'à 1148px */
-  padding: 0 20px; /* Padding pour les marges internes */
+  max-width: 1148px; /* Limite la largeur maximale du conteneur */
+  width: 100%; /* Prend toute la largeur jusqu'à 1148px */
+  padding: 0 20px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -214,22 +216,26 @@
 }
 
 /* Centrer le bouton "Load More" */
-.load-more {
-  display: block;
-  margin: 30px auto; /* Centrage du bouton */
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #0073e6; /* Couleur de fond */
-  color: white; /* Couleur du texte */
-  border: none;
+.load-more-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto; /* Centrage du bouton */
+  border-radius: 2px;
+  background-color: #D8D8D8;
+  font-family: "SpaceMono", sans-serif;
+  width: 272px;
+  height: 50px;
+  text-align: center;
+  color: #000000;
   cursor: pointer;
-  border-radius: 5px;
   transition: background-color 0.3s ease;
 }
 
 /* Hover sur le bouton "Load More" */
-.load-more:hover {
-  background-color: #005bb5;
+.load-more-btn:hover {
+  background-color: #000000;
+  color: #E5E5E5;
 }
 
 .site-footer {
@@ -278,7 +284,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 20px auto;
+  margin: 60px auto 20px;
   width: 1200px; /* Largeur maximale du conteneur */
 }
 
@@ -298,6 +304,7 @@ select {
   background-color: white;
   width: 280px; /* Largeur fixe */
   height: 42px; /* Hauteur fixe */
+  border: 3px solid red;
 }
 
 /* *********** GALERIE ***************** */
@@ -336,44 +343,23 @@ select {
   object-fit: cover; /* L'image couvre toute la zone du cube tout en conservant les proportions */
 }
 
-#charger-plus {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 2px;
-  background-color: #D8D8D8;
-  font-family: "SpaceMono", sans-serif;
-  width: 280px;
-  height: 50px;
-  text-align: center;
-  color: #000000;
-}
-
-#load-more-btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 2px;
-  background-color: #D8D8D8;
-  font-family: "SpaceMono", sans-serif;
-  width: 280px;
-  height: 50px;
-  text-align: center;
-  color: #000000;
-}
-
 /* Ajustement responsive pour les petits écrans */
 @media (max-width: 768px) {
   .photo-item {
     flex-basis: 100%; /* Chaque photo prend toute la largeur sur mobile */
   }
 }
+#masthead {
+  box-shadow: 0 14px 14px -10px rgba(0, 0, 0, 0.3); /* Ombre noire en bas */
+  overflow: hidden;
+}
+
 .header-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px auto;
-  margin: auto;
+  margin: auto 20px;
   position: relative;
   font-family: "SpaceMono", sans-serif;
   max-width: 1200px; /* Limite la largeur du header au conteneur principal */
@@ -425,38 +411,40 @@ select {
   max-width: 1148px;
   margin: 0 auto;
   padding: 20px;
-  font-family: "Space Mono", monospace;
 }
 
 /* Mise en page de l'en-tête */
 .photo-header {
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-start;
+  align-items: flex-end; /* Aligne les éléments en bas */
   gap: 20px;
-  border-bottom: 1px solid #ccc;
-  padding-bottom: 20px;
-  margin-bottom: 20px;
+  justify-content: flex-end; /* Place l'enfant en bas */
 }
 
 .photo-info {
   flex: 1 1 300px;
+  border-bottom: 1px solid black;
 }
 
 .photo-title {
   font-size: 36px;
   font-weight: 700;
   margin: 0 0 10px;
+  text-transform: uppercase;
 }
 
 .photo-details p {
-  margin: 5px 0;
+  margin: 20px 0;
   font-size: 14px;
   text-transform: uppercase;
+  font-family: "SpaceMono", sans-serif;
+  font-weight: normal;
 }
 
 .photo-image {
   flex: 1 1 300px;
+  margin: 0;
 }
 
 .photo-image img {
@@ -467,45 +455,68 @@ select {
 
 /* Section de contact */
 .photo-contact-section {
-  text-align: center;
-  padding: 20px;
-  border-top: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
-  margin: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #000000;
 }
 
-.contact-question {
+.photo-question, .photo-navigation {
+  flex: 1; /* Chaque enfant prend 50% de la largeur du conteneur */
+  box-sizing: border-box; /* Inclut les marges et les paddings dans la largeur totale */
+  align-items: center;
+  padding: 25px 0;
+}
+
+.photo-question {
+  display: flex;
   font-size: 16px;
-  margin: 0 0 10px;
+  margin: 0;
+  justify-content: space-between;
 }
 
-.contact-button {
+#contact-btn {
   background-color: #ccc;
   padding: 10px 20px;
   color: #000;
   text-decoration: none;
   text-transform: uppercase;
+  margin: 0 10px 0;
 }
 
 /* Navigation Précédente et Suivante */
 .photo-navigation {
-  display: flex;
   justify-content: space-between;
-  padding: 20px 0;
-  border-top: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
+  align-items: flex-end; /* Aligne les éléments en bas */
+  border: 2px solid rgb(32, 222, 22);
+}
+
+.nav-links {
+  display: flex;
+  justify-content: flex-end; /* Place l'élément enfant à droite */
+  border: 2px solid rgb(79, 170, 226);
 }
 
 .nav-item {
-  text-align: center;
-  width: 48%;
+  display: flex;
+  margin-right: 20px; /* Sépare les éléments de 20px */
+  border: 2px solid rgb(209, 82, 9);
 }
 
+.nav-item:last-child {
+  margin-right: 0; /* Supprime la marge de droite sur le dernier élément */
+}
+
+/* Par défaut, masquer les images */
 .thumbnail-preview img {
-  width: 100%;
+  display: none;
+  width: 100%; /* Ajustez la taille selon vos besoins */
   height: auto;
-  margin-top: 10px;
   object-fit: cover;
+}
+
+/* Afficher l'image au survol du parent */
+.nav-item:hover .thumbnail-preview img {
+  display: block;
 }
 
 /* Section "Vous aimerez aussi" */

@@ -28,7 +28,7 @@
 
         <!-- Bouton Charger Plus -->
         <div class="load-more-container">
-            <button id="load-more" class="load-more-button" data-page="2"><?php esc_html_e('Charger plus', 'mota'); ?></button>
+            <button id="load-more-btn" class="load-more-btn" data-page="2"><?php esc_html_e('Charger plus', 'mota'); ?></button>
         </div>
 
 

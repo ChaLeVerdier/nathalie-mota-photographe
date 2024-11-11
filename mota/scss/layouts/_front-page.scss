@@ -14,7 +14,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 20px auto;
+  margin: 60px auto 20px;
   width: 1200px; /* Largeur maximale du conteneur */
 }
 
@@ -34,7 +34,9 @@ select {
   background-color: white;
   width: 280px; /* Largeur fixe */
   height: 42px; /* Hauteur fixe */
+  border: 3px solid red;
 }
+
 
 /* *********** GALERIE ***************** */
 
@@ -73,31 +75,6 @@ select {
   object-fit: cover; /* L'image couvre toute la zone du cube tout en conservant les proportions */
 }
 
-#charger-plus {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 2px;
-  background-color: $color-tertiary-medium;
-  font-family: $font-primary;
-  width: 280px;
-  height: 50px;
-  text-align: center;
-  color: $color-black;
-}
-
-#load-more-btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 2px;
-  background-color: $color-tertiary-medium;
-  font-family: $font-primary;
-  width: 280px;
-  height: 50px;
-  text-align: center;
-  color: $color-black;
-}
 
 /* Ajustement responsive pour les petits écrans */
 @media (max-width: 768px) {

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Template part for displaying single photo content
  *
@@ -37,23 +38,23 @@ var_dump($formats);    // Affiche les formats ou WP_Error si non trouvés
             <?php if ($reference || $type || $annee) : ?>
                 <div class="photo-details">
                     <?php if ($reference) : ?>
-                        <p class="photo-reference"><strong>Référence : </strong><?php echo esc_html($reference); ?></p>
+                        <p class="photo-reference">Référence : <?php echo esc_html($reference); ?></p>
                     <?php endif; ?>
                     <?php if (!empty($categories)) : ?>
-                        <p class="photo-categorie"><strong>Catégorie : </strong>
+                        <p class="photo-categorie">Catégorie :
                             <?php echo esc_html(implode(', ', wp_list_pluck($categories, 'name'))); ?>
                         </p>
                     <?php endif; ?>
                     <?php if (!empty($formats)) : ?>
-                        <p class="photo-format"><strong>Format : </strong>
+                        <p class="photo-format">Format :
                             <?php echo esc_html(implode(', ', wp_list_pluck($formats, 'name'))); ?>
                         </p>
                     <?php endif; ?>
                     <?php if ($type) : ?>
-                        <p class="photo-type"><strong>Type : </strong><?php echo esc_html($type); ?></p>
+                        <p class="photo-type">Type : <?php echo esc_html($type); ?></p>
                     <?php endif; ?>
                     <?php if ($annee) : ?>
-                        <p class="photo-annee"><strong>Année : </strong><?php echo esc_html($annee); ?></p>
+                        <p class="photo-annee">Année : <?php echo esc_html($annee); ?></p>
                     <?php endif; ?>
                 </div>
             <?php endif; ?>
@@ -68,52 +69,54 @@ var_dump($formats);    // Affiche les formats ou WP_Error si non trouvés
     </header>
 
 
-    <!-- Section de contact -->
-<div class="photo-contact-section">
-    <p class="contact-question">Cette photo vous intéresse ?</p>
-    <?php if ($reference) : ?>
-        <a href="#" class="button contact-button open-modal" data-reference="<?php echo esc_attr($reference); ?>">Contact</a>
-    <?php endif; ?>
-</div>
+    <!-- Section contact et Navigation Précédente et Suivante -->
+    <section class="photo-contact-section">
 
-
-    <!-- Navigation Précédente et Suivante -->
-    <footer class="photo-navigation">
-        <div class="nav-links">
-            <?php
-            $prev_post = get_previous_post();
-            $next_post = get_next_post();
-            ?>
-
-            <?php if ($prev_post) : ?>
-                <div class="nav-item previous-photo">
-                    <a href="<?php echo get_permalink($prev_post->ID); ?>" class="nav-link prev-link">
-                        ← <?php echo esc_html(get_the_title($prev_post->ID)); ?>
-                    </a>
-                    <?php $prev_thumbnail = get_the_post_thumbnail_url($prev_post->ID, 'thumbnail'); ?>
-                    <?php if ($prev_thumbnail) : ?>
-                        <div class="thumbnail-preview">
-                            <img src="<?php echo esc_url($prev_thumbnail); ?>" alt="<?php echo esc_attr(get_the_title($prev_post->ID)); ?>" />
-                        </div>
-                    <?php endif; ?>
-                </div>
-            <?php endif; ?>
-
-            <?php if ($next_post) : ?>
-                <div class="nav-item next-photo">
-                    <a href="<?php echo get_permalink($next_post->ID); ?>" class="nav-link next-link">
-                        <?php echo esc_html(get_the_title($next_post->ID)); ?> →
-                    </a>
-                    <?php $next_thumbnail = get_the_post_thumbnail_url($next_post->ID, 'thumbnail'); ?>
-                    <?php if ($next_thumbnail) : ?>
-                        <div class="thumbnail-preview">
-                            <img src="<?php echo esc_url($next_thumbnail); ?>" alt="<?php echo esc_attr(get_the_title($next_post->ID)); ?>" />
-                        </div>
-                    <?php endif; ?>
-                </div>
-            <?php endif; ?>
+        <!-- Section de contact -->
+        <div class="photo-question">
+            <p>Cette photo vous intéresse ?</p>
+            <?php if ($reference) : ?>
+                <button id="contact-btn" class="load-more-btn open-modal" data-reference="<?php echo esc_attr($reference); ?>">Contact</a>
+                <?php endif; ?>
+                </button>
         </div>
-    </footer>
+
+        <div class="photo-navigation">
+            <div class="nav-links">
+                <?php
+                $prev_post = get_previous_post();
+                $next_post = get_next_post();
+                ?>
+
+                <?php if ($prev_post) : ?>
+                    <div class="nav-item previous-photo">
+                        <a href="<?php echo get_permalink($prev_post->ID); ?>" class="nav-link prev-link"> ← </a>
+                        <?php $prev_thumbnail = get_the_post_thumbnail_url($prev_post->ID, 'thumbnail'); ?>
+                        <?php if ($prev_thumbnail) : ?>
+                            <div class="thumbnail-preview">
+                                <img src="<?php echo esc_url($prev_thumbnail); ?>" />
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                <?php endif; ?>
+
+                <?php if ($next_post) : ?>
+                    <div class="nav-item next-photo">
+                        <a href="<?php echo get_permalink($next_post->ID); ?>" class="nav-link next-link">
+                            →
+                        </a>
+                        <?php $next_thumbnail = get_the_post_thumbnail_url($next_post->ID, 'thumbnail'); ?>
+                        <?php if ($next_thumbnail) : ?>
+                            <div class="thumbnail-preview">
+                                <img src="<?php echo esc_url($next_thumbnail); ?>" ?>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
+
+    </section>
 
     <!-- Section "Vous aimerez aussi" -->
     <section class="related-photos">
@@ -137,13 +140,13 @@ var_dump($formats);    // Affiche les formats ou WP_Error si non trouvés
 
             if ($related_photos->have_posts()) :
                 while ($related_photos->have_posts()) : $related_photos->the_post();
-                    ?>
+            ?>
                     <div class="related-photo-thumbnail">
                         <a href="<?php the_permalink(); ?>">
                             <?php the_post_thumbnail('medium'); ?>
                         </a>
                     </div>
-                    <?php
+            <?php
                 endwhile;
                 wp_reset_postdata();
             endif;

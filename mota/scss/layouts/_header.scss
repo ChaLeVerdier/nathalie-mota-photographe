@@ -1,9 +1,14 @@
+#masthead {
+  box-shadow: 0 14px 14px -10px rgba(0, 0, 0, 0.3);  /* Ombre noire en bas */
+  overflow: hidden;
+}
+
 .header-container {
   display: flex;
   justify-content: space-between; // Logo à gauche, menu à droite
   align-items: center;
   padding: 10px auto;
-  margin: auto;
+  margin: auto 20px;
   position: relative; // Pour le toggle du menu en mode mobile
   font-family: $font-primary; // Applique la police principale à tout le header
   max-width: 1200px; /* Limite la largeur du header au conteneur principal */

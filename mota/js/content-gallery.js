@@ -1,3 +1,25 @@
+// Filtre gallery 
+document.addEventListener("DOMContentLoaded", function () {
+    const selectElements = document.querySelectorAll("select");
+
+    selectElements.forEach(select => {
+        select.addEventListener("mouseover", (event) => {
+            const options = event.target.options;
+            for (let i = 0; i < options.length; i++) {
+                options[i].onmouseover = function() {
+                    this.style.backgroundColor = "red";
+                    this.style.color = "white";
+                };
+                options[i].onmouseleave = function() {
+                    this.style.backgroundColor = "";
+                    this.style.color = "";
+                };
+            }
+        });
+    });
+});
+console.log('content-gallery.js chargé avec succès');
+
 // Fonction LOAD-MORE avec jQuery et AJAX
 
 jQuery(document).ready(function($){
@@ -8,7 +30,7 @@ jQuery(document).ready(function($){
         
         var button = $(this);
         var data = {
-            'action': 'load_more', // L'action à exécuter côté PHP
+            'action': 'load-more', // L'action à exécuter côté PHP
             'page': page // Page courante pour WP_Query
         };
 
@@ -24,7 +46,7 @@ jQuery(document).ready(function($){
                     button.text('Charger plus'); // Si plus de photos à charger
                     button.prop('disabled', true); // Désactiver le bouton
                 } else {
-                    $('.gallery').append(response); // Ajouter les nouvelles images
+                    $('.photo-gallery').append(response); // Ajouter les nouvelles images
                     button.text('Charger plus');
                     page++; // Incrémenter le compteur de pages
                 }
@@ -32,52 +54,5 @@ jQuery(document).ready(function($){
         });
     });
 });
-
-
-
-// OLD
-// let photosChargees = 0; // Nombre de photos déjà affichées
-// const photosParChargement = 8; // Nombre de photos à charger à chaque clic
-
-// // Au clic du bouton 'charger plus', appeler la fonction fetchPhotos
-// document.getElementById('charger-plus').addEventListener('click', () => {
-//     fetchPhotos();
-// });
-
-// // Fonction pour récupérer et afficher les photos
-// function fetchPhotos() {
-//     const apiUrl = `http://nathalie-mota-photographe.local/wp-json/wp/v2/media?per_page=${photosParChargement}&offset=${photosChargees}`;
-
-//     fetch(apiUrl)
-//         .then(response => response.json())
-//         .then(data => {
-//             const container = document.getElementById('photo-container'); // Assure-toi d'avoir ce conteneur dans ton HTML
-            
-//             // Afficher les photos récupérées
-//             data.forEach(photo => {
-//                 const photoDiv = document.createElement('div');
-//                 photoDiv.classList.add('photo-item');
-//                 photoDiv.innerHTML = `<img src="${photo.source_url}" alt="${photo.alt_text || 'Photo'}">`;
-//                 container.appendChild(photoDiv);
-//             });
-
-//             // Mettre à jour le nombre de photos chargées
-//             photosChargees += data.length;
-
-//             // Vérifie si toutes les photos sont chargées ou si moins que prévu sont renvoyées
-//             if (data.length < photosParChargement) {
-//                 document.getElementById('charger-plus').disabled = true;
-//                 document.getElementById('charger-plus').innerText = 'Plus de photos à charger';
-//             }
-//         })
-//         .catch(error => {
-//             console.error('Erreur lors du chargement des photos:', error);
-//         });
-// }
-
-// // Charger les photos initiales au chargement de la page
-// document.addEventListener('DOMContentLoaded', () => {
-//     fetchPhotos();
-// });
 
 

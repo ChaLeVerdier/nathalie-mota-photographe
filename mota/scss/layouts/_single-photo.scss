@@ -1,103 +1,134 @@
 /* Styles de base pour la page single photo */
 .content-single-photo {
-     max-width: 1148px;
-     margin: 0 auto;
-     padding: 20px;
-     font-family: 'Space Mono', monospace;
- }
- 
- /* Mise en page de l'en-tête */
- .photo-header {
-     display: flex;
-     flex-wrap: wrap;
-     align-items: flex-start;
-     gap: 20px;
-     border-bottom: 1px solid #ccc;
-     padding-bottom: 20px;
-     margin-bottom: 20px;
- }
- 
- .photo-info {
-     flex: 1 1 300px;
- }
- 
- .photo-title {
-     font-size: 36px;
-     font-weight: 700;
-     margin: 0 0 10px;
- }
- 
- .photo-details p {
-     margin: 5px 0;
-     font-size: 14px;
-     text-transform: uppercase;
- }
- 
- .photo-image {
-     flex: 1 1 300px;
- }
- 
- .photo-image img {
-     width: 100%;
-     height: auto;
-     object-fit: cover;
- }
- 
- /* Section de contact */
- .photo-contact-section {
-     text-align: center;
-     padding: 20px;
-     border-top: 1px solid #ccc;
-     border-bottom: 1px solid #ccc;
-     margin: 20px 0;
- }
- 
- .contact-question {
-     font-size: 16px;
-     margin: 0 0 10px;
- }
- 
- .contact-button {
-     background-color: #ccc;
-     padding: 10px 20px;
-     color: #000;
-     text-decoration: none;
-     text-transform: uppercase;
- }
- 
- /* Navigation Précédente et Suivante */
- .photo-navigation {
-     display: flex;
-     justify-content: space-between;
-     padding: 20px 0;
-     border-top: 1px solid #ccc;
-     border-bottom: 1px solid #ccc;
- }
- 
- .nav-item {
-     text-align: center;
-     width: 48%;
- }
- 
- .thumbnail-preview img {
-     width: 100%;
-     height: auto;
-     margin-top: 10px;
-     object-fit: cover;
- }
- 
- /* Section "Vous aimerez aussi" */
- .related-photos {
-     text-align: center;
-     margin-top: 40px;
- }
- 
- .related-title {
-     font-size: 18px;
-     margin-bottom: 20px;
- }
- 
- .related-photos-grid {
-     display: grid;
-     grid-template-columns: repeat(2, 1fr);
- }
+  max-width: 1148px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Mise en page de l'en-tête */
+.photo-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end; /* Aligne les éléments en bas */
+  gap: 20px;
+//   padding-bottom: 20px;
+//   margin-bottom: 20px;
+  justify-content: flex-end; /* Place l'enfant en bas */
+}
+
+.photo-info {
+  flex: 1 1 300px;
+  border-bottom: 1px solid black;
+}
+
+.photo-title {
+  font-size: 36px;
+  font-weight: 700;
+  margin: 0 0 10px;
+  text-transform: uppercase;
+}
+
+.photo-details p {
+  margin: 20px 0;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-family: $font-primary;
+  font-weight: normal;
+}
+
+.photo-image {
+  flex: 1 1 300px;
+  margin: 0;
+}
+
+.photo-image img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+
+/* Section de contact */
+
+.photo-contact-section {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #000000;
+}
+
+.photo-question, .photo-navigation {
+    flex: 1; /* Chaque enfant prend 50% de la largeur du conteneur */
+    box-sizing: border-box; /* Inclut les marges et les paddings dans la largeur totale */
+    align-items: center;
+    padding: 25px 0;
+
+     }
+
+.photo-question {
+    display: flex;
+    font-size: 16px;
+    margin: 0;
+    justify-content: space-between;
+    // border: 2px solid rgb(255, 0, 144);
+}
+
+#contact-btn {
+  background-color: #ccc;
+  padding: 10px 20px;
+  color: #000;
+  text-decoration: none;
+  text-transform: uppercase;
+  margin: 0 10px 0;
+}
+
+
+/* Navigation Précédente et Suivante */
+.photo-navigation {
+  justify-content: space-between;
+  align-items: flex-end; /* Aligne les éléments en bas */
+  border: 2px solid rgb(32, 222, 22);
+}
+
+.nav-links {
+    display: flex;
+    justify-content: flex-end; /* Place l'élément enfant à droite */
+    border: 2px solid rgb(79, 170, 226);
+}
+
+.nav-item {
+    display: flex;
+    margin-right: 20px; /* Sépare les éléments de 20px */
+    border: 2px solid rgb(209, 82, 9);
+}
+.nav-item:last-child {
+    margin-right: 0; /* Supprime la marge de droite sur le dernier élément */
+  }
+  
+/* Par défaut, masquer les images */
+.thumbnail-preview img {
+    display: none;
+    width: 100%; /* Ajustez la taille selon vos besoins */
+    height: auto;
+    object-fit: cover;
+  }
+  
+  /* Afficher l'image au survol du parent */
+  .nav-item:hover .thumbnail-preview img {
+    display: block;
+  }
+
+/* Section "Vous aimerez aussi" */
+.related-photos {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.related-title {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.related-photos-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}

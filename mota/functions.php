@@ -46,7 +46,7 @@ function mota_enqueue_scripts() {
     wp_enqueue_script('mota-scripts', get_template_directory_uri() . '/js/scripts.js', array('jquery'), '1.0.0', true);
 
     // Enqueue le script pour charger plus de photos
-    wp_enqueue_script('load-more-photos', get_stylesheet_directory_uri() . '/js/content-gallery.js', array('jquery'), null, true);
+    wp_enqueue_script('load-more-gallery', get_stylesheet_directory_uri() . '/js/content-gallery.js', array('jquery'), null, true);
 }
 
 add_action('wp_enqueue_scripts', 'mota_enqueue_styles');

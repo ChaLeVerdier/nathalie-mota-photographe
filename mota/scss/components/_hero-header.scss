@@ -8,18 +8,30 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    margin: 0;
+    margin: 0 ; 
+    box-sizing: border-box;
 }
 
 .hero .container {
-    max-width: 1148px; /* Largeur maximale du contenu interne */
-    width: 100%; /* Prend toute la largeur du parent jusqu'à 1148px */
-    padding: 0 20px; /* Padding pour les marges internes */
+    max-width: 1148px; /* Limite la largeur maximale du conteneur */
+    width: 100%; /* Prend toute la largeur jusqu'à 1148px */
+    padding: 0 20px;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
+
+// .hero .container {
+//     max-width: 1148px; /* Largeur maximale du contenu interne */
+//     width: 100%; /* Prend toute la largeur du parent jusqu'à 1148px */
+//     padding: 0 20px; /* Padding pour les marges internes */
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     justify-content: center;
+// }
 
 .hero-title {
     font-family: 'Space Mono', monospace;

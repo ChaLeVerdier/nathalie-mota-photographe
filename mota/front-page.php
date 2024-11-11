@@ -14,7 +14,7 @@ get_header(); ?>
         while (have_posts()) :
             the_post();
     ?>
-            <section class='hero'>
+            
                 <?php
                 //ajoute template-parts hero.php
                 $template_part = locate_template('template-parts/hero-header.php');
@@ -25,7 +25,7 @@ get_header(); ?>
                     echo '<p>Le template hero est indisponible.</p>';
                 }
                 ?>
-            </section>
+          
 
             <!-- // Section catalogue 1e partie : filtres -->
             <section class="catalogue">
@@ -36,7 +36,7 @@ get_header(); ?>
                         <!-- Filtre par catégorie -->
                         <select name="photo-categorie" id="photo-categorie">
 
-                            <option value=""><?php esc_html_e('CATÉGORIE', 'mota'); ?></option>
+                            <option value="" disabled selected hidden><?php esc_html_e('CATÉGORIE', 'mota'); ?></option>
 
                             <?php
                             // Affichage des catégories spécifiques
@@ -54,7 +54,7 @@ get_header(); ?>
                         <!-- Filtre par format -->
                         <select name="photo-format" id="photo-format">
 
-                            <option value=""><?php esc_html_e('FORMAT', 'mota'); ?></option>
+                            <option value=""disabled selected hidden><?php esc_html_e('FORMAT', 'mota'); ?></option>
 
                             <?php
                             // Affichage des formats spécifiques
@@ -74,7 +74,7 @@ get_header(); ?>
                         <!-- Trier par date -->
                         <select name="sort_by_date" id="sort_by_date">
 
-                            <option value=""><?php esc_html_e('TRIER PAR', 'mota'); ?></option>
+                            <option value="" disabled selected hidden><?php esc_html_e('TRIER PAR', 'mota'); ?></option>
 
                             <option value="DESC"><?php esc_html_e('à partir des plus récentes ', 'mota'); ?></option>
 

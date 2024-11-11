@@ -1,0 +1,31 @@
+ <?php if ($prev_post) : ?>
+                <div class="nav-item previous-photo">
+                    <a href="<?php echo get_permalink($prev_post->ID); ?>" class="nav-link prev-link">
+                        ← <?php echo esc_html(get_the_title($prev_post->ID)); ?>
+                    </a>
+                    <?php $prev_thumbnail = get_the_post_thumbnail_url($prev_post->ID, 'thumbnail'); ?>
+                    <?php if ($prev_thumbnail) : ?>
+                        <div class="thumbnail-preview">
+                            <img src="<?php echo esc_url($prev_thumbnail); ?>" alt="<?php echo esc_attr(get_the_title($prev_post->ID)); ?>" />
+                        </div>
+                    <?php endif; ?>
+                </div>
+            <?php endif; ?>
+
+            <?php if ($next_post) : ?>
+                <div class="nav-item next-photo">
+                    <a href="<?php echo get_permalink($next_post->ID); ?>" class="nav-link next-link">
+                        <?php echo esc_html(get_the_title($next_post->ID)); ?> →
+                    </a>
+                    <?php $next_thumbnail = get_the_post_thumbnail_url($next_post->ID, 'thumbnail'); ?>
+                    <?php if ($next_thumbnail) : ?>
+                        <div class="thumbnail-preview">
+                            <img src="<?php echo esc_url($next_thumbnail); ?>" alt="<?php echo esc_attr(get_the_title($next_post->ID)); ?>" />
+                        </div>
+                    <?php endif; ?>
+                </div>
+            <?php endif; ?>
+        </div>
+        </div>
+        
+    </section>

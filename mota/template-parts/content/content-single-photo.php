@@ -90,67 +90,77 @@ var_dump($formats);    // Affiche les formats ou WP_Error si non trouvés
 
                 <?php if ($prev_post) : ?>
                     <div class="nav-item previous-photo">
-                        <a href="<?php echo get_permalink($prev_post->ID); ?>" class="nav-link prev-link"> ← </a>
-                        <?php $prev_thumbnail = get_the_post_thumbnail_url($prev_post->ID, 'thumbnail'); ?>
-                        <?php if ($prev_thumbnail) : ?>
-                            <div class="thumbnail-preview">
-                                <img src="<?php echo esc_url($prev_thumbnail); ?>" />
-                            </div>
-                        <?php endif; ?>
+                        <a href="<?php echo get_permalink($prev_post->ID); ?>" class="nav-link prev-link">
+                            <?php $prev_thumbnail = get_the_post_thumbnail_url($prev_post->ID, 'thumbnail'); ?>
+                            <?php if ($prev_thumbnail) : ?>
+                                <div class="thumbnail-preview">
+                                    <img src="<?php echo esc_url($prev_thumbnail); ?>" />
+                                </div>
+                            <?php endif; ?>
+                            <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/arrow-left.svg" alt="Flèche gauche" class="arrow-icon">
+                        </a>
                     </div>
                 <?php endif; ?>
 
                 <?php if ($next_post) : ?>
                     <div class="nav-item next-photo">
                         <a href="<?php echo get_permalink($next_post->ID); ?>" class="nav-link next-link">
-                            →
+                            <?php $next_thumbnail = get_the_post_thumbnail_url($next_post->ID, 'thumbnail'); ?>
+                            <?php if ($next_thumbnail) : ?>
+                                <div class="thumbnail-preview">
+                                    <img src="<?php echo esc_url($next_thumbnail); ?>" />
+                                </div>
+                            <?php endif; ?>
+                            <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/arrow-right.svg" alt="Flèche droite" class="arrow-icon">
                         </a>
-                        <?php $next_thumbnail = get_the_post_thumbnail_url($next_post->ID, 'thumbnail'); ?>
-                        <?php if ($next_thumbnail) : ?>
-                            <div class="thumbnail-preview">
-                                <img src="<?php echo esc_url($next_thumbnail); ?>" ?>
-                            </div>
-                        <?php endif; ?>
                     </div>
                 <?php endif; ?>
             </div>
-        </div>
-
+</div>
     </section>
 
-    <!-- Section "Vous aimerez aussi" -->
-    <section class="related-photos">
+   <!-- Section "Vous aimerez aussi" -->
+   <section class="related-photos">
         <h2 class="related-title">Vous aimerez aussi</h2>
-        <div class="related-photos-grid">
-            <?php
-            // Récupérer les photos similaires dans la même catégorie
-            $related_args = array(
-                'post_type' => 'photo',
+        <div class="gallery"> <!-- Ajoutez cette ligne pour appliquer les styles de la galerie -->
+        <?php
+        // Vérifier si la photo actuelle a des catégories
+        if (!empty($categories)) {
+            $category_slugs = wp_list_pluck($categories, 'slug');
+
+            // Requête pour les posts similaires
+            $related_posts_query = new WP_Query(array(
+                'post_type'      => 'photo',
                 'posts_per_page' => 2,
-                'post__not_in' => array(get_the_ID()),
-                'tax_query' => array(
+                'post__not_in'   => array(get_the_ID()),
+                'tax_query'      => array(
                     array(
                         'taxonomy' => 'photo-categorie',
                         'field'    => 'slug',
-                        'terms'    => !empty($categories) ? wp_list_pluck($categories, 'slug') : '',
+                        'terms'    => $category_slugs,
                     ),
                 ),
-            );
-            $related_photos = new WP_Query($related_args);
+                'orderby'        => 'rand',
+                'fields'         => 'ids',
+            ));
 
-            if ($related_photos->have_posts()) :
-                while ($related_photos->have_posts()) : $related_photos->the_post();
-            ?>
-                    <div class="related-photo-thumbnail">
-                        <a href="<?php the_permalink(); ?>">
-                            <?php the_post_thumbnail('medium'); ?>
-                        </a>
-                    </div>
-            <?php
-                endwhile;
-                wp_reset_postdata();
-            endif;
-            ?>
-        </div>
+            // Récupérer les IDs des posts similaires
+            $related_post_ids = $related_posts_query->posts;
+
+            // Vérifier si des photos similaires ont été trouvées
+            if (!empty($related_post_ids)) {
+                get_template_part('template-parts/photo-block', null, array('post_ids' => $related_post_ids));
+            } else {
+                echo '<p>Aucune photo similaire trouvée.</p>';
+            }
+
+            wp_reset_postdata();
+        } else {
+            echo '<p>Aucune catégorie associée à cette photo.</p>';
+        }
+        ?>
+        </div> <!-- Ajoutez cette ligne pour appliquer les styles de la galerie -->
     </section>
 </article>
+
+<?php get_footer(); ?>

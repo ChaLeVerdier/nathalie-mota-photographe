@@ -1,0 +1,120 @@
+/* Styles de base de la galerie */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 colonnes pour les images sur desktop */
+  gap: 20px;
+  max-width: 1148px;
+  margin: 0 auto;
+}
+
+/* Conteneur de chaque photo */
+.photo-block__container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 564 / 495;
+}
+
+.photo-thumbnail {
+  width: 100%;
+  height: 100%;
+}
+
+.photo-block__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Superposition */
+.photo-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* Fond semi-transparent noir */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.photo-block__container:hover .photo-overlay {
+  opacity: 1;
+}
+
+/* Icône de lightbox en haut à droite */
+.photo-overlay__fullscreen {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 24px;
+  height: 24px;
+}
+
+/* Icône lien vers la photo au centre */
+.photo-overlay__link {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Informations en bas */
+.photo-overlay__info {
+  width: 100%;
+  max-width: calc(100% - 40px); /* Tient compte du padding des côtés */
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  color: #fff;
+  font-size: 14px;
+  position: absolute;
+  bottom: 10px; /* Positionne l'info en bas */
+  left: 10px;
+  right: 10px;
+}
+
+.photo-overlay__reference,
+.photo-overlay__category {
+  margin: 0;
+}
+
+/* Version mobile : 1 colonne pour les images */
+@media (max-width: 768px) {
+  .gallery {
+      grid-template-columns: 1fr; /* 1 colonne pour chaque image sur mobile */
+      gap: 15px; /* Réduit l'espace entre les images */
+      padding: 0 20px; /* Ajoute un padding pour éviter que les images touchent les bords */
+  }
+
+  .photo-block__container {
+      aspect-ratio: 1 / 1; /* Format carré en version mobile */
+  }
+
+  .photo-overlay__info {
+      font-size: 12px; /* Réduit la taille du texte sur mobile */
+      padding: 8px; /* Réduit le padding */
+  }
+
+  .photo-overlay__fullscreen {
+      top: 8px;
+      right: 8px;
+      width: 20px; /* Taille réduite pour l'icône */
+      height: 20px;
+  }
+
+  .photo-overlay__link {
+      width: 35px; /* Taille réduite pour l'icône */
+      height: 35px;
+  }
+}

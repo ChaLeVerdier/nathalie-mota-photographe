@@ -19,9 +19,28 @@
         );
         ?>
     </nav>
+
+    <?php
+    // Ajoute template-part contact-modal.php
+    $template_part_modale = locate_template('template-parts/modal-contact.php');
+    if ($template_part_modale) {
+        get_template_part('template-parts/modal-contact');
+    } else {
+        // Code alternatif si le template part n'existe pas
+        echo '<p>Le template contact modal est indisponible.</p>';
+    }
+    ?>
+
+
+
+<!-- Modale de lightbox -->
+<div id="lightbox-modal" class="lightbox-modal">
+    <span class="close-lightbox">&times;</span>
+    <img id="lightbox-image" src="" alt="Image en plein écran">
+</div>
+
 </footer>
 
-<?php get_template_part('template-parts/modal', 'contact'); ?>
 <?php wp_footer(); ?>
 </body>
 </html>

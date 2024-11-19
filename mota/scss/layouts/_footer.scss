@@ -22,14 +22,21 @@
     }
   }
 
-  // Responsive : Menu mobile (breakpoint pour mobile)
-  @media (max-width: 768px) {
-    .header-container {
-      flex-direction: column; // Affiche le menu en colonne
-      align-items: flex-start;
-      li {
-        margin-bottom: 10px; // Espace entre les items en mobile
-      }
-    }
+  
+}
+
+/* Version mobile */
+@media (max-width: 768px) {
+  .footer-menu {
+      flex-direction: column; /* Aligne les liens en colonne */
+      gap: 10px;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
   }
+
+  // .footer-menu a,
+  // .footer-navigation {
+  //     font-size: 14px; /* Réduit la taille de police en version mobile */
+  // }
 }

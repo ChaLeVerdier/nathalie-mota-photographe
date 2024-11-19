@@ -82,33 +82,43 @@
 }
 
 
+
 /* Navigation Précédente et Suivante */
 .photo-navigation {
-  justify-content: space-between;
-  align-items: flex-end; /* Aligne les éléments en bas */
+  display: grid;
+  grid-template-rows: 1fr auto; /* Définit deux lignes : une flexible et une automatique */
   border: 2px solid rgb(32, 222, 22);
+  padding: 0;
 }
 
-.nav-links {
+.nav-links{
+  grid-row: 2; /* Place l'enfant sur la deuxième ligne (en bas) */
+  // padding: 10px;
     display: flex;
     justify-content: flex-end; /* Place l'élément enfant à droite */
+    // align-items: flex-end; /* Place l'élément enfant en bas */
     border: 2px solid rgb(79, 170, 226);
 }
 
 .nav-item {
-    display: flex;
-    margin-right: 20px; /* Sépare les éléments de 20px */
+    margin-right: 35px; /* Sépare les éléments de 20px */
+    margin-bottom: 10px;
     border: 2px solid rgb(209, 82, 9);
 }
+
 .nav-item:last-child {
     margin-right: 0; /* Supprime la marge de droite sur le dernier élément */
   }
-  
+
+  .thumbnail-preview {
+    display: block;
+  }
+
 /* Par défaut, masquer les images */
 .thumbnail-preview img {
     display: none;
-    width: 100%; /* Ajustez la taille selon vos besoins */
-    height: auto;
+    width: 81px;
+    height: 71px;
     object-fit: cover;
   }
   
@@ -117,18 +127,40 @@
     display: block;
   }
 
+
+
+
+
+
+
+
+
+
+
 /* Section "Vous aimerez aussi" */
 .related-photos {
-  text-align: center;
+  border: 2px solid rgb(209, 82, 9);
   margin-top: 40px;
 }
 
 .related-title {
+  text-transform: uppercase;
+  font-family: $font-primary;
   font-size: 18px;
-  margin-bottom: 20px;
+  margin: 45px 0 20px;
+  font-style: normal;
 }
 
 .related-photos-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Colonnes flexibles */
+    gap: 20px; /* Espacement de 20px entre les éléments */
+    width: 100%; /* Conteneur occupe toute la largeur */
+    border: 2px solid rgb(9, 209, 32);
+}
+
+.related-photo-thumbnail {
+    width: 100%; /* Largeur de chaque cellule */
+    object-fit: cover; /* Ajuste l'image pour couvrir la zone */
+    border: 2px solid rgb(56, 9, 209);
 }

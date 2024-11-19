@@ -46,7 +46,7 @@
   font-style: normal;
   font-display: swap;
 }
-.modal {
+.modal-contact {
   display: none;
   position: fixed;
   z-index: 1000;
@@ -54,13 +54,13 @@
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.7);
   overflow: auto;
 }
-.modal.show {
+.modal-contact.show {
   display: block;
 }
-.modal .modal-content {
+.modal-contact .modal-contact-content {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -78,24 +78,24 @@
   overflow: auto;
   max-height: 80vh;
 }
-.modal .modal-content img {
+.modal-contact .modal-content img {
   width: 100%; /* L'image prend toute la largeur */
   height: auto; /* Maintient le ratio de l'image */
   margin-top: 5px;
   margin-bottom: 30px;
 }
-.modal .form-group {
+.modal-contact .form-group {
   width: 50%; /* Chaque groupe de champs prend la largeur totale */
   margin-bottom: 25px; /* Espace entre les champs */
 }
-.modal label {
+.modal-contact label {
   display: block; /* Force les labels à occuper toute la ligne */
   margin-bottom: 10px; /* Espace entre le label et le champ */
   text-align: left; /* Justifie le texte à gauche */
 }
-.modal input[type=text],
-.modal input[type=email],
-.modal textarea {
+.modal-contact input[type=text],
+.modal-contact input[type=email],
+.modal-contact textarea {
   width: 100%; /* Champs prennent toute la largeur */
   border: 1px solid #ccc; /* Bordure par défaut */
   border-radius: 6px; /* Bords arrondis des champs */
@@ -103,8 +103,8 @@
   padding: 10px; /* Espacement intérieur */
   box-sizing: border-box; /* Inclut padding et bordure dans la largeur totale */
 }
-.modal button,
-.modal input[type=submit] {
+.modal-contact button,
+.modal-contact input[type=submit] {
   font-family: "SpaceMono", sans-serif !important;
   font-size: 12px;
   width: 100%; /* Le bouton prend toute la largeur comme les autres champs */
@@ -116,24 +116,10 @@
   transition: background-color 0.3s; /* Effet de transition pour la couleur de fond */
   overflow: hidden; /* Cache tout débordement */
 }
-.modal button:hover,
-.modal input[type=submit]:hover {
-  background-color: #C0C0C0; /* Couleur de fond au survol */
-}
-.modal button:hover {
-  background-color: #C0C0C0; /* Couleur de fond au survol */
-}
-.modal .close {
-  display: none;
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  cursor: pointer;
-}
-.modal .close:hover, .modal .close:focus {
-  color: black;
-  text-decoration: none;
+.modal-contact button:hover,
+.modal-contact input[type=submit]:hover {
+  background-color: #000000; /* Couleur de fond au survol */
+  color: #E5E5E5;
 }
 
 /* Hero Section */
@@ -189,30 +175,197 @@
     -webkit-text-stroke: 1px #FFF; /* Contour réduit en version mobile */
   }
 }
-.gallery {
-  display: flex; /* Active le mode Flexbox */
-  flex-wrap: wrap; /* Permet aux éléments de passer à la ligne */
-  justify-content: space-between; /* Espace entre les éléments */
+/* Wrapper de la photo */
+.photo-overlay-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.photo-overlay-wrapper img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Overlay */
+.photo-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Overlay semi-transparent */
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  margin: 20px auto;
-  width: 1200px; /* Largeur maximale du conteneur */
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Afficher l'overlay au survol */
+.photo-overlay-wrapper:hover .photo-overlay {
+  opacity: 1;
+}
+
+/* Icône de lightbox en haut à gauche */
+.lightbox-icon {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: white;
+  font-size: 20px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Contenu de l'overlay */
+.overlay-content {
+  text-align: center;
+  color: white;
+  font-family: "Space Mono", monospace;
+}
+
+.overlay-content .photo-reference,
+.overlay-content .photo-category {
+  margin: 5px 0;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+/* Styles de la modale de lightbox */
+.lightbox-modal {
+  display: none; /* Masquée par défaut */
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9); /* Fond sombre */
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-modal img {
+  max-width: 90%;
+  max-height: 90%;
+}
+
+.close-lightbox {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  color: white;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close-lightbox:hover {
+  color: #bbb;
+}
+
+/* *********** SECTION FILTRE ET GALLERY ***************** */
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 20px;
+  border: 3px solid rgb(30, 255, 0);
+}
+
+/* *********** FILTRES ***************** */
+.gallery-filters {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 60px auto 20px;
+  max-width: 1148px;
+  border: 3px solid rgb(228, 182, 16);
+}
+
+.filters-left {
+  display: flex;
+  gap: 30px; /* Espace entre les deux filtres */
+}
+
+.filters-right {
+  display: flex;
+  text-align: right;
+}
+
+.selected-filter {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: white;
+  width: 280px; /* Largeur fixe */
+  height: 42px; /* Hauteur fixe */
+}
+
+/* Styles pour le focus et l'ouverture */
+.filter-open {
+  border: 1.3px solid #215aff;
+  border-radius: 8px 8px 0 0;
+}
+
+/* Version mobile */
+@media (max-width: 768px) {
+  .gallery-filters {
+    flex-direction: column; /* Passe en colonne */
+    align-items: center; /* Centre le contenu */
+    gap: 20px; /* Espace entre les éléments */
+    padding: 0 20px; /* Ajoute du padding pour éviter que les filtres touchent les bords */
+  }
+  .filters-left,
+  .filters-right {
+    width: 100%; /* Prend toute la largeur */
+    display: flex;
+    flex-direction: column; /* Les sélecteurs s'affichent en colonne */
+    gap: 10px; /* Espace entre les sélecteurs */
+  }
+  .selected-filter {
+    min-width: 100%; /* Prend toute la largeur de l'écran en version mobile */
+    max-width: 100%; /* S'assure que les sélecteurs ne débordent pas */
+    font-size: 14px; /* Réduit légèrement la taille de la police pour les petits écrans */
+  }
+}
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 colonnes pour les images */
+  gap: 20px;
+  max-width: 1148px;
+  margin: 0 auto;
+  grid-auto-flow: dense; /* Force le remplissage des espaces vides */
   border: 3px solid red;
 }
 
-.gallery-item {
-  flex: 0 0 calc(50% - 10px); /* Chaque élément prend 50% de largeur moins l'espacement */
-  margin-bottom: 20px; /* Marge en bas de chaque image */
-  position: relative; /* Nécessaire pour centrer l'image */
-  overflow: hidden; /* Masquer le débordement */
-  border: 3px solid rgb(0, 174, 255);
+.photo-thumbnail {
+  width: 100%;
+  overflow: hidden;
+  aspect-ratio: 564/495; /* Maintient le ratio 564x495 */
 }
 
-.gallery img {
-  width: 100%; /* Remplir le conteneur */
-  height: auto; /* Garder le ratio d'aspect */
-  aspect-ratio: 1; /* Assurer que l'image est carrée */
-  object-fit: cover; /* Couvrir le conteneur sans déformer l'image */
-  display: block; /* Éliminer les espaces indésirables */
+.photo-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Coupe l'image pour qu'elle remplisse la vignette */
+  display: block;
+}
+
+/* Version mobile */
+@media (max-width: 768px) {
+  .gallery {
+    grid-template-columns: 1fr; /* 1 colonne en version mobile */
+    gap: 15px; /* Réduit l'espace entre les images */
+    padding: 0 20px; /* Ajoute un padding pour éviter que les images touchent les bords */
+  }
+}
+/* Bouton Charger Plus */
+.load-more-container {
+  text-align: center;
+  margin-top: 20px;
+  border: 3px solid rgb(230, 12, 147);
 }
 
 /* Centrer le bouton "Load More" */
@@ -238,6 +391,128 @@
   color: #E5E5E5;
 }
 
+/* Version mobile */
+@media (max-width: 768px) {
+  .load-more-btn {
+    width: 150px;
+  }
+}
+/* Styles de base de la galerie */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 colonnes pour les images sur desktop */
+  gap: 20px;
+  max-width: 1148px;
+  margin: 0 auto;
+}
+
+/* Conteneur de chaque photo */
+.photo-block__container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 564/495;
+}
+
+.photo-thumbnail {
+  width: 100%;
+  height: 100%;
+}
+
+.photo-block__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Superposition */
+.photo-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* Fond semi-transparent noir */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.photo-block__container:hover .photo-overlay {
+  opacity: 1;
+}
+
+/* Icône de lightbox en haut à droite */
+.photo-overlay__fullscreen {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 24px;
+  height: 24px;
+}
+
+/* Icône lien vers la photo au centre */
+.photo-overlay__link {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Informations en bas */
+.photo-overlay__info {
+  width: 100%;
+  max-width: calc(100% - 40px); /* Tient compte du padding des côtés */
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  color: #fff;
+  font-size: 14px;
+  position: absolute;
+  bottom: 10px; /* Positionne l'info en bas */
+  left: 10px;
+  right: 10px;
+}
+
+.photo-overlay__reference,
+.photo-overlay__category {
+  margin: 0;
+}
+
+/* Version mobile : 1 colonne pour les images */
+@media (max-width: 768px) {
+  .gallery {
+    grid-template-columns: 1fr; /* 1 colonne pour chaque image sur mobile */
+    gap: 15px; /* Réduit l'espace entre les images */
+    padding: 0 20px; /* Ajoute un padding pour éviter que les images touchent les bords */
+  }
+  .photo-block__container {
+    aspect-ratio: 1/1; /* Format carré en version mobile */
+  }
+  .photo-overlay__info {
+    font-size: 12px; /* Réduit la taille du texte sur mobile */
+    padding: 8px; /* Réduit le padding */
+  }
+  .photo-overlay__fullscreen {
+    top: 8px;
+    right: 8px;
+    width: 20px; /* Taille réduite pour l'icône */
+    height: 20px;
+  }
+  .photo-overlay__link {
+    width: 35px; /* Taille réduite pour l'icône */
+    height: 35px;
+  }
+}
 .site-footer {
   border-top: 1px solid #000; /* Bordure en haut */
   font-family: "SpaceMono", sans-serif;
@@ -260,152 +535,170 @@
 .footer-menu li a:hover {
   font-weight: 700; /* Poids de la police en gras au survol */
 }
+
+/* Version mobile */
 @media (max-width: 768px) {
-  .footer-menu .header-container {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .footer-menu .header-container li {
-    margin-bottom: 10px;
-  }
-}
-
-/* *********** SECTION FILTRE ET gallery ***************** */
-.catalogue {
-  width: 100%; /* Occupe 80% la largeur disponible */
-  padding: 0; /* Pas de padding */
-  box-sizing: border-box; /* Empêche les éléments de déborder */
-  display: flex;
-  flex-direction: column;
-}
-
-/* *********** FILTRES ***************** */
-.catalogue-filters {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 60px auto 20px;
-  width: 1200px; /* Largeur maximale du conteneur */
-}
-
-.filters-left {
-  display: flex;
-  gap: 30px; /* Espace entre les deux filtres */
-}
-
-.filters-right {
-  text-align: right;
-}
-
-select {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: white;
-  width: 280px; /* Largeur fixe */
-  height: 42px; /* Hauteur fixe */
-  border: 3px solid red;
-}
-
-/* *********** GALERIE ***************** */
-/* Style pour la galerie photo */
-.photo-gallery {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 20px 0;
-}
-
-/* Style pour le conteneur des photos */
-#photo-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between; /* Espace entre les colonnes */
-  max-width: 1200px; /* Largeur maximale du conteneur */
-  margin: 0 auto; /* Centrer le conteneur */
-}
-
-/* Style pour chaque élément photo */
-.photo-item {
-  flex-basis: calc(50% - 10px); /* Deux colonnes */
-  height: 495px; /* Hauteur fixe des cubes */
-  margin-bottom: 20px; /* Espacement entre les rangées */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f0f0f0; /* Couleur de fond au cas où l'image ne charge pas */
-}
-
-/* Style pour les images */
-.photo-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* L'image couvre toute la zone du cube tout en conservant les proportions */
-}
-
-/* Ajustement responsive pour les petits écrans */
-@media (max-width: 768px) {
-  .photo-item {
-    flex-basis: 100%; /* Chaque photo prend toute la largeur sur mobile */
+  .footer-menu {
+    flex-direction: column; /* Aligne les liens en colonne */
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
   }
 }
 #masthead {
+  display: flex;
+  justify-content: center; /* Centre horizontalement */
+  height: 80px;
   box-shadow: 0 14px 14px -10px rgba(0, 0, 0, 0.3); /* Ombre noire en bas */
   overflow: hidden;
 }
 
 .header-container {
+  max-width: 1200px; /* Largeur du conteneur enfant */
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px auto;
-  margin: auto 20px;
-  position: relative;
   font-family: "SpaceMono", sans-serif;
   max-width: 1200px; /* Limite la largeur du header au conteneur principal */
-  height: 80px;
+  padding: 0 20px;
   box-sizing: border-box; /* Assure que padding et bordures soient inclus dans la largeur */
   transition: height 0.3s ease;
 }
 
+/* Ajustez la hauteur de l'en-tête en version mobile */
+@media (max-width: 768px) {
+  #masthead {
+    height: 72px; /* Hauteur de l'en-tête en version mobile */
+  }
+}
 .main-navigation .main-menu {
   display: flex;
   list-style: none;
   margin: 0;
   padding: 0;
 }
-.main-navigation .main-menu li {
+
+li {
   margin-left: 20px;
 }
-.main-navigation .main-menu li a {
+
+a {
   text-decoration: none;
   color: #000000;
   text-transform: uppercase;
   transition: font-weight 0.3s ease;
 }
-.main-navigation .main-menu li a:hover {
+a:hover {
   font-weight: 700; /* Poids de la police en gras au survol */
 }
-@media (max-width: 768px) {
-  .main-navigation .main-menu {
-    display: none;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .main-navigation .main-menu li {
-    margin-left: 0;
-    margin-bottom: 10px;
-  }
+
+/* Styles pour le menu hamburger */
+.hamburger {
+  display: none; /* Caché par défaut (affiché seulement en mobile) */
+  cursor: pointer;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 3px;
+  background-color: #333;
+  transition: transform 0.3s;
+}
+
+/* Animation du hamburger en croix */
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Menu mobile plein écran */
+.mobile-menu {
+  display: none; /* Caché par défaut */
+  position: fixed;
+  top: 80px; /* Aligne le menu juste en dessous de l'en-tête desktop */
+  left: 0;
+  width: 100vw;
+  height: calc(100vh - 80px); /* Prend toute la hauteur en dessous de l'en-tête desktop */
+  background-color: #ff0000; /* Fond rouge */
+  color: #ffffff;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 999; /* Sous l'en-tête */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  box-sizing: border-box;
 }
 
 @media (max-width: 768px) {
-  .menu-toggle {
-    display: block;
-  }
-  .main-menu.active {
-    display: flex;
+  .mobile-menu {
+    top: 72px; /* Ajustement pour l'en-tête mobile */
+    height: calc(100vh - 72px); /* Prend toute la hauteur en dessous de l'en-tête mobile */
   }
 }
+/* Ajustement pour la barre d'administration sur mobile */
+@media (max-width: 782px) {
+  body.admin-bar .mobile-menu {
+    top: 118px; /* En mobile */
+    height: calc(100vh - 72px - 46px); /* Prend toute la hauteur en dessous de l'en-tête mobile et de la barre admin */
+  }
+}
+/* Affiche le menu mobile quand actif */
+.mobile-menu.active {
+  display: flex;
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Liste des liens dans le menu mobile */
+.mobile-menu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+.mobile-menu-list li {
+  margin: 20px 0;
+}
+
+.mobile-menu-list a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 2em;
+  font-family: "Space Mono", monospace;
+  text-transform: uppercase;
+}
+
+/* Media queries pour mobile */
+@media (max-width: 768px) {
+  .main-navigation {
+    display: none; /* Cache le menu principal */
+  }
+  .hamburger {
+    display: flex; /* Affiche le menu hamburger */
+  }
+}
+/* Empêche le défilement de la page quand le menu mobile est ouvert */
+.no-scroll {
+  overflow: hidden;
+  height: 100vh; /* Verrouille la hauteur pour éviter tout défilement vertical */
+}
+
 /* Styles de base pour la page single photo */
 .content-single-photo {
   max-width: 1148px;
@@ -485,20 +778,22 @@ select {
 
 /* Navigation Précédente et Suivante */
 .photo-navigation {
-  justify-content: space-between;
-  align-items: flex-end; /* Aligne les éléments en bas */
+  display: grid;
+  grid-template-rows: 1fr auto; /* Définit deux lignes : une flexible et une automatique */
   border: 2px solid rgb(32, 222, 22);
+  padding: 0;
 }
 
 .nav-links {
+  grid-row: 2; /* Place l'enfant sur la deuxième ligne (en bas) */
   display: flex;
   justify-content: flex-end; /* Place l'élément enfant à droite */
   border: 2px solid rgb(79, 170, 226);
 }
 
 .nav-item {
-  display: flex;
-  margin-right: 20px; /* Sépare les éléments de 20px */
+  margin-right: 35px; /* Sépare les éléments de 20px */
+  margin-bottom: 10px;
   border: 2px solid rgb(209, 82, 9);
 }
 
@@ -506,11 +801,15 @@ select {
   margin-right: 0; /* Supprime la marge de droite sur le dernier élément */
 }
 
+.thumbnail-preview {
+  display: block;
+}
+
 /* Par défaut, masquer les images */
 .thumbnail-preview img {
   display: none;
-  width: 100%; /* Ajustez la taille selon vos besoins */
-  height: auto;
+  width: 81px;
+  height: 71px;
   object-fit: cover;
 }
 
@@ -521,18 +820,30 @@ select {
 
 /* Section "Vous aimerez aussi" */
 .related-photos {
-  text-align: center;
+  border: 2px solid rgb(209, 82, 9);
   margin-top: 40px;
 }
 
 .related-title {
+  text-transform: uppercase;
+  font-family: "SpaceMono", sans-serif;
   font-size: 18px;
-  margin-bottom: 20px;
+  margin: 45px 0 20px;
+  font-style: normal;
 }
 
 .related-photos-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Colonnes flexibles */
+  gap: 20px; /* Espacement de 20px entre les éléments */
+  width: 100%; /* Conteneur occupe toute la largeur */
+  border: 2px solid rgb(9, 209, 32);
+}
+
+.related-photo-thumbnail {
+  width: 100%; /* Largeur de chaque cellule */
+  object-fit: cover; /* Ajuste l'image pour couvrir la zone */
+  border: 2px solid rgb(56, 9, 209);
 }
 
 /* Styles Globaux */

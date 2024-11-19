@@ -1,0 +1,97 @@
+// ********* OVERLAY ***************
+
+/* Wrapper de la photo */
+.photo-overlay-wrapper {
+     position: relative;
+     overflow: hidden;
+ }
+ 
+ .photo-overlay-wrapper img {
+     display: block;
+     width: 100%;
+     height: auto;
+     // border: 3px solid rgb(30, 22, 26);
+ }
+ 
+ /* Overlay */
+ .photo-overlay {
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     background-color: rgba(0, 0, 0, 0.7); /* Overlay semi-transparent */
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+     opacity: 0;
+     transition: opacity 0.3s ease;
+     // border: 3px solid rgb(30, 22, 26);
+ }
+ 
+ /* Afficher l'overlay au survol */
+ .photo-overlay-wrapper:hover .photo-overlay {
+     opacity: 1;
+ }
+ 
+ /* Icône de lightbox en haut à gauche */
+ .lightbox-icon {
+     position: absolute;
+     top: 10px;
+     left: 10px;
+     color: white;
+     font-size: 20px;
+     text-decoration: none;
+     cursor: pointer;
+     // border: 3px solid rgb(30, 22, 26);
+ }
+ 
+ /* Contenu de l'overlay */
+ .overlay-content {
+     text-align: center;
+     color: white;
+     font-family: 'Space Mono', monospace;
+ }
+ 
+ .overlay-content .photo-reference,
+ .overlay-content .photo-category {
+     margin: 5px 0;
+     font-size: 16px;
+     text-transform: uppercase;
+ }
+ 
+ /* Styles de la modale de lightbox */
+ .lightbox-modal {
+     display: none; /* Masquée par défaut */
+     position: fixed;
+     z-index: 1000;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     background-color: rgba(0, 0, 0, 0.9); /* Fond sombre */
+     align-items: center;
+     justify-content: center;
+ }
+ 
+ .lightbox-modal img {
+     max-width: 90%;
+     max-height: 90%;
+ }
+ 
+ .close-lightbox {
+     position: absolute;
+     top: 20px;
+     right: 30px;
+     color: white;
+     font-size: 40px;
+     font-weight: bold;
+     cursor: pointer;
+ }
+ 
+ .close-lightbox:hover {
+     color: #bbb;
+ }
+ 
+//  <!-- ********* FIN OVERLAY *************** -->

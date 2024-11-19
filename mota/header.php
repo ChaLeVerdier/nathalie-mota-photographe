@@ -48,7 +48,29 @@
           ?>
         </nav>
 
+
+        <!-- Icône du menu hamburger pour le mobile -->
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <!-- Menu mobile en overlay -->
+        <div class="mobile-menu">
+          <?php
+          wp_nav_menu(
+            array(
+              'theme_location' => 'main-menu',
+              'container_class' => 'mobile-menu-container',
+              'menu_class' => 'mobile-menu-list',
+            )
+          );
+          ?>
+        </div>
+
+
       </div> <!-- header-container -->
 
       <?php get_template_part('template-parts/modal', 'contact'); ?>
-    </header>
+    </header><!-- #masthead -->

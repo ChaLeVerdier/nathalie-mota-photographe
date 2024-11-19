@@ -1,7 +1,7 @@
 <!-- /template-parts/modal-contact.php -->
 
-<div id="modal-contact" class="modal">
-    <div class="modal-content">
+<div id="modal-contact" class="modal-contact">
+    <div class="modal-contact-content">
         <span class="close">&times;</span>
         <!-- Image d'en-tête non modifiable -->
         <div class="modal-header">

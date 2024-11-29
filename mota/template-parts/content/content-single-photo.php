@@ -1,32 +1,32 @@
 <?php
 
 /**
- * Template part for displaying single photo content
+ * Template part pour l'affichage d'une photo
  *
- * @package MotaPhoto
+ * @package Mota
  */
 
 // Récupération des valeurs ACF
-$reference = get_field('Reference', get_the_ID()) ?: ''; // Initialiser avec une chaîne vide
-$type = get_field('Type', get_the_ID()) ?: ''; // Initialiser avec une chaîne vide
+$reference = get_field('Reference', get_the_ID()) ?: ''; // Récupère la référence associée à la photo ou retourne une chaîne vide si non définie
+$type = get_field('Type', get_the_ID()) ?: ''; // Récupère le type associé à la photo ou une chaîne vide
 
 // Récupération de l'année de publication
-$annee = get_the_date('Y') ?: ''; // Initialiser avec une chaîne vide
+$annee = get_the_date('Y') ?: ''; // Récupère l'année de publication ou une chaîne vide si non définie
 
 // Récupération des termes de taxonomie
-$categories = get_the_terms(get_the_ID(), 'photo-categorie') ?: [];
-$formats = get_the_terms(get_the_ID(), 'photo-format') ?: [];
+$categories = get_the_terms(get_the_ID(), 'photo-categorie') ?: []; // Récupère les catégories de la photo ou un tableau vide
+$formats = get_the_terms(get_the_ID(), 'photo-format') ?: []; // Récupère les formats associés à la photo ou un tableau vide
 
 // URL de la page de contact
-$contact_page_url = get_permalink(get_page_by_path('contact')) ?: '#'; // Lien de fallback si la page n'existe pas
+$contact_page_url = get_permalink(get_page_by_path('contact')) ?: '#'; // Définit une URL de fallback si la page de contact n'existe pas
 
-// Debug : Affichage des valeurs pour vérification
+// Debug : Affichage des valeurs pour vérifier leur contenu
 /*
-var_dump($reference); // Affiche la référence ou NULL si non défini
-var_dump($type);      // Affiche le type ou NULL si non défini
-var_dump($annee);     // Affiche l'année de publication
-var_dump($categories); // Affiche les catégories ou WP_Error si non trouvées
-var_dump($formats);    // Affiche les formats ou WP_Error si non trouvés
+var_dump($reference); // Vérifie si la référence est correctement récupérée (string ou null)
+var_dump($type);      // Vérifie le type récupéré (string ou null)
+var_dump($annee);     // Vérifie l'année de publication (string ou null)
+var_dump($categories); // Vérifie les catégories (array ou WP_Error)
+var_dump($formats);    // Vérifie les formats (array ou WP_Error)
 */
 ?>
 
@@ -35,6 +35,7 @@ var_dump($formats);    // Affiche les formats ou WP_Error si non trouvés
         <div class="photo-info">
             <?php the_title('<h1 class="photo-title">', '</h1>'); ?>
 
+            <!-- Vérifie si des informations spécifiques existent pour la photo -->
             <?php if ($reference || $type || $annee) : ?>
                 <div class="photo-details">
                     <?php if ($reference) : ?>
@@ -60,7 +61,7 @@ var_dump($formats);    // Affiche les formats ou WP_Error si non trouvés
             <?php endif; ?>
         </div>
 
-        <!-- Image principale alignée à droite -->
+        <!-- Affiche l'image principale de la photo -->
         <?php if (has_post_thumbnail()) : ?>
             <div class="photo-image">
                 <?php the_post_thumbnail('large'); ?>
@@ -68,26 +69,27 @@ var_dump($formats);    // Affiche les formats ou WP_Error si non trouvés
         <?php endif; ?>
     </header>
 
-
-    <!-- Section contact et Navigation Précédente et Suivante -->
+    <!-- Section de contact et navigation -->
     <section class="photo-contact-section">
-
-        <!-- Section de contact -->
         <div class="photo-question">
             <p>Cette photo vous intéresse ?</p>
             <?php if ($reference) : ?>
-                <button id="contact-btn" class="load-more-btn open-modal" data-reference="<?php echo esc_attr($reference); ?>">Contact</a>
-                <?php endif; ?>
+                <!-- Bouton de contact avec référence intégrée -->
+                <button id="contact-btn" class="load-more-btn open-modal" data-reference="<?php echo esc_attr($reference); ?>">
+                    Contact
                 </button>
+            <?php endif; ?>
         </div>
 
         <div class="photo-navigation">
             <div class="nav-links">
                 <?php
+                // Navigation vers les articles précédent et suivant
                 $prev_post = get_previous_post();
                 $next_post = get_next_post();
                 ?>
 
+                <!-- Lien vers l'article précédent -->
                 <?php if ($prev_post) : ?>
                     <div class="nav-item previous-photo">
                         <a href="<?php echo get_permalink($prev_post->ID); ?>" class="nav-link prev-link">
@@ -102,6 +104,7 @@ var_dump($formats);    // Affiche les formats ou WP_Error si non trouvés
                     </div>
                 <?php endif; ?>
 
+                <!-- Lien vers l'article suivant -->
                 <?php if ($next_post) : ?>
                     <div class="nav-item next-photo">
                         <a href="<?php echo get_permalink($next_post->ID); ?>" class="nav-link next-link">
@@ -116,19 +119,18 @@ var_dump($formats);    // Affiche les formats ou WP_Error si non trouvés
                     </div>
                 <?php endif; ?>
             </div>
-</div>
+        </div>
     </section>
 
-   <!-- Section "Vous aimerez aussi" -->
-   <section class="related-photos">
+    <!-- Section "Vous aimerez aussi" -->
+    <section class="related-photos">
         <h2 class="related-title">Vous aimerez aussi</h2>
-        <div class="gallery"> <!-- Ajoutez cette ligne pour appliquer les styles de la galerie -->
+        <div class="gallery">
         <?php
-        // Vérifier si la photo actuelle a des catégories
+        // Recherche des photos similaires basées sur les catégories
         if (!empty($categories)) {
             $category_slugs = wp_list_pluck($categories, 'slug');
 
-            // Requête pour les posts similaires
             $related_posts_query = new WP_Query(array(
                 'post_type'      => 'photo',
                 'posts_per_page' => 2,
@@ -144,10 +146,8 @@ var_dump($formats);    // Affiche les formats ou WP_Error si non trouvés
                 'fields'         => 'ids',
             ));
 
-            // Récupérer les IDs des posts similaires
             $related_post_ids = $related_posts_query->posts;
 
-            // Vérifier si des photos similaires ont été trouvées
             if (!empty($related_post_ids)) {
                 get_template_part('template-parts/photo-block', null, array('post_ids' => $related_post_ids));
             } else {
@@ -159,7 +159,7 @@ var_dump($formats);    // Affiche les formats ou WP_Error si non trouvés
             echo '<p>Aucune catégorie associée à cette photo.</p>';
         }
         ?>
-        </div> <!-- Ajoutez cette ligne pour appliquer les styles de la galerie -->
+        </div>
     </section>
 </article>
 

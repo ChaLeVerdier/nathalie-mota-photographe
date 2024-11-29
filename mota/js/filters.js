@@ -1,38 +1,29 @@
-// Description: Script JavaScript pour filtrer les photos de la galerie en utilisant AJAX
 document.addEventListener('DOMContentLoaded', function () {
-    const categoryFilter = document.getElementById('photo-category-filter');
-    const formatFilter = document.getElementById('photo-format-filter');
-    const orderFilter = document.getElementById('photo-order-filter');
-    const galleryContainer = document.getElementById('gallery');
+    const galleryContainer = document.getElementById('gallery'); // Conteneur principal de la galerie
+    const loadMoreButton = document.getElementById('load-more-btn'); // Bouton "Charger plus"
 
-    // Vérification initiale des éléments
-    console.log('Chargement des éléments de filtre :');
-    console.log('Catégorie :', categoryFilter ? 'Trouvé' : 'Non trouvé');
-    console.log('Format :', formatFilter ? 'Trouvé' : 'Non trouvé');
-    console.log('Ordre :', orderFilter ? 'Trouvé' : 'Non trouvé');
-    console.log('Galerie :', galleryContainer ? 'Trouvé' : 'Non trouvé');
+    // Sélecteurs personnalisés
+    const categoryFilter = document.querySelector('.filter-categorie .custom-selected'); // Filtre par catégorie
+    const formatFilter = document.querySelector('.filter-format .custom-selected'); // Filtre par format
+    const orderFilter = document.querySelector('.filter-date .custom-selected'); // Tri par date
 
+    console.log('Initialisation des filtres et de la galerie');
+
+    // Fonction pour récupérer les photos filtrées
     function fetchFilteredPhotos() {
-        // Assurez-vous que les éléments existent avant d'essayer de récupérer leur valeur
-        const category = categoryFilter ? categoryFilter.value : '';
-        const format = formatFilter ? formatFilter.value : '';
-        const order = orderFilter ? orderFilter.value : '';
+        const category = categoryFilter ? categoryFilter.dataset.value : 'all';
+        const format = formatFilter ? formatFilter.dataset.value : 'all';
+        const order = orderFilter ? orderFilter.dataset.value : 'DESC';
 
-        // Log des valeurs des filtres pour vérifier leur récupération
-        console.log('Valeurs des filtres :');
-        console.log('Filtre catégorie:', category);
-        console.log('Filtre format:', format);
-        console.log('Ordre de tri:', order);
+        console.log('Valeurs des filtres :', { category, format, order });
 
-        // Création de l'objet de données pour AJAX
+        // Envoi des paramètres au backend
         const data = new URLSearchParams({
             action: 'filter_photos',
             category: category,
             format: format,
             order: order,
         });
-
-        console.log('Données envoyées via AJAX:', Object.fromEntries(data)); // Vérifie les données envoyées
 
         fetch(ajaxurl, {
             method: 'POST',
@@ -41,48 +32,100 @@ document.addEventListener('DOMContentLoaded', function () {
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
         })
-            .then((response) => {
-                console.log('Réponse brute:', response); // Vérifie l'objet de réponse
-                return response.text();
+            .then((response) => {  // promesse
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
             })
             .then((data) => {
-                console.log('Données reçues du serveur:', data); // Vérifie le HTML renvoyé par le serveur
-                if (galleryContainer) {
-                    galleryContainer.innerHTML = data;
+                console.log('Réponse du serveur :', data);
+
+                if (data.success && galleryContainer) {
+                    galleryContainer.innerHTML = data.data.html;
+
+                    if (loadMoreButton) {
+                        loadMoreButton.dataset.page = 2;
+                        loadMoreButton.dataset.maxPages = data.data.max_pages;
+
+                        if (data.data.max_pages <= 1) {
+                            loadMoreButton.style.display = 'none';
+                        } else {
+                            loadMoreButton.style.display = 'block';
+                        }
+                    }
                 } else {
-                    console.log('Erreur : Élément de galerie introuvable pour afficher les données.');
+                    galleryContainer.innerHTML = '<p>Aucune photo trouvée.</p>';
+                    if (loadMoreButton) {
+                        loadMoreButton.style.display = 'none';
+                    }
                 }
             })
             .catch((error) => {
-                console.error('Erreur lors du filtrage des photos:', error);
+                console.error('Erreur lors de la requête AJAX :', error);
             });
     }
 
-    // Ajout des écouteurs d'événements si les éléments existent
-    if (categoryFilter) {
-        categoryFilter.addEventListener('change', function() {
-            console.log('Changement de catégorie détecté');
-            fetchFilteredPhotos();
+    // Charger plus de photos
+    function loadMorePhotos() {
+        const currentPage = parseInt(loadMoreButton.dataset.page, 10) || 1;
+        const maxPages = parseInt(loadMoreButton.dataset.maxPages, 10) || 1;
+
+        if (currentPage > maxPages) {
+            return;
+        }
+
+        const category = categoryFilter ? categoryFilter.dataset.value : 'all';
+        const format = formatFilter ? formatFilter.dataset.value : 'all';
+        const order = orderFilter ? orderFilter.dataset.value : 'DESC';
+
+        const data = new URLSearchParams({
+            action: 'filter_photos',
+            category: category,
+            format: format,
+            order: order,
+            page: currentPage,
         });
-    } else {
-        console.log('Aucun écouteur ajouté pour le filtre de catégorie, élément introuvable.');
+
+        fetch(ajaxurl, {
+            method: 'POST',
+            body: data,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.success && galleryContainer) {
+                    galleryContainer.innerHTML += data.data.html;
+                    loadMoreButton.dataset.page = currentPage + 1;
+
+                    if (currentPage + 1 > maxPages) {
+                        loadMoreButton.style.display = 'none';
+                    }
+                } else {
+                    console.log('Aucune photo supplémentaire trouvée.');
+                    loadMoreButton.style.display = 'none';
+                }
+            })
+            .catch((error) => {
+                console.error('Erreur lors du chargement des photos supplémentaires :', error);
+            });
     }
 
-    if (formatFilter) {
-        formatFilter.addEventListener('change', function() {
-            console.log('Changement de format détecté');
-            fetchFilteredPhotos();
-        });
-    } else {
-        console.log('Aucun écouteur ajouté pour le filtre de format, élément introuvable.');
-    }
+    // Ajout des événements de clic sur les filtres personnalisés
+    const customFilters = document.querySelectorAll('.custom-option');
+    customFilters.forEach(option => {
+        option.addEventListener('click', function () {
+            const selected = this.closest('.custom-select').querySelector('.custom-selected');
+            selected.textContent = this.textContent;
+            selected.dataset.value = this.dataset.value;
 
-    if (orderFilter) {
-        orderFilter.addEventListener('change', function() {
-            console.log('Changement d\'ordre détecté');
+            // Appliquer les filtres après sélection
             fetchFilteredPhotos();
         });
-    } else {
-        console.log('Aucun écouteur ajouté pour le filtre d\'ordre, élément introuvable.');
-    }
+    });
+
+    // Bouton "Charger plus"
+    if (loadMoreButton) loadMoreButton.addEventListener('click', loadMorePhotos);
 });

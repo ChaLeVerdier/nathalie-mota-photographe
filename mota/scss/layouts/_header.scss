@@ -1,61 +1,61 @@
+/* ************ Conteneur du header *********** */
 #masthead {
   display: flex;
-  justify-content: center; /* Centre horizontalement */
-  height: 80px;
-  box-shadow: 0 14px 14px -10px rgba(0, 0, 0, 0.3); /* Ombre noire en bas */
-  overflow: hidden;
+  justify-content: center; /* Centre horizontalement le masthead */
+  height: 80px; /* Hauteur par défaut de l'en-tête */
+  box-shadow: 0 14px 14px -10px rgba(0, 0, 0, 0.3); /* Ombre noire en bas de l'en-tête */
+  overflow: hidden; /* Cache le débordement éventuel du contenu */
 }
 
+/* ************ Conteneur interne du header *********** */
 .header-container {
-  max-width: 1200px; /* Largeur du conteneur enfant */
+  max-width: 1200px; /* Limite la largeur du conteneur interne */
   width: 100%;
   display: flex;
-  justify-content: space-between; // Logo à gauche, menu à droite
-  align-items: center;
-  font-family: $font-primary; // Applique la police principale à tout le header
-  max-width: 1200px; /* Limite la largeur du header au conteneur principal */
+  justify-content: space-between; /* Espace entre le logo et le menu */
+  align-items: center; /* Aligne les éléments verticalement */
+  font-family: $font-primary; /* Police principale */
   padding: 0 20px;
-  box-sizing: border-box; /* Assure que padding et bordures soient inclus dans la largeur */
-  transition: height 0.3s ease;
+  box-sizing: border-box; /* Inclut le padding dans la largeur */
+  transition: height 0.3s ease; /* Transition de la hauteur pour les ajustements */
 }
 
-/* Ajustez la hauteur de l'en-tête en version mobile */
+/* Ajustement du header pour la version mobile */
 @media (max-width: 768px) {
   #masthead {
-    height: 72px; /* Hauteur de l'en-tête en version mobile */
+    height: 72px; /* Hauteur réduite pour la version mobile */
   }
 }
 
-// Menu principal
+/* ************ Menu principal *********** */
 .main-navigation .main-menu {
   display: flex;
-  list-style: none;
+  list-style: none; /* Supprime les puces */
   margin: 0;
   padding: 0;
 }
+
 li {
-  margin-left: 20px;
+  margin-left: 20px; /* Espacement entre les éléments de menu */
 }
 
 a {
-  text-decoration: none;
-  color: #000000;
-  text-transform: uppercase; // Tout en majuscule
-  transition: font-weight 0.3s ease;
-
+  text-decoration: none; /* Enlève le souligné */
+  color: #000000; /* Couleur du texte du lien */
+  text-transform: uppercase; /* Met tout en majuscule */
+  transition: font-weight 0.3s ease; /* Transition pour le changement de poids de police */
   &:hover {
-    font-weight: 700; /* Poids de la police en gras au survol */
+    font-weight: 700; /* Applique un poids de police en gras au survol */
   }
 }
 
 
-
-/* Styles pour le menu hamburger */
+/* ************ Menu hamburger (version mobile) *********** */
 .hamburger {
-  display: none; /* Caché par défaut (affiché seulement en mobile) */
+  display: none; /* Caché par défaut, affiché en mobile */
   cursor: pointer;
   flex-direction: column;
-  gap: 4px;
+  gap: 4px; /* Espacement entre les 3 barres */
 }
 
 .hamburger span {
@@ -63,68 +63,69 @@ a {
   width: 24px;
   height: 3px;
   background-color: #333;
-  transition: transform 0.3s;
+  transition: transform 0.3s; /* Animation des barres */
 }
 
-/* Animation du hamburger en croix */
+/* Animation de transformation du hamburger en croix */
 .hamburger.active span:nth-child(1) {
   transform: rotate(45deg) translate(5px, 5px);
 }
+
 .hamburger.active span:nth-child(2) {
-  opacity: 0;
+  opacity: 0; /* Cache la deuxième barre */
 }
+
 .hamburger.active span:nth-child(3) {
   transform: rotate(-45deg) translate(5px, -5px);
 }
 
-/* Menu mobile plein écran */
+
+
+/* ************ Menu mobile plein écran *********** */
 .mobile-menu {
   display: none; /* Caché par défaut */
   position: fixed;
-  top: 80px; /* Aligne le menu juste en dessous de l'en-tête desktop */
+  top: 80px; /* Aligne sous l'en-tête desktop */
   left: 0;
-  width: 100vw;
-  height: calc(100vh - 80px); /* Prend toute la hauteur en dessous de l'en-tête desktop */
-  background-color: #ff0000; /* Fond rouge */
+  width: 100vw; /* Largeur de l'écran */
+  height: calc(100vh - 80px); /* Prend toute la hauteur sous l'en-tête */
+  background-color: #ff0000; /* Fond rouge pour le menu */
   color: #ffffff;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 20px;
-  z-index: 999; /* Sous l'en-tête */
+  z-index: 999; /* Assure que le menu soit au-dessus des autres éléments */
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease, visibility 0.3s ease;
   box-sizing: border-box;
 }
 
+/* Ajustement du menu mobile en fonction de la taille de l'écran */
 @media (max-width: 768px) {
   .mobile-menu {
-    top: 72px; /* Ajustement pour l'en-tête mobile */
-    height: calc(
-      100vh - 72px
-    ); /* Prend toute la hauteur en dessous de l'en-tête mobile */
+    top: 72px; /* Ajuste le top pour l'en-tête mobile */
+    height: calc(100vh - 72px); /* Ajuste la hauteur sous l'en-tête mobile */
   }
 }
 
 /* Ajustement pour la barre d'administration sur mobile */
 @media (max-width: 782px) {
   body.admin-bar .mobile-menu {
-    top: calc(72px + 46px); /* En mobile */
-    height: calc(
-      100vh - 72px - 46px
-    ); /* Prend toute la hauteur en dessous de l'en-tête mobile et de la barre admin */
+    top: calc(72px + 46px); /* Ajuste en fonction de la barre admin */
+    height: calc(100vh - 72px - 46px); /* Réduit la hauteur pour laisser de la place à la barre admin */
   }
 }
 
-/* Affiche le menu mobile quand actif */
+/* Affiche le menu mobile quand il est actif */
 .mobile-menu.active {
   display: flex;
   opacity: 1;
   visibility: visible;
 }
 
-/* Liste des liens dans le menu mobile */
+/* ************ Liste des éléments dans le menu mobile *********** */
 .mobile-menu-list {
   list-style: none;
   padding: 0;
@@ -133,30 +134,30 @@ a {
 }
 
 .mobile-menu-list li {
-  margin: 20px 0;
+  margin: 20px 0; /* Espacement entre les éléments */
 }
 
 .mobile-menu-list a {
   color: #ffffff;
   text-decoration: none;
-  font-size: 2em;
+  font-size: 2em; /* Taille du texte pour mobile */
   font-family: "Space Mono", monospace;
   text-transform: uppercase;
 }
 
-/* Media queries pour mobile */
+/* ************ Media Queries pour mobile *********** */
 @media (max-width: 768px) {
   .main-navigation {
-    display: none; /* Cache le menu principal */
+    display: none; /* Cache le menu principal sur mobile */
   }
 
   .hamburger {
-    display: flex; /* Affiche le menu hamburger */
+    display: flex; /* Affiche le hamburger */
   }
 }
 
-/* Empêche le défilement de la page quand le menu mobile est ouvert */
+/* ************ Empêche le défilement de la page lors de l'ouverture du menu mobile *********** */
 .no-scroll {
   overflow: hidden;
-  height: 100vh; /* Verrouille la hauteur pour éviter tout défilement vertical */
+  height: 100vh; /* Empêche le défilement de la page */
 }

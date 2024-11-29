@@ -1,3 +1,4 @@
+/* *********** MODAL CONTACT ***************** */
 .modal-contact {
     display: none; // Cache la modale par défaut
     position: fixed;
@@ -6,79 +7,88 @@
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    overflow: auto; // Permet le défilement
-
+    background-color: rgba(0, 0, 0, 0.7); // Fond semi-transparent
+    overflow: auto; // Permet le défilement si nécessaire
+  
+    // Modale visible lorsque la classe 'show' est ajoutée
     &.show {
-        display: block; // Affiche la modale quand la classe 'show' est ajoutée
+      display: block;
     }
-
+  
     .modal-contact-content {
-        display: flex;
-        flex-direction: column; // Aligne les éléments en colonne
-        align-items: center; // Centre les éléments horizontalement
-        background-color: #fefefe;
-        font-family: $font-secondary; // Utilisation de la police secondaire
-        font-size: 12px; // Ajuste la taille de police
-        font-weight: 500;
-        color: #313144; // Couleur du texte
-        margin: 15% auto; // Centre horizontalement et verticalement
-        padding: 0px; // Ajoute du padding
-        border: 4px solid #000000;
-        max-width: 400px; // Limite la largeur
-        width: 90%; // Largeur responsive pour mobiles
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); // Effet d'ombre
-        overflow: auto; // Permet le défilement en cas de débordement
-        max-height: 80vh; // Limite la hauteur pour éviter le débordement
+      display: flex;
+      flex-direction: column; // Aligne les éléments en colonne
+      align-items: center; // Centre les éléments horizontalement
+      background-color: #fefefe; // Fond blanc
+      font-family: $font-secondary; // Police secondaire
+      font-size: 12px;
+      font-weight: 500;
+      color: #313144; // Texte de couleur sombre
+      margin: 15% auto; // Centre la modale verticalement et horizontalement
+      padding: 0;
+      border: 4px solid #000000; // Bordure noire
+      max-width: 400px; // Largeur max de la modale
+      width: 90%; // Largeur responsive pour mobiles
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); // Ombre douce autour de la modale
+      overflow: hidden; // Empêche le débordement
+      max-height: 80vh; // Limite la hauteur pour éviter les débordements verticaux
     }
-
- .modal-content img {
-     width: 100%; /* L'image prend toute la largeur */
-     height: auto; /* Maintient le ratio de l'image */
-     margin-top: 5px; 
-     margin-bottom: 30px; 
- }
- 
- .form-group {
-     width: 50%; /* Chaque groupe de champs prend la largeur totale */
-     margin-bottom: 25px; /* Espace entre les champs */
- }
- 
- label {
-     display: block; /* Force les labels à occuper toute la ligne */
-     margin-bottom: 10px; /* Espace entre le label et le champ */
-     text-align: left; /* Justifie le texte à gauche */
- }
- 
- input[type="text"],
- input[type="email"],
- textarea {
-     width: 100%; /* Champs prennent toute la largeur */
-     border: 1px solid #ccc; /* Bordure par défaut */
-     border-radius: 6px; /* Bords arrondis des champs */
-     margin: 5px 0;
-     padding: 10px; /* Espacement intérieur */
-     box-sizing: border-box; /* Inclut padding et bordure dans la largeur totale */
- }
- 
- button,
- input[type="submit"] {
-    font-family: $font-primary !important; // Utilisation de la police secondaire
-    font-size: 12px; // Ajuste la taille de police selon les besoins
-    width: 100%; /* Le bouton prend toute la largeur comme les autres champs */
-    background-color: #D3D3D3; /* Couleur de fond gris */
-    border: none; /* Enlève la bordure */
-    border-radius: 2px; /* Bords arrondis */
-    padding: 10px; /* Espacement intérieur */
-    cursor: pointer; /* Change le curseur pour indiquer que c'est cliquable */
-    transition: background-color 0.3s; /* Effet de transition pour la couleur de fond */
-    overflow: hidden; /* Cache tout débordement */
-}
-
-button:hover,
-input[type="submit"]:hover {
-    background-color: $color-black; /* Couleur de fond au survol */
-    color: $color-tertiary-dark;
-}
- }
- 
+  
+    .modal-header img {
+      width: 100%; // L'image prend toute la largeur de la modale
+      height: auto; // Maintient le ratio de l'image
+      object-fit: contain; // L'image est contenue sans être coupée
+      max-height: 30vh; // Hauteur max à 30% de l'écran
+      margin: 0;
+      padding: 0;
+    }
+  
+    .form-group {
+      width: 90%; // Largeur de formulaire presque pleine
+      margin: 15px 0; // Espacement autour des champs du formulaire
+    }
+  
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin: 5px 0; // Espacement entre les champs
+      padding: 10px;
+      box-sizing: border-box; // Inclut les bordures et padding dans la largeur
+    }
+  
+    button,
+    input[type="submit"] {
+      font-family: $font-primary !important; // Priorité à la police primaire
+      font-size: 12px;
+      width: 100%;
+      background-color: #D3D3D3; // Fond gris clair
+      border: none;
+      border-radius: 2px;
+      padding: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s; // Effet de transition au survol
+    }
+  
+    button:hover,
+    input[type="submit"]:hover {
+      background-color: $color-black; // Fond noir au survol
+      color: $color-tertiary-dark; // Texte d'une couleur claire au survol
+    }
+  }
+  
+  /* *********** Version mobile *************** */
+  @media (max-width: 768px) {
+    .modal-contact-content {
+      max-width: 90%; // Modale plus large sur mobile
+      width: 100%; // Largeur à 100% sur petits écrans
+      margin: 10% auto; // Ajuste la marge pour un meilleur centrage
+    }
+  
+    .modal-header img {
+      max-height: 20vh; // Image plus petite sur mobile
+    }
+  }
+  

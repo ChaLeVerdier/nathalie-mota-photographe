@@ -1,61 +1,66 @@
-/* Styles Globaux */
+// Styles Globaux
 .container {
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: 0 20px; /* Marge interne pour éviter que le contenu touche les bords */
-  }
-  
-  h1, h2, h3 {
-    font-family: "Space Mono", monospace;
-  }
-  
-  h1 {
-    font-family: "Space Mono", monospace;
-    font-size: 96px;
-    font-weight: 700;
-    font-style: italic;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 20px; // Marge interne pour éviter que le contenu touche les bords
+}
+
+// Styles pour les titres
+h1, h2, h3 {
+  font-family: "Space Mono", monospace;
+}
+
+h1 {
+  font-size: 96px;
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1.48;
+  @media (max-width: 768px) {
+    font-size: 27.59px;
     line-height: 1.48;
   }
+}
+
+h2 {
+  font-size: 66px;
+  font-weight: 400;
+  font-style: italic;
+  line-height: 0.88;
   @media (max-width: 768px) {
-    h1 {
-      font-size: 27.59px;
-      line-height: 1.48;
-    }
+    font-size: 46px;
+    line-height: 1.04;
   }
-  
-  h2 {
-    font-family: "Space Mono", monospace;
-    font-size: 66px;
-    font-weight: 400;
-    font-style: italic;
-    line-height: 0.88;
-  }
-  @media (max-width: 768px) {
-    h2 {
-      font-size: 46px;
-      line-height: 1.04;
-    }
-  }
-  
-  h3 {
-    font-family: "Space Mono", monospace;
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 1.48;
-    letter-spacing: 0.1em;
-  }
-  
-  .photo-description {
-    font-family: "Space Mono", monospace;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 20.73px;
-    letter-spacing: 10%;
-  }
-  
-  p {
-    font-family: "Poppins", sans-serif;
-    font-weight: 300;
-    font-size: 14px;
-    line-height: 21px;
-  }
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.48;
+  letter-spacing: 0.1em;
+}
+
+// Styles pour la description des photos
+.photo-description {
+  font-family: "Space Mono", monospace;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20.73px;
+  letter-spacing: 10%;
+}
+
+// Styles pour les paragraphes
+p {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 21px;
+}
+
+// Styles pour la gestion de la visibilité
+.hidden {
+  display: none;
+}
+
+.show {
+  display: block;
+}

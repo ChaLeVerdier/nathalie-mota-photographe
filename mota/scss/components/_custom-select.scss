@@ -1,0 +1,130 @@
+
+/* Style de base pour chaque filtre personnalisé */
+.custom-select {
+     position: relative;
+     width: 200px; /* Ajustez la largeur */
+     border: 2px solid $color-grey; /* Bordure grise */
+     border-radius: 8px; /* Coins arrondis */
+     font-family: $font-secondary; /* Poppins */
+     font-size: 12px; /* Taille de police */
+     font-weight: 500; /* Poppins Medium */
+     color: $color-black; /* Texte noir */
+     background-color: #fff; /* Fond blanc */
+     cursor: pointer;
+     user-select: none;
+     transition: border-color 0.3s ease, border-radius 0.3s ease;
+ }
+ 
+ /* Conteneur interne pour gérer la bordure inférieure */
+ .custom-select::after {
+     content: '';
+     position: absolute;
+     bottom: -2px; /* Positionné juste en dessous */
+     left: 0;
+     right: 0;
+     height: 2px; /* Largeur de la bordure inférieure */
+     background-color: transparent; /* Invisible par défaut */
+     transition: background-color 0.3s ease;
+     z-index: 1;
+ }
+ 
+ /* Bordure bleue uniquement lorsque l'élément est ouvert */
+ .custom-select.open::after {
+     background-color: $color-blue;
+ }
+ 
+ /* Apparence au hover */
+ .custom-select:hover {
+     border-color: $color-blue; /* Bordure bleue */
+ }
+ 
+ /* Coins arrondis uniquement en haut */
+ .custom-select.open {
+     border-radius: 8px 8px 0 0; /* Supprime les coins en bas */
+     border-bottom-color: transparent; /* Pas de bordure visible en bas */
+ }
+ 
+ /* Partie sélectionnée */
+ .custom-selected {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     padding: 10px 15px;
+     text-transform: uppercase; /* Majuscules uniquement pour l’élément sélectionné */
+     font-weight: 500; /* Poppins Medium */
+     position: relative;
+     z-index: 2; /* Priorité sur les options */
+ }
+ 
+ /* Flèche descendante (SVG) */
+ .custom-selected::after {
+     content: '';
+     display: inline-block;
+     width: 12px; /* Largeur de la flèche */
+     height: 12px; /* Hauteur de la flèche */
+     background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"%3E%3Cpolyline points="6 9 12 15 18 9"%3E%3C/polyline%3E%3C/svg%3E'); /* Flèche vers le bas */
+     background-repeat: no-repeat;
+     background-size: contain;
+     position: absolute;
+     right: 10px; /* Positionné à droite */
+     top: 50%; /* Centré verticalement */
+     transform: translateY(-50%);
+     transition: transform 0.3s ease;
+ }
+ 
+ /* Lorsque le menu est ouvert, la flèche pointe vers le haut */
+ .custom-select.open .custom-selected::after {
+     transform: translateY(-50%) rotate(180deg);
+ }
+ 
+ /* Menu déroulant des options */
+ .custom-options {
+     display: none; /* Caché par défaut */
+     position: absolute;
+     left: 0;
+     width: 100%;
+     background-color: #FFF; /* Fond blanc */
+     border-radius: 0 0 8px 8px; /* Coins arrondis uniquement en bas */
+     /*box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Légère ombre */
+     z-index: 1; /* Priorité sous la partie sélectionnée */
+ }
+ 
+ /* Afficher les options lorsque le menu est ouvert */
+ .custom-select.open .custom-options {
+     display: block; /* Les options deviennent visibles */
+ }
+ 
+ /* Options individuelles */
+ .custom-option {
+     padding: 10px 15px; /* Alignement correct avec le texte */
+     cursor: pointer;
+     text-transform: none; /* Options déroulées restent en texte normal */
+     font-weight: 400; /* Poppins Regular */
+     transition: background-color 0.3s ease, color 0.3s ease;
+ }
+ 
+ /* Apparence au hover */
+ .custom-option:hover {
+     background-color: $color-tertiary-light; /* Fond clair au survol */
+     color: $color-black; /* Texte noir */
+ }
+ 
+ /* Style pour l'option actuellement sélectionnée */
+ .custom-option.is-selected {
+     font-weight: bold; /* Gras pour mettre en évidence */
+     color: #fff; /* Texte blanc */
+     background-color: $color-main; /* Fond rouge */
+ }
+ 
+ /* Catégorie par défaut affichée mais stylisée comme blanche sur blanche */
+ .custom-options .custom-option[data-value=""] {
+     color: #fff; /* Texte blanc */
+     background-color: #fff; /* Fond blanc */
+     pointer-events: none; /* Empêche les interactions avec "Catégorie" */
+ }
+ 
+ /* Gestion de l'option sélectionnée */
+ .custom-selected[data-value=""] {
+     color: $color-black; /* Texte noir pour la valeur par défaut */
+ }
+ 

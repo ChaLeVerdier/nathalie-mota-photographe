@@ -1,21 +1,21 @@
-/* Styles de base pour la page single photo */
+// ********* Styles de base pour la page single photo ****** //
+
 .content-single-photo {
   max-width: 1148px;
   margin: 0 auto;
   padding: 20px;
 }
 
-/* Mise en page de l'en-tête */
+// ********** Mise en page de l'en-tête avec flexbox ************** //
 .photo-header {
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-end; /* Aligne les éléments en bas */
+  align-items: flex-end; // Aligne les éléments en bas
   gap: 20px;
-//   padding-bottom: 20px;
-//   margin-bottom: 20px;
-  justify-content: flex-end; /* Place l'enfant en bas */
+  justify-content: flex-end; // Place l'enfant en bas
 }
 
+// ************** Informations de la photo ************* //
 .photo-info {
   flex: 1 1 300px;
   border-bottom: 1px solid black;
@@ -24,7 +24,7 @@
 .photo-title {
   font-size: 36px;
   font-weight: 700;
-  margin: 0 0 10px;
+  margin-bottom: 10px;
   text-transform: uppercase;
 }
 
@@ -36,6 +36,7 @@
   font-weight: normal;
 }
 
+// ******** Image de la photo avec une mise en page flexible *********** //
 .photo-image {
   flex: 1 1 300px;
   margin: 0;
@@ -44,32 +45,29 @@
 .photo-image img {
   width: 100%;
   height: auto;
-  object-fit: cover;
+  object-fit: cover; // Assure que l'image couvre toute la zone sans déformer
 }
 
-
-/* Section de contact */
-
+// ******* Section de contact (Formulaire + navigation) ************* //
 .photo-contact-section {
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid #000000;
 }
 
+// ********** Question et navigation prennent 50% de la largeur du conteneur ******** //
 .photo-question, .photo-navigation {
-    flex: 1; /* Chaque enfant prend 50% de la largeur du conteneur */
-    box-sizing: border-box; /* Inclut les marges et les paddings dans la largeur totale */
-    align-items: center;
-    padding: 25px 0;
-
-     }
+  flex: 1; 
+  box-sizing: border-box; 
+  align-items: center;
+  padding: 25px 0;
+}
 
 .photo-question {
-    display: flex;
-    font-size: 16px;
-    margin: 0;
-    justify-content: space-between;
-    // border: 2px solid rgb(255, 0, 144);
+  display: flex;
+  font-size: 16px;
+  margin: 0;
+  justify-content: space-between;
 }
 
 #contact-btn {
@@ -78,68 +76,56 @@
   color: #000;
   text-decoration: none;
   text-transform: uppercase;
-  margin: 0 10px 0;
+  margin: 0 10px;
 }
 
 
+// ********* Navigation Précédente et Suivante en grid ****** //
 
-/* Navigation Précédente et Suivante */
 .photo-navigation {
   display: grid;
-  grid-template-rows: 1fr auto; /* Définit deux lignes : une flexible et une automatique */
-  border: 2px solid rgb(32, 222, 22);
+  grid-template-rows: 1fr auto; // Deux lignes flexibles
   padding: 0;
 }
 
-.nav-links{
-  grid-row: 2; /* Place l'enfant sur la deuxième ligne (en bas) */
-  // padding: 10px;
-    display: flex;
-    justify-content: flex-end; /* Place l'élément enfant à droite */
-    // align-items: flex-end; /* Place l'élément enfant en bas */
-    border: 2px solid rgb(79, 170, 226);
+.nav-links {
+  grid-row: 2; // Place les liens sur la deuxième ligne
+  display: flex;
+  justify-content: flex-end; // Aligne les liens à droite
 }
 
 .nav-item {
-    margin-right: 35px; /* Sépare les éléments de 20px */
-    margin-bottom: 10px;
-    border: 2px solid rgb(209, 82, 9);
+  margin-right: 35px; // Espacement entre les éléments
+  margin-bottom: 10px;
 }
 
 .nav-item:last-child {
-    margin-right: 0; /* Supprime la marge de droite sur le dernier élément */
-  }
+  margin-right: 0; // Supprime la marge à droite du dernier élément
+}
 
-  .thumbnail-preview {
-    display: block;
-  }
+// Image miniature dans la navigation
+.thumbnail-preview {
+  display: block;
+}
 
-/* Par défaut, masquer les images */
 .thumbnail-preview img {
-    display: none;
-    width: 81px;
-    height: 71px;
-    object-fit: cover;
-  }
-  
-  /* Afficher l'image au survol du parent */
-  .nav-item:hover .thumbnail-preview img {
-    display: block;
-  }
+  display: none; // Cacher les images par défaut
+  width: 81px;
+  height: 71px;
+  object-fit: cover;
+}
+
+.nav-item:hover .thumbnail-preview img {
+  display: block; // Afficher l'image au survol de l'élément
+}
 
 
 
 
+// ********* Section "Vous aimerez aussi" ********* //
 
 
-
-
-
-
-
-/* Section "Vous aimerez aussi" */
 .related-photos {
-  border: 2px solid rgb(209, 82, 9);
   margin-top: 40px;
 }
 
@@ -151,16 +137,45 @@
   font-style: normal;
 }
 
+// Grille des photos recommandées
 .related-photos-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Colonnes flexibles */
-    gap: 20px; /* Espacement de 20px entre les éléments */
-    width: 100%; /* Conteneur occupe toute la largeur */
-    border: 2px solid rgb(9, 209, 32);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); // Colonnes flexibles
+  gap: 20px; // Espacement de 20px entre les éléments
+  width: 100%;
 }
 
 .related-photo-thumbnail {
-    width: 100%; /* Largeur de chaque cellule */
-    object-fit: cover; /* Ajuste l'image pour couvrir la zone */
-    border: 2px solid rgb(56, 9, 209);
+  width: 100%; // Largeur de chaque cellule de la grille
+  object-fit: cover; // Ajuste l'image pour couvrir la zone
+}
+
+
+
+
+// ********** Styles responsives ********** //
+
+@media (max-width: 768px) {
+  .photo-header {
+    flex-direction: column; // Empile les éléments verticalement sur les petits écrans
+    align-items: center;
+  }
+
+  .photo-title {
+    font-size: 28px; // Taille de texte réduite pour les petits écrans
+  }
+
+  .photo-image {
+    flex: 1 1 100%; // Prend toute la largeur disponible sur petits écrans
+    margin-top: 20px;
+  }
+
+  .related-photos-grid {
+    grid-template-columns: 1fr 1fr; // Affiche 2 colonnes sur petits écrans
+  }
+
+  .nav-links {
+    flex-direction: column; // Empile les liens de navigation sur petits écrans
+    align-items: center;
+  }
 }

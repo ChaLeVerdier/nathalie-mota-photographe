@@ -7,6 +7,8 @@
 /* Couleur tertiaire foncée */
 /* Noir */
 /* Gris foncé */
+/* Gris */
+/* Bleu */
 /* Space Mono */
 @font-face {
   font-family: "SpaceMono";
@@ -26,14 +28,14 @@
 /* Poppins */
 @font-face {
   font-family: "Poppins";
-  src: url("../../assets/fonts/poppins/Poppins-Light.woff2") format("woff2"), url("../../assets/fonts/poppins/Poppins-Light.woff") format("woff");
+  src: url("../../assets/fonts/Poppins-Light.woff2") format("woff2"), url("../../assets/fonts/Poppins-Light.woff") format("woff");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Poppins";
-  src: url("../fonts/poppins/Poppins-Regular.woff2") format("woff2"), url("../fonts/poppins/Poppins-Regular.woff") format("woff");
+  src: url("../fonts/Poppins-Regular.woff2") format("woff2"), url("../fonts/Poppins-Regular.woff") format("woff");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -41,11 +43,12 @@
 /* Poppins Bold */
 @font-face {
   font-family: "Poppins";
-  src: url("../fonts/poppins/Poppins-Bold.woff2") format("woff2"), url("../fonts/poppins/Poppins-Bold.woff") format("woff");
+  src: url("../fonts/Poppins-Bold.woff2") format("woff2"), url("../fonts/Poppins-Bold.woff") format("woff");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
+/* *********** MODAL CONTACT ***************** */
 .modal-contact {
   display: none;
   position: fixed;
@@ -70,58 +73,65 @@
   font-weight: 500;
   color: #313144;
   margin: 15% auto;
-  padding: 0px;
+  padding: 0;
   border: 4px solid #000000;
   max-width: 400px;
   width: 90%;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  overflow: auto;
+  overflow: hidden;
   max-height: 80vh;
 }
-.modal-contact .modal-content img {
-  width: 100%; /* L'image prend toute la largeur */
-  height: auto; /* Maintient le ratio de l'image */
-  margin-top: 5px;
-  margin-bottom: 30px;
+.modal-contact .modal-header img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  max-height: 30vh;
+  margin: 0;
+  padding: 0;
 }
 .modal-contact .form-group {
-  width: 50%; /* Chaque groupe de champs prend la largeur totale */
-  margin-bottom: 25px; /* Espace entre les champs */
-}
-.modal-contact label {
-  display: block; /* Force les labels à occuper toute la ligne */
-  margin-bottom: 10px; /* Espace entre le label et le champ */
-  text-align: left; /* Justifie le texte à gauche */
+  width: 90%;
+  margin: 15px 0;
 }
 .modal-contact input[type=text],
 .modal-contact input[type=email],
 .modal-contact textarea {
-  width: 100%; /* Champs prennent toute la largeur */
-  border: 1px solid #ccc; /* Bordure par défaut */
-  border-radius: 6px; /* Bords arrondis des champs */
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 6px;
   margin: 5px 0;
-  padding: 10px; /* Espacement intérieur */
-  box-sizing: border-box; /* Inclut padding et bordure dans la largeur totale */
+  padding: 10px;
+  box-sizing: border-box;
 }
 .modal-contact button,
 .modal-contact input[type=submit] {
   font-family: "SpaceMono", sans-serif !important;
   font-size: 12px;
-  width: 100%; /* Le bouton prend toute la largeur comme les autres champs */
-  background-color: #D3D3D3; /* Couleur de fond gris */
-  border: none; /* Enlève la bordure */
-  border-radius: 2px; /* Bords arrondis */
-  padding: 10px; /* Espacement intérieur */
-  cursor: pointer; /* Change le curseur pour indiquer que c'est cliquable */
-  transition: background-color 0.3s; /* Effet de transition pour la couleur de fond */
-  overflow: hidden; /* Cache tout débordement */
+  width: 100%;
+  background-color: #D3D3D3;
+  border: none;
+  border-radius: 2px;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 .modal-contact button:hover,
 .modal-contact input[type=submit]:hover {
-  background-color: #000000; /* Couleur de fond au survol */
+  background-color: #000000;
   color: #E5E5E5;
 }
 
+/* *********** Version mobile *************** */
+@media (max-width: 768px) {
+  .modal-contact-content {
+    max-width: 90%;
+    width: 100%;
+    margin: 10% auto;
+  }
+  .modal-header img {
+    max-height: 20vh;
+  }
+}
 /* Hero Section */
 .hero {
   width: 100%; /* Prend toute la largeur de l'écran */
@@ -175,95 +185,100 @@
     -webkit-text-stroke: 1px #FFF; /* Contour réduit en version mobile */
   }
 }
-/* Wrapper de la photo */
-.photo-overlay-wrapper {
-  position: relative;
-  overflow: hidden;
-}
-
-.photo-overlay-wrapper img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-/* Overlay */
-.photo-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7); /* Overlay semi-transparent */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-/* Afficher l'overlay au survol */
-.photo-overlay-wrapper:hover .photo-overlay {
-  opacity: 1;
-}
-
-/* Icône de lightbox en haut à gauche */
-.lightbox-icon {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  color: white;
-  font-size: 20px;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-/* Contenu de l'overlay */
-.overlay-content {
-  text-align: center;
-  color: white;
-  font-family: "Space Mono", monospace;
-}
-
-.overlay-content .photo-reference,
-.overlay-content .photo-category {
-  margin: 5px 0;
-  font-size: 16px;
-  text-transform: uppercase;
-}
-
-/* Styles de la modale de lightbox */
-.lightbox-modal {
-  display: none; /* Masquée par défaut */
+/* Conteneur principal de la lightbox */
+.photo-lightbox {
   position: fixed;
-  z-index: 1000;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.9); /* Fond sombre */
-  align-items: center;
+  background: rgba(0, 0, 0, 0.9); /* Fond noir semi-transparent */
+  display: flex;
   justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
-.lightbox-modal img {
-  max-width: 90%;
-  max-height: 90%;
+/* Contenu de la lightbox */
+.photo-lightbox__content {
+  display: flex; /* Utilise Flexbox pour un alignement facile */
+  align-items: center; /* Centre verticalement */
+  justify-content: center; /* Centre horizontalement */
+  position: fixed; /* Assure que la lightbox couvre toute la fenêtre */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Fond semi-transparent */
+  z-index: 1000; /* Place la lightbox au-dessus des autres éléments */
 }
 
-.close-lightbox {
+/* Image affichée dans la lightbox */
+#lightbox-image {
+  width: auto;
+  height: auto;
+  max-width: 100%; /* Ne dépasse pas la largeur de l'écran */
+  max-height: 80%; /* Garde une marge pour les infos */
+  object-fit: contain; /* Garde les proportions de l'image */
+  margin: auto;
+  display: block;
+}
+
+/* Boutons de navigation */
+.photo-lightbox__prev,
+.photo-lightbox__next {
   position: absolute;
-  top: 20px;
-  right: 30px;
-  color: white;
-  font-size: 40px;
-  font-weight: bold;
+  top: 50%; /* Centré verticalement */
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.7); /* Fond semi-transparent */
+  color: #fff;
+  border: none;
+  font-size: 18px;
   cursor: pointer;
+  padding: 10px 20px;
+  z-index: 1010;
 }
 
-.close-lightbox:hover {
-  color: #bbb;
+.photo-lightbox__prev {
+  left: 20px;
+}
+
+.photo-lightbox__next {
+  right: 20px;
+}
+
+/* Bouton de fermeture */
+.photo-lightbox__close {
+  position: absolute;
+  top: 30px;
+  right: 20px;
+  font-size: 24px;
+  color: #fff;
+  cursor: pointer;
+  z-index: 1010;
+}
+
+/* Informations en bas de l'image */
+.photo-lightbox__info {
+  position: absolute;
+  bottom: 20px; /* Positionné en bas */
+  width: 90%; /* Garde une marge sur les côtés */
+  display: flex;
+  justify-content: space-between; /* Aligné à gauche et à droite */
+  color: #fff;
+  font-size: 16px;
+  padding: 0 20px;
+}
+
+.photo-lightbox__info > p {
+  margin: 0;
+  font-size: 14px;
+  opacity: 0.9; /* Texte légèrement transparent */
+}
+
+/* Masquer le titre */
+#lightbox-title {
+  display: none; /* Cache l'élément titre */
 }
 
 /* *********** SECTION FILTRE ET GALLERY ***************** */
@@ -271,7 +286,6 @@
   max-width: 1440px;
   margin: 0 auto;
   padding: 0 20px;
-  border: 3px solid rgb(30, 255, 0);
 }
 
 /* *********** FILTRES ***************** */
@@ -281,7 +295,6 @@
   align-items: center;
   margin: 60px auto 20px;
   max-width: 1148px;
-  border: 3px solid rgb(228, 182, 16);
 }
 
 .filters-left {
@@ -304,11 +317,19 @@
 }
 
 /* Styles pour le focus et l'ouverture */
-.filter-open {
-  border: 1.3px solid #215aff;
-  border-radius: 8px 8px 0 0;
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+  border: 0;
 }
 
+/* ****** FILTRES EN ROUGE TEST NON FONCTIONNEL (filtres.js) ****** */
+/* Personnalisation du fond pour Select2 */
+/* Conteneur personnalisé */
 /* Version mobile */
 @media (max-width: 768px) {
   .gallery-filters {
@@ -324,7 +345,7 @@
     flex-direction: column; /* Les sélecteurs s'affichent en colonne */
     gap: 10px; /* Espace entre les sélecteurs */
   }
-  .selected-filter {
+  .custom-select .selected {
     min-width: 100%; /* Prend toute la largeur de l'écran en version mobile */
     max-width: 100%; /* S'assure que les sélecteurs ne débordent pas */
     font-size: 14px; /* Réduit légèrement la taille de la police pour les petits écrans */
@@ -337,7 +358,6 @@
   max-width: 1148px;
   margin: 0 auto;
   grid-auto-flow: dense; /* Force le remplissage des espaces vides */
-  border: 3px solid red;
 }
 
 .photo-thumbnail {
@@ -365,7 +385,6 @@
 .load-more-container {
   text-align: center;
   margin-top: 20px;
-  border: 3px solid rgb(230, 12, 147);
 }
 
 /* Centrer le bouton "Load More" */
@@ -397,36 +416,38 @@
     width: 150px;
   }
 }
-/* Styles de base de la galerie */
+/* ******** Styles de base de la galerie ******* */
 .gallery {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 colonnes pour les images sur desktop */
-  gap: 20px;
-  max-width: 1148px;
-  margin: 0 auto;
+  grid-template-columns: repeat(2, 1fr); /* 2 colonnes sur desktop */
+  gap: 20px; /* Espace entre les éléments */
+  max-width: 1148px; /* Limite la largeur */
+  margin: 0 auto; /* Centrage du conteneur */
 }
 
-/* Conteneur de chaque photo */
+/* ************ Conteneur de chaque photo ******** */
 .photo-block__container {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  aspect-ratio: 564/495;
+  position: relative; /* Positionnement relatif pour pouvoir superposer des éléments */
+  overflow: hidden; /* Cache tout ce qui dépasse du conteneur */
+  width: 100%; /* Prend toute la largeur disponible */
+  aspect-ratio: 564/495; /* Ratio d'aspect pour maintenir la proportion */
 }
 
+/* ************ Image miniature de la photo *********** */
 .photo-thumbnail {
-  width: 100%;
-  height: 100%;
+  width: 100%; /* Prend toute la largeur du conteneur */
+  height: 100%; /* Prend toute la hauteur du conteneur */
 }
 
+/* ******* Image de la photo, avec ajustement de la taille ************* */
 .photo-block__img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  display: block;
+  object-fit: cover; /* Couvre entièrement le conteneur sans déformation */
+  display: block; /* Évite l'espace sous l'image */
 }
 
-/* Superposition */
+/* ***** Superposition (overlay) sur la photo ***** */
 .photo-overlay {
   position: absolute;
   top: 0;
@@ -434,19 +455,19 @@
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.6); /* Fond semi-transparent noir */
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  opacity: 0; /* Commence caché */
+  transition: opacity 0.3s ease; /* Animation pour faire apparaître l'overlay */
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: space-between; /* Espacement entre les éléments */
+  align-items: center; /* Centrage des éléments à l'intérieur */
 }
 
 .photo-block__container:hover .photo-overlay {
-  opacity: 1;
+  opacity: 1; /* Affiche l'overlay au survol */
 }
 
-/* Icône de lightbox en haut à droite */
+/* ************ Icône de lightbox en haut à droite ******* */
 .photo-overlay__fullscreen {
   position: absolute;
   top: 10px;
@@ -455,12 +476,12 @@
   height: 24px;
 }
 
-/* Icône lien vers la photo au centre */
+/* ****** Icône lien vers la photo au centre *********** */
 .photo-overlay__link {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); /* Centrage parfait de l'élément */
   width: 40px;
   height: 40px;
   display: flex;
@@ -468,44 +489,44 @@
   justify-content: center;
 }
 
-/* Informations en bas */
+/* ************* Informations en bas de la photo **************** */
 .photo-overlay__info {
   width: 100%;
-  max-width: calc(100% - 40px); /* Tient compte du padding des côtés */
+  max-width: calc(100% - 40px); /* Prend toute la largeur moins les bords */
   padding: 10px;
   display: flex;
   justify-content: space-between;
   color: #fff;
   font-size: 14px;
   position: absolute;
-  bottom: 10px; /* Positionne l'info en bas */
+  bottom: 10px; /* Place l'info tout en bas */
   left: 10px;
   right: 10px;
 }
 
 .photo-overlay__reference,
 .photo-overlay__category {
-  margin: 0;
+  margin: 0; /* Évite les marges par défaut */
 }
 
-/* Version mobile : 1 colonne pour les images */
+/* ************** Version mobile ************** */
 @media (max-width: 768px) {
   .gallery {
-    grid-template-columns: 1fr; /* 1 colonne pour chaque image sur mobile */
-    gap: 15px; /* Réduit l'espace entre les images */
+    grid-template-columns: 1fr; /* 1 colonne sur mobile */
+    gap: 15px; /* Espacement réduit */
     padding: 0 20px; /* Ajoute un padding pour éviter que les images touchent les bords */
   }
   .photo-block__container {
-    aspect-ratio: 1/1; /* Format carré en version mobile */
+    aspect-ratio: 1/1; /* Format carré en mobile */
   }
   .photo-overlay__info {
-    font-size: 12px; /* Réduit la taille du texte sur mobile */
+    font-size: 12px; /* Réduit la taille de la police */
     padding: 8px; /* Réduit le padding */
   }
   .photo-overlay__fullscreen {
     top: 8px;
     right: 8px;
-    width: 20px; /* Taille réduite pour l'icône */
+    width: 20px; /* Taille réduite pour l'icône sur mobile */
     height: 20px;
   }
   .photo-overlay__link {
@@ -513,93 +534,97 @@
     height: 35px;
   }
 }
+/* ************ Conteneur du footer *********** */
 .site-footer {
-  border-top: 1px solid #000; /* Bordure en haut */
-  font-family: "SpaceMono", sans-serif;
+  border-top: 1px solid #000; /* Bordure en haut du footer */
+  font-family: "SpaceMono", sans-serif; /* Applique la police principale */
 }
 
+/* ************ Menu du footer *********** */
 .footer-menu {
   list-style: none;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: center; /* Centre les éléments horizontalement */
+  align-items: center; /* Centre les éléments verticalement */
   width: 100%;
-  gap: 50px;
+  gap: 50px; /* Espacement entre les éléments du menu */
 }
 .footer-menu li a {
-  text-decoration: none;
-  color: #000000;
-  text-transform: uppercase;
-  transition: font-weight 0.3s ease;
+  text-decoration: none; /* Enlève le souligné des liens */
+  color: #000000; /* Couleur du texte des liens */
+  text-transform: uppercase; /* Met les liens en majuscules */
+  transition: font-weight 0.3s ease; /* Transition fluide pour le changement de poids de police */
 }
 .footer-menu li a:hover {
-  font-weight: 700; /* Poids de la police en gras au survol */
+  font-weight: 700; /* Applique un poids de police en gras au survol */
 }
 
-/* Version mobile */
+/* ************ Version mobile *********** */
 @media (max-width: 768px) {
   .footer-menu {
-    flex-direction: column; /* Aligne les liens en colonne */
-    gap: 10px;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
+    flex-direction: column; /* Aligne les éléments du menu en colonne */
+    gap: 10px; /* Réduit l'espacement entre les éléments en version mobile */
+    justify-content: center; /* Centre les éléments verticalement */
+    align-items: center; /* Centre les éléments horizontalement */
+    padding: 0; /* Enlève le padding par défaut */
   }
 }
+/* ************ Conteneur du header *********** */
 #masthead {
   display: flex;
-  justify-content: center; /* Centre horizontalement */
-  height: 80px;
-  box-shadow: 0 14px 14px -10px rgba(0, 0, 0, 0.3); /* Ombre noire en bas */
-  overflow: hidden;
+  justify-content: center; /* Centre horizontalement le masthead */
+  height: 80px; /* Hauteur par défaut de l'en-tête */
+  box-shadow: 0 14px 14px -10px rgba(0, 0, 0, 0.3); /* Ombre noire en bas de l'en-tête */
+  overflow: hidden; /* Cache le débordement éventuel du contenu */
 }
 
+/* ************ Conteneur interne du header *********** */
 .header-container {
-  max-width: 1200px; /* Largeur du conteneur enfant */
+  max-width: 1200px; /* Limite la largeur du conteneur interne */
   width: 100%;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-family: "SpaceMono", sans-serif;
-  max-width: 1200px; /* Limite la largeur du header au conteneur principal */
+  justify-content: space-between; /* Espace entre le logo et le menu */
+  align-items: center; /* Aligne les éléments verticalement */
+  font-family: "SpaceMono", sans-serif; /* Police principale */
   padding: 0 20px;
-  box-sizing: border-box; /* Assure que padding et bordures soient inclus dans la largeur */
-  transition: height 0.3s ease;
+  box-sizing: border-box; /* Inclut le padding dans la largeur */
+  transition: height 0.3s ease; /* Transition de la hauteur pour les ajustements */
 }
 
-/* Ajustez la hauteur de l'en-tête en version mobile */
+/* Ajustement du header pour la version mobile */
 @media (max-width: 768px) {
   #masthead {
-    height: 72px; /* Hauteur de l'en-tête en version mobile */
+    height: 72px; /* Hauteur réduite pour la version mobile */
   }
 }
+/* ************ Menu principal *********** */
 .main-navigation .main-menu {
   display: flex;
-  list-style: none;
+  list-style: none; /* Supprime les puces */
   margin: 0;
   padding: 0;
 }
 
 li {
-  margin-left: 20px;
+  margin-left: 20px; /* Espacement entre les éléments de menu */
 }
 
 a {
-  text-decoration: none;
-  color: #000000;
-  text-transform: uppercase;
-  transition: font-weight 0.3s ease;
+  text-decoration: none; /* Enlève le souligné */
+  color: #000000; /* Couleur du texte du lien */
+  text-transform: uppercase; /* Met tout en majuscule */
+  transition: font-weight 0.3s ease; /* Transition pour le changement de poids de police */
 }
 a:hover {
-  font-weight: 700; /* Poids de la police en gras au survol */
+  font-weight: 700; /* Applique un poids de police en gras au survol */
 }
 
-/* Styles pour le menu hamburger */
+/* ************ Menu hamburger (version mobile) *********** */
 .hamburger {
-  display: none; /* Caché par défaut (affiché seulement en mobile) */
+  display: none; /* Caché par défaut, affiché en mobile */
   cursor: pointer;
   flex-direction: column;
-  gap: 4px;
+  gap: 4px; /* Espacement entre les 3 barres */
 }
 
 .hamburger span {
@@ -607,64 +632,65 @@ a:hover {
   width: 24px;
   height: 3px;
   background-color: #333;
-  transition: transform 0.3s;
+  transition: transform 0.3s; /* Animation des barres */
 }
 
-/* Animation du hamburger en croix */
+/* Animation de transformation du hamburger en croix */
 .hamburger.active span:nth-child(1) {
   transform: rotate(45deg) translate(5px, 5px);
 }
 
 .hamburger.active span:nth-child(2) {
-  opacity: 0;
+  opacity: 0; /* Cache la deuxième barre */
 }
 
 .hamburger.active span:nth-child(3) {
   transform: rotate(-45deg) translate(5px, -5px);
 }
 
-/* Menu mobile plein écran */
+/* ************ Menu mobile plein écran *********** */
 .mobile-menu {
   display: none; /* Caché par défaut */
   position: fixed;
-  top: 80px; /* Aligne le menu juste en dessous de l'en-tête desktop */
+  top: 80px; /* Aligne sous l'en-tête desktop */
   left: 0;
-  width: 100vw;
-  height: calc(100vh - 80px); /* Prend toute la hauteur en dessous de l'en-tête desktop */
-  background-color: #ff0000; /* Fond rouge */
+  width: 100vw; /* Largeur de l'écran */
+  height: calc(100vh - 80px); /* Prend toute la hauteur sous l'en-tête */
+  background-color: #ff0000; /* Fond rouge pour le menu */
   color: #ffffff;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 20px;
-  z-index: 999; /* Sous l'en-tête */
+  z-index: 999; /* Assure que le menu soit au-dessus des autres éléments */
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease, visibility 0.3s ease;
   box-sizing: border-box;
 }
 
+/* Ajustement du menu mobile en fonction de la taille de l'écran */
 @media (max-width: 768px) {
   .mobile-menu {
-    top: 72px; /* Ajustement pour l'en-tête mobile */
-    height: calc(100vh - 72px); /* Prend toute la hauteur en dessous de l'en-tête mobile */
+    top: 72px; /* Ajuste le top pour l'en-tête mobile */
+    height: calc(100vh - 72px); /* Ajuste la hauteur sous l'en-tête mobile */
   }
 }
 /* Ajustement pour la barre d'administration sur mobile */
 @media (max-width: 782px) {
   body.admin-bar .mobile-menu {
-    top: 118px; /* En mobile */
-    height: calc(100vh - 72px - 46px); /* Prend toute la hauteur en dessous de l'en-tête mobile et de la barre admin */
+    top: 118px; /* Ajuste en fonction de la barre admin */
+    height: calc(100vh - 72px - 46px); /* Réduit la hauteur pour laisser de la place à la barre admin */
   }
 }
-/* Affiche le menu mobile quand actif */
+/* Affiche le menu mobile quand il est actif */
 .mobile-menu.active {
   display: flex;
   opacity: 1;
   visibility: visible;
 }
 
-/* Liste des liens dans le menu mobile */
+/* ************ Liste des éléments dans le menu mobile *********** */
 .mobile-menu-list {
   list-style: none;
   padding: 0;
@@ -673,46 +699,44 @@ a:hover {
 }
 
 .mobile-menu-list li {
-  margin: 20px 0;
+  margin: 20px 0; /* Espacement entre les éléments */
 }
 
 .mobile-menu-list a {
   color: #ffffff;
   text-decoration: none;
-  font-size: 2em;
+  font-size: 2em; /* Taille du texte pour mobile */
   font-family: "Space Mono", monospace;
   text-transform: uppercase;
 }
 
-/* Media queries pour mobile */
+/* ************ Media Queries pour mobile *********** */
 @media (max-width: 768px) {
   .main-navigation {
-    display: none; /* Cache le menu principal */
+    display: none; /* Cache le menu principal sur mobile */
   }
   .hamburger {
-    display: flex; /* Affiche le menu hamburger */
+    display: flex; /* Affiche le hamburger */
   }
 }
-/* Empêche le défilement de la page quand le menu mobile est ouvert */
+/* ************ Empêche le défilement de la page lors de l'ouverture du menu mobile *********** */
 .no-scroll {
   overflow: hidden;
-  height: 100vh; /* Verrouille la hauteur pour éviter tout défilement vertical */
+  height: 100vh; /* Empêche le défilement de la page */
 }
 
-/* Styles de base pour la page single photo */
 .content-single-photo {
   max-width: 1148px;
   margin: 0 auto;
   padding: 20px;
 }
 
-/* Mise en page de l'en-tête */
 .photo-header {
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-end; /* Aligne les éléments en bas */
+  align-items: flex-end;
   gap: 20px;
-  justify-content: flex-end; /* Place l'enfant en bas */
+  justify-content: flex-end;
 }
 
 .photo-info {
@@ -723,7 +747,7 @@ a:hover {
 .photo-title {
   font-size: 36px;
   font-weight: 700;
-  margin: 0 0 10px;
+  margin-bottom: 10px;
   text-transform: uppercase;
 }
 
@@ -746,7 +770,6 @@ a:hover {
   object-fit: cover;
 }
 
-/* Section de contact */
 .photo-contact-section {
   display: flex;
   justify-content: space-between;
@@ -754,8 +777,8 @@ a:hover {
 }
 
 .photo-question, .photo-navigation {
-  flex: 1; /* Chaque enfant prend 50% de la largeur du conteneur */
-  box-sizing: border-box; /* Inclut les marges et les paddings dans la largeur totale */
+  flex: 1;
+  box-sizing: border-box;
   align-items: center;
   padding: 25px 0;
 }
@@ -773,39 +796,34 @@ a:hover {
   color: #000;
   text-decoration: none;
   text-transform: uppercase;
-  margin: 0 10px 0;
+  margin: 0 10px;
 }
 
-/* Navigation Précédente et Suivante */
 .photo-navigation {
   display: grid;
-  grid-template-rows: 1fr auto; /* Définit deux lignes : une flexible et une automatique */
-  border: 2px solid rgb(32, 222, 22);
+  grid-template-rows: 1fr auto;
   padding: 0;
 }
 
 .nav-links {
-  grid-row: 2; /* Place l'enfant sur la deuxième ligne (en bas) */
+  grid-row: 2;
   display: flex;
-  justify-content: flex-end; /* Place l'élément enfant à droite */
-  border: 2px solid rgb(79, 170, 226);
+  justify-content: flex-end;
 }
 
 .nav-item {
-  margin-right: 35px; /* Sépare les éléments de 20px */
+  margin-right: 35px;
   margin-bottom: 10px;
-  border: 2px solid rgb(209, 82, 9);
 }
 
 .nav-item:last-child {
-  margin-right: 0; /* Supprime la marge de droite sur le dernier élément */
+  margin-right: 0;
 }
 
 .thumbnail-preview {
   display: block;
 }
 
-/* Par défaut, masquer les images */
 .thumbnail-preview img {
   display: none;
   width: 81px;
@@ -813,14 +831,11 @@ a:hover {
   object-fit: cover;
 }
 
-/* Afficher l'image au survol du parent */
 .nav-item:hover .thumbnail-preview img {
   display: block;
 }
 
-/* Section "Vous aimerez aussi" */
 .related-photos {
-  border: 2px solid rgb(209, 82, 9);
   margin-top: 40px;
 }
 
@@ -834,23 +849,40 @@ a:hover {
 
 .related-photos-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Colonnes flexibles */
-  gap: 20px; /* Espacement de 20px entre les éléments */
-  width: 100%; /* Conteneur occupe toute la largeur */
-  border: 2px solid rgb(9, 209, 32);
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  width: 100%;
 }
 
 .related-photo-thumbnail {
-  width: 100%; /* Largeur de chaque cellule */
-  object-fit: cover; /* Ajuste l'image pour couvrir la zone */
-  border: 2px solid rgb(56, 9, 209);
+  width: 100%;
+  object-fit: cover;
 }
 
-/* Styles Globaux */
+@media (max-width: 768px) {
+  .photo-header {
+    flex-direction: column;
+    align-items: center;
+  }
+  .photo-title {
+    font-size: 28px;
+  }
+  .photo-image {
+    flex: 1 1 100%;
+    margin-top: 20px;
+  }
+  .related-photos-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .nav-links {
+    flex-direction: column;
+    align-items: center;
+  }
+}
 .container {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0 20px; /* Marge interne pour éviter que le contenu touche les bords */
+  padding: 0 20px;
 }
 
 h1, h2, h3 {
@@ -858,35 +890,32 @@ h1, h2, h3 {
 }
 
 h1 {
-  font-family: "Space Mono", monospace;
   font-size: 96px;
   font-weight: 700;
   font-style: italic;
   line-height: 1.48;
 }
-
 @media (max-width: 768px) {
   h1 {
     font-size: 27.59px;
     line-height: 1.48;
   }
 }
+
 h2 {
-  font-family: "Space Mono", monospace;
   font-size: 66px;
   font-weight: 400;
   font-style: italic;
   line-height: 0.88;
 }
-
 @media (max-width: 768px) {
   h2 {
     font-size: 46px;
     line-height: 1.04;
   }
 }
+
 h3 {
-  font-family: "Space Mono", monospace;
   font-size: 18px;
   font-weight: 400;
   line-height: 1.48;
@@ -906,6 +935,143 @@ p {
   font-weight: 300;
   font-size: 14px;
   line-height: 21px;
+}
+
+.hidden {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+/* Style de base pour chaque filtre personnalisé */
+.custom-select {
+  position: relative;
+  width: 200px; /* Ajustez la largeur */
+  border: 2px solid #B8BBC2; /* Bordure grise */
+  border-radius: 8px; /* Coins arrondis */
+  font-family: "Poppins", sans-serif; /* Poppins */
+  font-size: 12px; /* Taille de police */
+  font-weight: 500; /* Poppins Medium */
+  color: #000000; /* Texte noir */
+  background-color: #fff; /* Fond blanc */
+  cursor: pointer;
+  user-select: none;
+  transition: border-color 0.3s ease, border-radius 0.3s ease;
+}
+
+/* Conteneur interne pour gérer la bordure inférieure */
+.custom-select::after {
+  content: "";
+  position: absolute;
+  bottom: -2px; /* Positionné juste en dessous */
+  left: 0;
+  right: 0;
+  height: 2px; /* Largeur de la bordure inférieure */
+  background-color: transparent; /* Invisible par défaut */
+  transition: background-color 0.3s ease;
+  z-index: 1;
+}
+
+/* Bordure bleue uniquement lorsque l'élément est ouvert */
+.custom-select.open::after {
+  background-color: #215AFF;
+}
+
+/* Apparence au hover */
+.custom-select:hover {
+  border-color: #215AFF; /* Bordure bleue */
+}
+
+/* Coins arrondis uniquement en haut */
+.custom-select.open {
+  border-radius: 8px 8px 0 0; /* Supprime les coins en bas */
+  border-bottom-color: transparent; /* Pas de bordure visible en bas */
+}
+
+/* Partie sélectionnée */
+.custom-selected {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  text-transform: uppercase; /* Majuscules uniquement pour l’élément sélectionné */
+  font-weight: 500; /* Poppins Medium */
+  position: relative;
+  z-index: 2; /* Priorité sur les options */
+}
+
+/* Flèche descendante (SVG) */
+.custom-selected::after {
+  content: "";
+  display: inline-block;
+  width: 12px; /* Largeur de la flèche */
+  height: 12px; /* Hauteur de la flèche */
+  background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"%3E%3Cpolyline points="6 9 12 15 18 9"%3E%3C/polyline%3E%3C/svg%3E'); /* Flèche vers le bas */
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: absolute;
+  right: 10px; /* Positionné à droite */
+  top: 50%; /* Centré verticalement */
+  transform: translateY(-50%);
+  transition: transform 0.3s ease;
+}
+
+/* Lorsque le menu est ouvert, la flèche pointe vers le haut */
+.custom-select.open .custom-selected::after {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+/* Menu déroulant des options */
+.custom-options {
+  display: none; /* Caché par défaut */
+  position: absolute;
+  left: 0;
+  width: 100%;
+  background-color: #FFF; /* Fond blanc */
+  border-radius: 0 0 8px 8px; /* Coins arrondis uniquement en bas */
+  /*box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Légère ombre */
+  z-index: 1; /* Priorité sous la partie sélectionnée */
+}
+
+/* Afficher les options lorsque le menu est ouvert */
+.custom-select.open .custom-options {
+  display: block; /* Les options deviennent visibles */
+}
+
+/* Options individuelles */
+.custom-option {
+  padding: 10px 15px; /* Alignement correct avec le texte */
+  cursor: pointer;
+  text-transform: none; /* Options déroulées restent en texte normal */
+  font-weight: 400; /* Poppins Regular */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Apparence au hover */
+.custom-option:hover {
+  background-color: #FFD6D6; /* Fond clair au survol */
+  color: #000000; /* Texte noir */
+}
+
+/* Style pour l'option actuellement sélectionnée */
+.custom-option.is-selected {
+  font-weight: bold; /* Gras pour mettre en évidence */
+  color: #fff; /* Texte blanc */
+  background-color: #E00000; /* Fond rouge */
+}
+
+/* Catégorie par défaut affichée mais stylisée comme blanche sur blanche */
+.custom-options .custom-option[data-value=""] {
+  color: #fff; /* Texte blanc */
+  background-color: #fff; /* Fond blanc */
+  pointer-events: none; /* Empêche les interactions avec "Catégorie" */
+}
+
+/* Gestion de l'option sélectionnée */
+.custom-selected[data-value=""] {
+  color: #000000; /* Texte noir pour la valeur par défaut */
 }
 
 /*# sourceMappingURL=main.css.map */

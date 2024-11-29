@@ -1,41 +1,34 @@
-jQuery(document).ready(function($) {
-    let page = 2; // Commence à la page 2, car la page 1 est déjà chargée
+jQuery(document).ready(function ($) {
+    let page = 2; // Commence à la page 2
     const loadMoreButton = $("#load-more-btn");
     const galleryContainer = $("#gallery");
 
-    loadMoreButton.on("click", function() {
-        console.log("URL AJAX :", load_more_params.ajax_url); // Vérification de l'URL
-        console.log("Page à charger :", page); // Vérification de la page
+    loadMoreButton.on("click", function () {
+        loadMoreButton.prop("disabled", true); // Désactive temporairement le bouton
 
-        // Prépare les données pour la requête
-        const data = {
-            action: "load_more_photos",
-            page: page,
-            nonce: load_more_params.nonce // Si un nonce est utilisé pour la sécurité
-        };
-
-        // Envoie la requête AJAX avec jQuery
         $.ajax({
             url: load_more_params.ajax_url,
             type: "POST",
-            data: data,
-            success: function(response) {
-                console.log("Réponse du serveur :", response); // Affiche la réponse reçue
-                if (response) {
-                    galleryContainer.append(response); // Ajoute la réponse au conteneur de la galerie
-                    page++;
-
-                    // Si on atteint la dernière page, on cache le bouton
-                    if (page > load_more_params.max_pages) {
-                        loadMoreButton.hide();
-                    }
-                } else {
-                    loadMoreButton.hide();
-                }
+            data: {
+                action: "load_more_photos",
+                page: page,
+                nonce: load_more_params.nonce,
             },
-            error: function(error) {
-                console.error("Une erreur s'est produite lors du chargement des photos :", error);
-            }
+            success: function (response) {
+                if (response.success && response.data.html) {
+                    galleryContainer.append(response.data.html); // Ajoute les nouvelles photos
+                    page++; // Passe à la page suivante
+                    $(document).trigger("photosUpdated"); // Notifie que les nouvelles photos sont disponibles
+                }
+                if (page > load_more_params.max_pages) {
+                    loadMoreButton.hide(); // Cache le bouton si toutes les pages sont chargées
+                }
+                loadMoreButton.prop("disabled", false); // Réactive le bouton
+            },
+            error: function () {
+                console.error("Erreur lors du chargement des photos.");
+                loadMoreButton.prop("disabled", false); // Réactive le bouton même en cas d'erreur
+            },
         });
     });
 });

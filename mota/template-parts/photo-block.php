@@ -1,63 +1,79 @@
 <?php
 
 /**
- * Template part for displaying a reusable photo block.
+ * Template part pour afficher un bloc photo réutilisable.
+ * Ce fichier est utilisé pour afficher chaque photo dans la galerie avec ses informations associées.
  *
  * @package Mota
  */
 
-$post_ids = !empty($args['post_ids']) ? $args['post_ids'] : [];
+// Récupérer les identifiants des posts à afficher, transmis via $args
+$post_ids = !empty($args['post_ids']) ? $args['post_ids'] : [];  // Si 'post_ids' est vide, on utilise un tableau vide
 
+// Si aucun identifiant de post n'est trouvé, on affiche un message d'erreur
 if (empty($post_ids)) {
-    echo '<p>Aucune photo trouvée.</p>';
-    return;
+    echo '<p>' . esc_html__('Aucune photo trouvée.', 'Mota') . '</p>';
+    return; // Arrêter l'exécution du code si aucune photo n'est à afficher
 }
 
+// Boucle pour afficher chaque photo à partir de ses ID
 foreach ($post_ids as $post_id) :
+    // Récupérer le titre de la photo
     $title = get_the_title($post_id);
-    $thumbnail_url = get_the_post_thumbnail_url($post_id, 'gallery-thumbnail') ?: 'default-thumbnail.jpg'; // Ajoute un fallback
-    $reference = get_post_meta($post_id, 'Reference', true);
+    // Récupérer l'URL de l'image à utiliser comme miniature (si disponible), sinon une image par défaut
+    $thumbnail_url = get_the_post_thumbnail_url($post_id, 'gallery-thumbnail') ?: 'default-thumbnail.jpg'; // Fallback à 'default-thumbnail.jpg' si l'image n'existe pas
+    // Récupérer la référence de la photo (métadonnée), ou afficher "Non disponible" si non définie
+    $reference = get_post_meta($post_id, 'Reference', true) ?: __('Non disponible', 'Mota');
+    // Récupérer les catégories associées à la photo
     $categories = get_the_terms($post_id, 'photo-categorie');
-    $category_name = !empty($categories) ? esc_html($categories[0]->name) : 'Aucune catégorie';
-?>
+    // Si des catégories existent, les afficher sous forme de chaîne (séparées par des virgules)
+    $category_names = !empty($categories) ? implode(', ', wp_list_pluck($categories, 'name')) : __('Aucune catégorie', 'Mota');
+    // Utiliser le titre de l'image comme texte alternatif (alt), ou "Image sans titre" si aucun titre n'est défini
+    $alt_text = $title ?: __('Image sans titre', 'Mota');
+    ?>
 
-    <div class="photo-block__container">
-        <!-- Image de la photo -->
+    <!-- Conteneur de la photo avec un attribut data-id pour l'identifier -->
+    <div class="photo-block__container" data-id="<?php echo esc_attr($post_id); ?>">
+        
+        <!-- Affichage de l'image miniature de la photo -->
         <div class="photo-thumbnail">
-
             <img
-                class="photo-block__img open-lightbox"
+                class="photo-block__img"
                 src="<?php echo esc_url($thumbnail_url); ?>"
-                alt="<?php echo esc_attr($title); ?>"
+                alt="<?php echo esc_attr($alt_text); ?>"
+                loading="lazy"  
+                data-id="<?php echo esc_attr($post_id); ?>"
                 data-title="<?php echo esc_attr($title); ?>"
-                data-thumbnail="<?php echo esc_url($thumbnail_url); ?>"
+                data-img="<?php echo esc_url($thumbnail_url); ?>"
                 data-reference="<?php echo esc_attr($reference); ?>"
-                data-category="<?php echo esc_attr($category_name); ?>" />
+                data-category="<?php echo esc_attr($category_names); ?>" />
 
-            <!-- Superposition -->
+            <!-- Superposition d'éléments supplémentaires lorsque l'utilisateur survole l'image -->
             <div class="photo-overlay">
-                <!-- Icône de lightbox en haut à droite -->
+                
+                <!-- Icône pour ouvrir la photo en plein écran (lightbox) -->
                 <a
-                    href="<?php echo esc_url($thumbnail_url); ?>"
-                    class="photo-overlay__fullscreen lightbox-trigger"
-                    data-img="<?php echo esc_url($thumbnail_url); ?>" 
+                    href="#"
+                    class="photo-overlay__fullscreen open-lightbox"
+                    data-id="<?php echo esc_attr($post_id); ?>"
+                    data-img="<?php echo esc_url($thumbnail_url); ?>"
                     data-title="<?php echo esc_attr($title); ?>"
                     data-reference="<?php echo esc_attr($reference); ?>"
-                    data-category="<?php echo esc_attr($category_name); ?>">
+                    data-category="<?php echo esc_attr($category_names); ?>">
                     <img
                         src="<?php echo esc_url(get_stylesheet_directory_uri() . '/assets/images/fullscreen.svg'); ?>"
                         alt="<?php esc_attr_e('Plein écran', 'Mota'); ?>" />
                 </a>
 
-                <!-- Icône lien vers la photo au centre -->
+                <!-- Icône pour ouvrir un lien vers la page de la photo -->
                 <a href="<?php echo esc_url(get_permalink($post_id)); ?>" class="photo-overlay__link">
                     <img src="<?php echo esc_url(get_stylesheet_directory_uri() . '/assets/images/eye.svg'); ?>" alt="<?php esc_attr_e('Voir la photo', 'Mota'); ?>" />
                 </a>
 
-                <!-- Informations en bas : Référence et Catégorie -->
+                <!-- Informations sur la photo (référence et catégorie) sous l'image -->
                 <div class="photo-overlay__info">
                     <p class="photo-overlay__reference"><?php echo esc_html($reference); ?></p>
-                    <p class="photo-overlay__category"><?php echo esc_html($category_name); ?></p>
+                    <p class="photo-overlay__category"><?php echo esc_html($category_names); ?></p>
                 </div>
             </div>
         </div>

@@ -1,42 +1,37 @@
+/* ************ Conteneur du footer *********** */
 .site-footer {
-  border-top: 1px solid #000; /* Bordure en haut */
-  font-family: $font-primary; // Applique la police principale à tout le header
+  border-top: 1px solid #000; /* Bordure en haut du footer */
+  font-family: $font-primary; /* Applique la police principale */
 }
 
+/* ************ Menu du footer *********** */
 .footer-menu {
   list-style: none;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: center; /* Centre les éléments horizontalement */
+  align-items: center; /* Centre les éléments verticalement */
   width: 100%;
-  gap: 50px;
-
+  gap: 50px; /* Espacement entre les éléments du menu */
+  
   li a {
-    text-decoration: none;
-    color: #000000;
-    text-transform: uppercase; // Pour avoir tout en majuscule
-    transition: font-weight 0.3s ease;
+    text-decoration: none; /* Enlève le souligné des liens */
+    color: #000000; /* Couleur du texte des liens */
+    text-transform: uppercase; /* Met les liens en majuscules */
+    transition: font-weight 0.3s ease; /* Transition fluide pour le changement de poids de police */
     
-      &:hover {
-        font-weight: 700; /* Poids de la police en gras au survol */
+    &:hover {
+      font-weight: 700; /* Applique un poids de police en gras au survol */
     }
   }
-
-  
 }
 
-/* Version mobile */
+/* ************ Version mobile *********** */
 @media (max-width: 768px) {
   .footer-menu {
-      flex-direction: column; /* Aligne les liens en colonne */
-      gap: 10px;
-      justify-content: center;
-      align-items: center;
-      padding: 0;
+    flex-direction: column; /* Aligne les éléments du menu en colonne */
+    gap: 10px; /* Réduit l'espacement entre les éléments en version mobile */
+    justify-content: center; /* Centre les éléments verticalement */
+    align-items: center; /* Centre les éléments horizontalement */
+    padding: 0; /* Enlève le padding par défaut */
   }
-
-  // .footer-menu a,
-  // .footer-navigation {
-  //     font-size: 14px; /* Réduit la taille de police en version mobile */
-  // }
 }

@@ -1,97 +1,95 @@
-// ********* OVERLAY ***************
+/* Conteneur principal de la lightbox */
+.photo-lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9); /* Fond noir semi-transparent */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
 
-/* Wrapper de la photo */
-.photo-overlay-wrapper {
-     position: relative;
-     overflow: hidden;
- }
- 
- .photo-overlay-wrapper img {
-     display: block;
-     width: 100%;
-     height: auto;
-     // border: 3px solid rgb(30, 22, 26);
- }
- 
- /* Overlay */
- .photo-overlay {
-     position: absolute;
+  /* Contenu de la lightbox */
+  .photo-lightbox__content {
+     display: flex; /* Utilise Flexbox pour un alignement facile */
+     align-items: center; /* Centre verticalement */
+     justify-content: center; /* Centre horizontalement */
+     position: fixed; /* Assure que la lightbox couvre toute la fenêtre */
      top: 0;
      left: 0;
      width: 100%;
      height: 100%;
-     background-color: rgba(0, 0, 0, 0.7); /* Overlay semi-transparent */
-     display: flex;
-     flex-direction: column;
-     align-items: center;
-     justify-content: center;
-     opacity: 0;
-     transition: opacity 0.3s ease;
-     // border: 3px solid rgb(30, 22, 26);
- }
- 
- /* Afficher l'overlay au survol */
- .photo-overlay-wrapper:hover .photo-overlay {
-     opacity: 1;
- }
- 
- /* Icône de lightbox en haut à gauche */
- .lightbox-icon {
-     position: absolute;
-     top: 10px;
-     left: 10px;
-     color: white;
-     font-size: 20px;
-     text-decoration: none;
-     cursor: pointer;
-     // border: 3px solid rgb(30, 22, 26);
- }
- 
- /* Contenu de l'overlay */
- .overlay-content {
-     text-align: center;
-     color: white;
-     font-family: 'Space Mono', monospace;
- }
- 
- .overlay-content .photo-reference,
- .overlay-content .photo-category {
-     margin: 5px 0;
-     font-size: 16px;
-     text-transform: uppercase;
- }
- 
- /* Styles de la modale de lightbox */
- .lightbox-modal {
-     display: none; /* Masquée par défaut */
-     position: fixed;
-     z-index: 1000;
-     top: 0;
-     left: 0;
-     width: 100%;
-     height: 100%;
-     background-color: rgba(0, 0, 0, 0.9); /* Fond sombre */
-     align-items: center;
-     justify-content: center;
- }
- 
- .lightbox-modal img {
-     max-width: 90%;
-     max-height: 90%;
- }
- 
- .close-lightbox {
-     position: absolute;
-     top: 20px;
-     right: 30px;
-     color: white;
-     font-size: 40px;
-     font-weight: bold;
-     cursor: pointer;
- }
- 
- .close-lightbox:hover {
-     color: #bbb;
- }
- 
-//  <!-- ********* FIN OVERLAY *************** -->
+     background-color: rgba(0, 0, 0, 0.8); /* Fond semi-transparent */
+     z-index: 1000; /* Place la lightbox au-dessus des autres éléments */
+  }
+
+  /* Image affichée dans la lightbox */
+  #lightbox-image {
+    width: auto;
+    height: auto;
+    max-width: 100%; /* Ne dépasse pas la largeur de l'écran */
+    max-height: 80%; /* Garde une marge pour les infos */
+    object-fit: contain; /* Garde les proportions de l'image */
+    margin: auto;
+    display: block;
+  }
+
+  /* Boutons de navigation */
+  .photo-lightbox__prev,
+  .photo-lightbox__next {
+    position: absolute;
+    top: 50%; /* Centré verticalement */
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.7); /* Fond semi-transparent */
+    color: #fff;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 10px 20px;
+    z-index: 1010;
+  }
+
+  .photo-lightbox__prev {
+    left: 20px;
+  }
+
+  .photo-lightbox__next {
+    right: 20px;
+  }
+
+  /* Bouton de fermeture */
+  .photo-lightbox__close {
+    position: absolute;
+    top: 30px;
+    right: 20px;
+    font-size: 24px;
+    color: #fff;
+    cursor: pointer;
+    z-index: 1010;
+  }
+
+  /* Informations en bas de l'image */
+  .photo-lightbox__info {
+    position: absolute;
+    bottom: 20px; /* Positionné en bas */
+    width: 90%; /* Garde une marge sur les côtés */
+    display: flex;
+    justify-content: space-between; /* Aligné à gauche et à droite */
+    color: #fff;
+    font-size: 16px;
+    padding: 0 20px;
+  }
+
+  .photo-lightbox__info > p {
+    margin: 0;
+    font-size: 14px;
+    opacity: 0.9; /* Texte légèrement transparent */
+  }
+
+  /* Masquer le titre */
+  #lightbox-title {
+    display: none; /* Cache l'élément titre */
+  }

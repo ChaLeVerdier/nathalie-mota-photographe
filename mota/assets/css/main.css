@@ -295,48 +295,29 @@
   align-items: center;
   margin: 60px auto 20px;
   max-width: 1148px;
+  width: 100%;
 }
 
 .filters-left {
   display: flex;
   gap: 30px; /* Espace entre les deux filtres */
+  justify-content: space-between;
+  width: calc(50% - 15px); /* Largeur égale à la première image de la galerie */
 }
 
 .filters-right {
   display: flex;
-  text-align: right;
+  gap: 30px; /* Espacement entre les filtres à droite */
+  width: 25%; /* Limite la largeur à 50% de la largeur de la galerie */
+  justify-content: flex-end; /* Aligner les filtres de droite à l'extrême droite */
 }
 
-.selected-filter {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: white;
-  width: 280px; /* Largeur fixe */
-  height: 42px; /* Hauteur fixe */
-}
-
-/* Styles pour le focus et l'ouverture */
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  clip: rect(0 0 0 0);
-  overflow: hidden;
-  border: 0;
-}
-
-/* ****** FILTRES EN ROUGE TEST NON FONCTIONNEL (filtres.js) ****** */
-/* Personnalisation du fond pour Select2 */
-/* Conteneur personnalisé */
 /* Version mobile */
 @media (max-width: 768px) {
   .gallery-filters {
     flex-direction: column; /* Passe en colonne */
     align-items: center; /* Centre le contenu */
     gap: 20px; /* Espace entre les éléments */
-    padding: 0 20px; /* Ajoute du padding pour éviter que les filtres touchent les bords */
   }
   .filters-left,
   .filters-right {
@@ -344,11 +325,6 @@
     display: flex;
     flex-direction: column; /* Les sélecteurs s'affichent en colonne */
     gap: 10px; /* Espace entre les sélecteurs */
-  }
-  .custom-select .selected {
-    min-width: 100%; /* Prend toute la largeur de l'écran en version mobile */
-    max-width: 100%; /* S'assure que les sélecteurs ne débordent pas */
-    font-size: 14px; /* Réduit légèrement la taille de la police pour les petits écrans */
   }
 }
 .gallery {
@@ -948,14 +924,15 @@ p {
 /* Style de base pour chaque filtre personnalisé */
 .custom-select {
   position: relative;
-  width: 200px; /* Ajustez la largeur */
-  border: 2px solid #B8BBC2; /* Bordure grise */
-  border-radius: 8px; /* Coins arrondis */
-  font-family: "Poppins", sans-serif; /* Poppins */
-  font-size: 12px; /* Taille de police */
-  font-weight: 500; /* Poppins Medium */
-  color: #000000; /* Texte noir */
-  background-color: #fff; /* Fond blanc */
+  width: 100%;
+  max-width: 564px;
+  border: 2px solid #B8BBC2;
+  border-radius: 8px;
+  font-family: "Poppins", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: #000000;
+  background-color: #fff;
   cursor: pointer;
   user-select: none;
   transition: border-color 0.3s ease, border-radius 0.3s ease;
@@ -965,11 +942,11 @@ p {
 .custom-select::after {
   content: "";
   position: absolute;
-  bottom: -2px; /* Positionné juste en dessous */
+  bottom: -2px;
   left: 0;
   right: 0;
-  height: 2px; /* Largeur de la bordure inférieure */
-  background-color: transparent; /* Invisible par défaut */
+  height: 2px;
+  background-color: transparent;
   transition: background-color 0.3s ease;
   z-index: 1;
 }
@@ -981,13 +958,13 @@ p {
 
 /* Apparence au hover */
 .custom-select:hover {
-  border-color: #215AFF; /* Bordure bleue */
+  border-color: #215AFF;
 }
 
 /* Coins arrondis uniquement en haut */
 .custom-select.open {
-  border-radius: 8px 8px 0 0; /* Supprime les coins en bas */
-  border-bottom-color: transparent; /* Pas de bordure visible en bas */
+  border-radius: 8px 8px 0 0;
+  border-bottom-color: transparent;
 }
 
 /* Partie sélectionnée */
@@ -996,82 +973,88 @@ p {
   justify-content: space-between;
   align-items: center;
   padding: 10px 15px;
-  text-transform: uppercase; /* Majuscules uniquement pour l’élément sélectionné */
-  font-weight: 500; /* Poppins Medium */
+  text-transform: uppercase;
+  font-weight: 500;
   position: relative;
-  z-index: 2; /* Priorité sur les options */
+  z-index: 2;
 }
 
 /* Flèche descendante (SVG) */
 .custom-selected::after {
   content: "";
   display: inline-block;
-  width: 12px; /* Largeur de la flèche */
-  height: 12px; /* Hauteur de la flèche */
-  background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"%3E%3Cpolyline points="6 9 12 15 18 9"%3E%3C/polyline%3E%3C/svg%3E'); /* Flèche vers le bas */
+  width: 12px;
+  height: 12px;
+  background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"%3E%3Cpolyline points="6 9 12 15 18 9"%3E%3C/polyline%3E%3C/svg%3E');
   background-repeat: no-repeat;
   background-size: contain;
   position: absolute;
-  right: 10px; /* Positionné à droite */
-  top: 50%; /* Centré verticalement */
+  right: 10px;
+  top: 50%;
   transform: translateY(-50%);
   transition: transform 0.3s ease;
 }
 
-/* Lorsque le menu est ouvert, la flèche pointe vers le haut */
+/* Lorsque menu ouvert, la flèche pointe vers le haut */
 .custom-select.open .custom-selected::after {
   transform: translateY(-50%) rotate(180deg);
 }
 
 /* Menu déroulant des options */
 .custom-options {
-  display: none; /* Caché par défaut */
+  display: none;
   position: absolute;
   left: 0;
   width: 100%;
-  background-color: #FFF; /* Fond blanc */
-  border-radius: 0 0 8px 8px; /* Coins arrondis uniquement en bas */
-  /*box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Légère ombre */
-  z-index: 1; /* Priorité sous la partie sélectionnée */
+  background-color: #fff;
+  border-radius: 0 0 8px 8px;
+  z-index: 1;
 }
 
-/* Afficher les options lorsque le menu est ouvert */
+/* Affiche les options quand le menu est ouvert */
 .custom-select.open .custom-options {
-  display: block; /* Les options deviennent visibles */
+  display: block;
 }
 
 /* Options individuelles */
 .custom-option {
-  padding: 10px 15px; /* Alignement correct avec le texte */
+  padding: 10px 15px;
   cursor: pointer;
-  text-transform: none; /* Options déroulées restent en texte normal */
-  font-weight: 400; /* Poppins Regular */
+  text-transform: none;
+  font-weight: 400;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Apparence au hover */
 .custom-option:hover {
-  background-color: #FFD6D6; /* Fond clair au survol */
-  color: #000000; /* Texte noir */
+  background-color: #FFD6D6;
+  color: #000000;
 }
 
 /* Style pour l'option actuellement sélectionnée */
 .custom-option.is-selected {
-  font-weight: bold; /* Gras pour mettre en évidence */
-  color: #fff; /* Texte blanc */
-  background-color: #E00000; /* Fond rouge */
+  font-weight: bold;
+  color: #fff;
+  background-color: #E00000;
 }
 
-/* Catégorie par défaut affichée mais stylisée comme blanche sur blanche */
+/* Catégorie par défaut affichée mais stylisée blanc sur blanc pour la rendre invisible */
 .custom-options .custom-option[data-value=""] {
-  color: #fff; /* Texte blanc */
-  background-color: #fff; /* Fond blanc */
-  pointer-events: none; /* Empêche les interactions avec "Catégorie" */
+  color: #fff;
+  background-color: #fff;
+  pointer-events: none;
 }
 
 /* Gestion de l'option sélectionnée */
 .custom-selected[data-value=""] {
-  color: #000000; /* Texte noir pour la valeur par défaut */
+  color: #000000;
+}
+
+@media (max-width: 768px) {
+  .custom-select {
+    max-width: 1148px;
+    margin: auto;
+  }
 }
 
 /*# sourceMappingURL=main.css.map */

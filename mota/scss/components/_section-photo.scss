@@ -3,7 +3,6 @@
   max-width: 1440px;
   margin: 0 auto;
   padding: 0 20px;
-  // border: 3px solid rgb(30, 255, 0);
 }
 /* *********** FILTRES ***************** */
 
@@ -13,71 +12,23 @@
   align-items: center;
   margin: 60px auto 20px;
   max-width: 1148px;
-  // border: 3px solid rgb(228, 182, 16);
+  width: 100%;
 }
 
 .filters-left {
   display: flex;
   gap: 30px; /* Espace entre les deux filtres */
+  justify-content: space-between;
+  width: calc(50% - 15px); /* Largeur égale à la première image de la galerie */
 }
 
 .filters-right {
   display: flex;
-  text-align: right;
+  gap: 30px; /* Espacement entre les filtres à droite */
+  width: 25%; /* Limite la largeur à 50% de la largeur de la galerie */
+  justify-content: flex-end; /* Aligner les filtres de droite à l'extrême droite */
 }
 
-.selected-filter {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: white;
-  width: 280px; /* Largeur fixe */
-  height: 42px; /* Hauteur fixe */
-}
-
-/* Styles pour le focus et l'ouverture */
-// .filter-open {
-//   border: 1.3px solid #215aff;
-//   border-radius: 8px 8px 0 0;
-// }
-
-.visually-hidden {
-     position: absolute;
-     width: 1px;
-     height: 1px;
-     margin: -1px;
-     clip: rect(0 0 0 0);
-     overflow: hidden;
-     border: 0;
- }
-
-//  .custom-select option[value=""] {
-//   display: none !important;
-// }
-
-
-/* ****** FILTRES EN ROUGE TEST NON FONCTIONNEL (filtres.js) ****** */
-
-/* Personnalisation du fond pour Select2 */
-// .select2-container--default .select2-selection--single {
-//     background-color: #f0f0f0; /* Couleur de fond personnalisée */
-//     border: 1px solid #ccc;    /* Bordure personnalisée */
-//     border-radius: 8px;
-//     border: 2px solid red;
-// }
-
-// .select2-container--default .select2-selection--single .select2-selection__rendered {
-//     color: #333; /* Couleur du texte dans le select */
-//     padding: 10px;
-//     border: 2px solid rgb(72, 0, 255);
-// }
-
-
-
-// *****************************************
-
-
-// /* Style par défaut des filtres */
 // .selected-filter {
 //   padding: 10px;
 //   border: 1px solid #ccc;
@@ -85,106 +36,8 @@
 //   background-color: white;
 //   width: 280px; /* Largeur fixe */
 //   height: 42px; /* Hauteur fixe */
-//   transition: background-color 0.3s ease; /* Transition douce */
 // }
 
-// /* Changement de fond au survol */
-// .selected-filter:hover,
-// .select2-container--default .select2-selection--single:hover {
-//   background-color: red; /* Fond rouge au survol */
-//   color: white; /* Texte blanc pour le contraste */
-// }
-
-// /* Personnalisation de Select2 */
-// .select2-container--default .select2-selection--single {
-//   border: 1px solid #ccc; /* Bordure par défaut */
-//   border-radius: 8px;
-//   background-color: white; /* Fond par défaut */
-//   height: 42px; /* Hauteur pour correspondre au style */
-//   display: flex;
-//   align-items: center;
-// }
-
-// .select2-container--default .select2-selection--single:hover {
-//   border: 1px solid red; /* Bordure rouge au survol */
-// }
-
-
-
-
-/* Conteneur personnalisé */
-// .custom-select {
-//   position: relative;
-//   display: inline-block;
-//   width: 280px; /* Largeur fixe comme demandé */
-//   height: 42px; /* Hauteur fixe comme demandé */
-//   border: 1px solid #ccc;
-//   border-radius: 8px;
-//   background-color: white;
-//   cursor: pointer;
-// }
-
-// /* Bouton sélectionné */
-// .custom-select .selected {
-//   padding: 10px;
-//   font-size: 14px;
-//   color: #000;
-//   height: 100%;
-//   display: flex;
-//   align-items: center;
-//   justify-content: space-between;
-// }
-
-// /* Icône pour indiquer l'ouverture */
-// .custom-select .selected::after {
-//   content: "▼";
-//   font-size: 10px;
-//   margin-left: 8px;
-//   color: #888;
-// }
-
-// /* Conteneur des options */
-// .custom-select .options-container {
-//   position: absolute;
-//   top: 100%;
-//   left: 0;
-//   right: 0;
-//   background-color: white;
-//   border: 1px solid #ccc;
-//   border-radius: 0 0 8px 8px;
-//   display: none; /* Masqué par défaut */
-//   z-index: 1000;
-//   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-// }
-
-// /* Options individuelles */
-// .custom-select .options-container .option {
-//   padding: 10px;
-//   font-size: 14px;
-//   cursor: pointer;
-//   border-bottom: 1px solid #f0f0f0;
-// }
-
-// .custom-select .options-container .option:last-child {
-//   border-bottom: none;
-// }
-
-// /* Effet hover sur les options */
-// .custom-select .options-container .option:hover {
-//   background-color: red;
-//   color: white;
-// }
-
-// /* Lorsque le menu est ouvert */
-// .custom-select.open .options-container {
-//   display: block;
-// }
-
-
-// .selected-filter:hover {
-//   background-color: red; /* Ajoute la couleur de fond rouge */
-//   color: white; /* Si tu veux changer la couleur du texte aussi */
-// }
 
 
 
@@ -194,7 +47,6 @@
     flex-direction: column; /* Passe en colonne */
     align-items: center; /* Centre le contenu */
     gap: 20px; /* Espace entre les éléments */
-    padding: 0 20px; /* Ajoute du padding pour éviter que les filtres touchent les bords */
   }
 
   .filters-left,
@@ -203,12 +55,6 @@
     display: flex;
     flex-direction: column; /* Les sélecteurs s'affichent en colonne */
     gap: 10px; /* Espace entre les sélecteurs */
-  }
-
-  .custom-select .selected {
-    min-width: 100%; /* Prend toute la largeur de l'écran en version mobile */
-    max-width: 100%; /* S'assure que les sélecteurs ne débordent pas */
-    font-size: 14px; /* Réduit légèrement la taille de la police pour les petits écrans */
   }
 }
 
